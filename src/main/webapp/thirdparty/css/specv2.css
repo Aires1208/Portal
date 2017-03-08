@@ -1,0 +1,325 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font: 12px Arial, "微软雅黑", sans-serif;
+}
+
+.flex-header {
+    display: flex;
+    flex-direction: row;
+}
+
+header.custom-navbar {
+    width: 100%;
+    height: 42px;
+    z-index: 100;
+    background-color: #008ed3;
+    border-radius: 2px;
+}
+
+header .logo {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    max-width: 170px;
+}
+
+header .header-items {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: center;
+
+/ / 保证菜单间距为42px
+}
+
+/*header .login {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: right;
+    margin-right: 8px;
+    margin-top: 8px;
+    padding-top: 1px;
+}*/
+
+header .login {
+
+    color: #fff;
+    font-size: 18px;
+    line-height: 42px;
+}
+
+header .header-placeholder {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+header > .logo {
+    font-size: 20px;
+    color: #fff;
+    line-height: 42px;
+}
+
+header .header-items {
+    font-size: 16px;
+/ / 导航字体大小 color: #fff;
+    line-height: 42px;
+}
+
+.items-content > a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.items-content.header-selected {
+    background-color: #1070b0;
+}
+
+.header-selected > a {
+    color: #fff;
+}
+
+.header-items:not(.header-selected):hover {
+    background-color: rgb(16, 112, 176);
+}
+
+.side-bar {
+    position: absolute;
+    top: 74px;
+    left: 2px;
+    width: 170px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #afafaf;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.side-bar a {
+    text-decoration: none;
+}
+
+.side-bar-selected {
+    /*    background-color: #008ed3;
+        box-shadow: 1px 1px 1px #1070b0;*/
+    font-weight: bolder;
+}
+
+.side-bar-selected > ul {
+    font-weight: normal;
+}
+
+.sup-menu {
+    display: block;
+    box-shadow: 0 1px 0 #ccc;
+}
+
+.sup-menu > a {
+    line-height: 25px;
+    font-size: 14px;
+    padding-left: 16px;
+}
+
+.sub-menu > li {
+    height: 25px;
+    padding-left: 14px;
+}
+
+.sub-menu a {
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.sup-menu a {
+    color: rgb(68, 68, 68);
+}
+
+.sub-menu a {
+    color: rgb(102, 102, 102);
+}
+
+/*.side-bar-selected > a {
+    color: #fff;
+}*/
+
+.sup-menu:hover {
+    /*    background-color: #008ed3;
+        box-shadow: 1px 1px 2px 1px #1070b0;
+        border-radius: 2px;*/
+    font-weight: bold;
+}
+
+/*.sup-menu:hover > a {
+    color: #fff;
+}*/
+
+.sub-menu > li:not(.side-bar-selected):hover {
+    /*    background-color: #008ed3;
+        box-shadow: 1px 1px 2px 1px #1070b0;
+        border-radius: 2px;*/
+    font-weight: bold;
+}
+
+/*.sub-menu > li:hover > a {
+    color: #fff;
+}*/
+
+.glyphicon-chevron-right,
+.glyphicon-chevron-down {
+    color: #afafaf;
+    font-size: 12px;
+}
+
+/*.sup-menu:hover .glyphicon-chevron-right,
+.sup-menu:hover .glyphicon-chevron-down {
+    color: #fff;
+}*/
+
+.main-content {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 1300px;
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+}
+
+.main-content .custom-h1 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.main-content .custom-h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.content-area {
+    margin-left: 20px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 38px;
+    background-color: rgb(239, 239, 239);
+    font-size: 10px;
+    color: rgb(175, 175, 175);
+    text-align: center;
+    line-height: 38px;
+    z-index: 10;
+}
+
+footer > p {
+    margin: 0;
+}
+
+.nav-link {
+    width: 100px;
+}
+
+.nav-link > a {
+    text-decoration: none;
+}
+
+/*
+ * 改变鼠标手势
+**/
+.header-items,
+.sup-menu,
+.sub-menu {
+    cursor: pointer;
+}
+
+.nav-link {
+    /* 调整三条线的位置 放到导航栏上*/
+    /*      position: absolute;
+            top: -35px;
+            left: 65px;*/
+    width: 30px;
+    font-size: 14px !important;
+}
+
+.jsc-sidebar-pushed > .nav-link {
+    position: absolute;
+    left: -35px;
+    z-index: 10;
+
+}
+
+.nav-link > a {
+    color: #bbb;
+}
+
+a:focus {
+    outline: none;
+}
+
+.wrapper {
+    border-left: 1px solid #ccc;
+}
+
+.main-content > img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 90%;
+
+}
+
+.main-content > .content-area {
+    position: absolute;
+    top: 600px;
+    left: 20px;
+    width: 900px;
+    height: 550px;
+}
+
+.content-area > p:not(.custom-h2) {
+    margin-left: 30px;
+    color: #333;
+}
+
+iframe {
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 800px;
+    height: 1950px;
+}
+
+h1 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.bs-docs-section > p,
+.bs-docs-section > ul,
+.bs-docs-section > ol,
+.bs-callout > p,
+.bs-callout > ol,
+.bs-callout > ul {
+    font-size: 14px;
+}
+

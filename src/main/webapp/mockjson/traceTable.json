@@ -1,0 +1,36 @@
+{
+  "traceTable": [
+    {
+      "startTime": "2016-05-01 11:22:33",
+      "path": "bin/bash",
+      "responseTime": "3ms",
+      "exception": "201",
+      "agent": "30",
+      "clientIP": "10.63.212.100",
+      "transaction": "FrondEnd01-BackEnd02",
+      "errors": "52",
+      "errorsPerMin": "1"
+    },
+    {      "startTime": "2016-05-02 11:22:33",
+      "path": "bin/bash2",
+      "responseTime": "2ms",
+      "exception": "202",
+      "agent": "32",
+      "clientIP": "10.63.212.102",
+      "transaction": "FrondEnd01-BackEnd02",
+      "errors": "52",
+      "errorsPerMin": "1"
+    },
+    {
+      "startTime": "2016-05-03 11:22:33",
+      "path": "bin3",
+      "responseTime": "3ms",
+      "exception": "203",
+      "agent": "32",
+      "clientIP": "10.63.212.103",
+      "transaction": "FrondEnd01-BackEnd03",
+      "errors": "53",
+      "errorsPerMin": "3"
+    }
+  ]
+}

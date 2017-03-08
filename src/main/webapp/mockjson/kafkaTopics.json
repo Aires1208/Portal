@@ -1,0 +1,35 @@
+{
+  "summary": [
+    {"name":"Replication","value":1},
+    {"name":"Number of Partitions","value":50},
+    {"name":"Sum of partition offsets","value":0},
+    {"name":"Total number of Brokers","value":1},
+    {"name":"Number of Brokers for Topic","value":1},
+    {"name":"Preferred Replicas (%)","value":1.0},
+    {"name":"Brokers Skewed (%)","value":1.0},
+    {"name":"Brokers Spread (%)","value":1.0},
+    {"name":"Under-replicated (%)","value":1.0},
+    {"name":"segment.bytes","value":104857600},
+    {"name":"compression.type","value":"uncompressed"},
+    {"name":"cleanup.policy","value":"compact"}
+  ],
+
+
+  "metrics":[
+      {"name":"Messages in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes out /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes rejected /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed fetch request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed produce request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0}
+  ] ,
+
+  "partitionInfo":[
+    {"partition":0,"latestOffset":1 ,"leader":0,"replicas":"(0)","inSyncReplicas":"(0)","preferredLeader":true,"underReplicated":false},
+    {"partition":1,"latestOffset":1 ,"leader":0,"replicas":"(0)","inSyncReplicas":"(0)","preferredLeader":true,"underReplicated":true}
+  ],
+
+  "partitionBroker":[
+    {"broker":0,"ofPartitions":1 ,"partitions":"(0)","skewed":true}
+  ]
+}

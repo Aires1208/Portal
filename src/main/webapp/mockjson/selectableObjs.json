@@ -1,0 +1,29 @@
+{
+  "apps": [
+    "appName=app1",
+    "appName=app2"
+  ],
+  "services": [
+    "appName=app1,serviceName=xxx1",
+    "appName=app1,serviceName=xxx2",
+    "appName=app2,serviceName=xxx1"
+  ],
+  "instances": [
+    "appName=app1,serviceName=xxx1,instanceName=y1",
+    "appName=app1,serviceName=xxx2,instanceName=y2",
+    "appName=app2,serviceName=xxx1,instanceName=y3"
+  ],
+  "transactions": [
+    "transactionId=t1",
+    "transactionId=t2",
+    "transactionId=t3"
+  ],
+  "hosts": [
+    "hostName=host1",
+    "hostName=host2"
+  ],
+  "dbs": [
+    "dbName=db1",
+    "dbName=db2"
+  ]
+}

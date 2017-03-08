@@ -1,0 +1,38 @@
+{
+  "cpuUsage":{
+    "io":[10],
+    "sys":[20],
+    "user":[30],
+    "idle":[40]
+  },
+  "memUsage":[
+    {"name":"Used","value":50},
+    {"name": "Available", "value":50}
+  ],
+  "sqlWaitStateLive":[
+    {"name":"Writing to net","value":23},
+    {"name": "other", "value":77}
+  ],
+  "sessionList": [
+    {
+      "id": "80001",
+      "user": "root",
+      "host": "ip10-61-11-11",
+      "db": " ",
+      "cmd": "Sleep",
+      "time": 1,
+      "state": "",
+      "info": ""
+    },
+    {
+      "id": "80002",
+      "user": "root",
+      "host": "ip10-62-11-12",
+      "db": " ",
+      "cmd": "Query",
+      "time": 2,
+      "state": "",
+      "info": ""
+    }
+  ]
+}

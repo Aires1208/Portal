@@ -1,0 +1,41 @@
+{
+  "applications": {
+    "total": 15,
+    "health": {
+      "critical": 2,
+      "warning": 5,
+      "normal": 8
+    },
+    "list": [
+      {"name": "EMS","health":"true"},
+      {"name": "OMM","health":"true"},
+      {"name": "EMS2","health":"false"}
+    ]
+  },
+  "databases": {
+    "total": 10,
+    "health": {
+      "critical": 1,
+      "warning": 2,
+      "normal": 7
+    },
+    "list": [
+      {"name": "Oracle","health":"false"},
+      {"name": "MySQL","health":"true"},
+      {"name": "Hbase","health":"true"}
+    ]
+  },
+  "servers": {
+    "total": 15,
+    "health": {
+      "critical": 2,
+      "warning": 5,
+      "normal": 8
+    },
+    "list": [
+      {"name": "node1","health":"true"},
+      {"name": "node2","health":"true"},
+      {"name": "node3","health":"false"}
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "networkInterface": {
+    "networkInterfaceDatas":[
+      {
+        "name": "eth0",
+        "status": "UP",
+        "ipv4Address": "172.17.0.5",
+        "maximumTransmissionUnit": 15000,
+        "type": "Ethernet",
+        "macAddress": "02-42-AC:11:00:05"
+      },
+      {
+        "name": "io",
+        "status": "UP",
+        "ipv4Address": "172.17.0.1",
+        "maximumTransmissionUnit": 65536,
+        "type": "Software_Loopback",
+        "macAddress": "Not_Available"
+      }
+    ],
+    "aggregatenetworkinterfaceiorate":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "theNumberOfKilobytesReceivedPerSecond":[0, 0, 0, 0, 0, 0, 0],
+      "theNumberOfKilobytesTransferredPerSecond":[0, 0, 0, 0, 0, 0, 0]
+    },
+    "aggregatenetworkinterfaceerror":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "theNumberOfPacketConflicts":[0, 0, 0, 0, 0, 0, 0],
+      "theNumberOfPacketInputErrors":[0, 0, 0, 0, 0, 0, 0],
+      "theNumberOfPacketOutputErrors":[0, 0, 0, 0, 0, 0, 0]
+    }
+  }
+}
+
+

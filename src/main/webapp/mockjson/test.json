@@ -1,0 +1,87 @@
+[
+  {
+    "vhost": "/",
+    "user": "guest",
+    "number": 1,
+    "name": "127.0.0.1:59864 -> 127.0.0.1:5672 (1)",
+    "node": "rabbit@A23350148",
+    "garbage_collection": {
+      "max_heap_size": 0,
+      "min_bin_vheap_size": 46422,
+      "min_heap_size": 233,
+      "fullsweep_after": 65535,
+      "minor_gcs": 3
+    },
+    "reductions": 2307,
+    "state": "running",
+    "global_prefetch_count": 0,
+    "prefetch_count": 1,
+    "acks_uncommitted": 0,
+    "messages_uncommitted": 0,
+    "messages_unconfirmed": 0,
+    "messages_unacknowledged": 0,
+    "consumer_count": 1,
+    "confirm": false,
+    "transactional": false,
+    "idle_since": "2016-12-01 1:56:49",
+    "reductions_details": {
+      "rate": 0.0
+    },
+    "reductions": 2307,
+    "message_stats": {
+      "publish": 0,
+      "publish_details": {
+        "rate": 0.0
+      },
+      "publish_in": 0,
+      "publish_in_details": {
+        "rate": 0.0
+      },
+      "publish_out": 0,
+      "publish_out_details": {
+        "rate": 0.0
+      },
+      "ack": 1,
+      "ack_details": {
+        "rate": 0.0
+      },
+      "deliver_get": 1,
+      "deliver_get_details": {
+        "rate": 0.0
+      },
+      "confirm": 0,
+      "confirm_details": {
+        "rate": 0.0
+      },
+      "return_unroutable": 0,
+      "return_unroutable_details": {
+        "rate": 0.0
+      },
+      "redeliver": 0,
+      "redeliver_details": {
+        "rate": 0.0
+      },
+      "deliver": 1,
+      "deliver_details": {
+        "rate": 0.0
+      },
+      "deliver_no_ack": 0,
+      "deliver_no_ack_details": {
+        "rate": 0.0
+      },
+      "get": 0,
+      "get_details": {
+        "rate": 0.0
+      },
+      "get_no_ack": 0,
+      "get_no_ack_details": {
+        "rate": 0.0
+      }
+    },
+    "connection_details": {
+      "name": "127.0.0.1:59864 -> 127.0.0.1:5672",
+      "peer_port": 59864,
+      "peer_host": "127.0.0.1"
+    }
+  }
+]

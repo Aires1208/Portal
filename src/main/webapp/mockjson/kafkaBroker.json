@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "topics": 5,
+    "partitions": 3,
+    "messages": 0.0,
+    "incoming":0.0,
+    "outgoing":0.0,
+
+    "msgCount":{
+      "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+      "producer":[0, 100, 10, 0, 200, 150, 50, 10, 120, 80],
+      "consumer":[10, 0, 200, 150, 50, 10, 120, 80, 0, 10]
+    }
+  },
+
+
+  "metrics":[
+      {"name":"Messages in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes out /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes rejected /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed fetch request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed produce request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0}
+  ] ,
+
+  "topics":[
+    {"topic":"policy_event","replication":1 ,"totalPartitions":50,"partitionsOnBroker":50,"partitions":"(0,1,2)","Skewed":true},
+    {"topic":"__consumer_offsets","replication":1 ,"totalPartitions":50,"partitionsOnBroker":50,"partitions":"(0,1)","Skewed":false}
+  ]
+}

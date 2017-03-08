@@ -1,0 +1,14 @@
+{
+  "queryTopN": [
+    {
+      "query": "SELECT * FROM 1",
+      "elapsedTime": "01:21:32",
+      "weight": "95"
+    },
+    {
+      "query": "SELECT * FROM 2",
+      "elapsedTime": "00:21:32",
+      "weight": "5"
+    }
+  ]
+}

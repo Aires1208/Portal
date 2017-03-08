@@ -1,0 +1,307 @@
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    font: 12px Arial, "微软雅黑", sans-serif;
+}
+/*
+ * 通用样式
+ */
+a {
+    display: block;
+    text-decoration: none;
+}
+a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+a:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+/*
+ * 覆盖 BootStrap 中的样式
+ */
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}
+/*
+ * 选中文本的样式表
+ */
+/*::-moz-selection {
+  background: red;
+  color: #fff;
+}
+
+::selection {
+  background: red;
+  color: #fff;
+}*/
+/*
+ * 头部导航区样式表
+ */
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: block;
+    width: 100%;
+    height: 42px;
+    color: #ffffff;
+    background-color: #008ed3;
+    /*
+     * 头部 a 标签专用样式
+     */
+    /*
+     * 头部导航栏选中项的样式
+     */
+}
+header .navbar-logo {
+    float: left;
+    width: 170px;
+    line-height: 42px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+header .navbar-items {
+    float: left;
+    list-style: none;
+    line-height: 42px;
+}
+header .navbar-items li {
+    float: left;
+    text-decoration: none;
+}
+header a {
+    padding: 0 18px;
+    font-size: 16px;
+    color: #ffffff;
+}
+header .navbar-login {
+    float: right;
+    padding-right: 10px;
+    line-height: 42px;
+    font-size: 18px;
+}
+header .header-selected {
+    background-color: #1070b0;
+}
+/*
+ * 侧边栏样式表
+ */
+.sidebar {
+    position: absolute;
+    left: 70px;
+    top: 250px;
+    background-color: #ffffff;
+    width: 300px;
+    height: 100%;
+    overflow: auto;
+}
+.sidebar li > a:hover {
+    background-color: #f2f2f2;
+}
+.sidebar-selected {
+    background-color: #f9f9f9;
+}
+.jsc-sidebar-content {
+    position: absolute;
+    top: 250px;
+    z-index: 10;
+    min-height: 100%;
+    left: 0;
+}
+.jsc-sidebar-pulled {
+    -webkit-transition: -webkit-transform 0.5s ease;
+    -moz-transition: -moz-transform 0.5s ease;
+    transition: transform 0.5s ease;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+}
+.jsc-sidebar-pushed {
+    -webkit-transform: translate3d(170px, 0, 0);
+    -moz-transform: translate3d(170px, 0, 0);
+    transform: translate3d(170px, 0, 0);
+}
+.jsc-sidebar-pushed > .nav-link {
+    position: absolute;
+    left: -35px;
+    z-index: 10;
+}
+
+.wrapper {
+    width: 70%;
+    box-sizing: border-box;
+    background-color: #fefefe;
+    border-left: 1px solid #cccccc;
+    position: absolute;
+    left: 70px;
+}
+.nav-link {
+    position: absolute;
+    width: 28px;
+    font-size: 23px !important;
+    text-decoration: none;
+}
+.nav-link a {
+    color: #bbbbbb;
+}
+.nav-link a:hover {
+    color: #807d7d;
+}
+.sup-menu {
+    display: block;
+    margin-bottom: 1px;
+    box-shadow: 0 1px 0 #ccc;
+    cursor: pointer;
+    /*  &:hover {
+      font-weight: bold;
+    }*/
+}
+.sup-menu > a {
+    display: inline;
+    color: #444444;
+    line-height: 25px;
+    font-size: 14px;
+    padding-left: 16px;
+}
+.sup-menu .glyphicon {
+    display: inline;
+    float: right;
+    margin-right: 12px;
+    line-height: 25px;
+    color: #ccc;
+}
+.sub-menu > li {
+    height: 25px;
+    padding-left: 32px;
+    /*    &:hover {
+        font-weight: bold;
+      }*/
+}
+.sub-menu a {
+    display: block;
+    line-height: 25px;
+    font-size: 14px;
+}
+.glyphicon-chevron-right,
+.glyphicon-chevron-down {
+    color: #afafaf;
+    font-size: 12px;
+}
+.sub-menu > li {
+    height: 25px;
+}
+.sub-menu a {
+    font-size: 14px;
+    line-height: 25px;
+    color: #666666;
+}
+.sidebar-selected > ul {
+    font-weight: normal;
+}
+/*
+ * 主体内容区样式表
+ */
+.main-content {
+    position: relative;
+    top: 20px;
+    width: 1300px;
+    margin-bottom: 60px;
+    font-size: 14px;
+    color: #555555;
+    background-color: #ffffff;
+    text-indent: 2em;
+}
+.main-content > img {
+    position: relative;
+    left: 20px;
+    top: 20px;
+    width: 100%;
+}
+.main-content > .content-area {
+    position: relative;
+    left: 20px;
+    top: 20px;
+    width: 1200px;
+    /*  height: @content-area-height;*/
+}
+.main-content .custom-h1 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.main-content .custom-h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-indent: 0;
+}
+/*
+ * iFrame 样式表
+ */
+iframe {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 1200px;
+    height: 1950px;
+}
+/*
+ * 底部区样式表
+ */
+footer {
+    position: absolute;
+    margin-top: 30px;
+    bottom: 0;
+    width: 100%;
+    height: 38px;
+    font-size: 12px;
+    color: #afafaf;
+    background-color: #efefef;
+    line-height: 38px;
+    text-align: center;
+}
+footer > p {
+    margin: 0;
+}
+/*
+ * 首页样式
+ */
+.introduction-content {
+    position: relative;
+    left: 15%;
+    top: 42px;
+    width: 70%;
+    height: auto;
+}
+.introduction-content .welcome-h1 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.introduction-content .welcome-content {
+    font-size: 14px;
+    text-indent: 2em;
+}
+.introduction-content a {
+    display: inline-block;
+    margin-left: 0;
+    text-indent: 0;
+}
+.introduction-content a:hover {
+    color: #008ed3;
+}
+/*
+ *  特殊样式
+ */

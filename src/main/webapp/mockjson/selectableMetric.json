@@ -1,0 +1,36 @@
+{
+  "app": [
+    {"id":"calls","name":"Calls"},
+    {"id":"errors","name":"Errors"},
+    {"id":"responsetime","name":"Response Time (ms)"}
+  ],
+  "service": [
+    {"id":"calls","name":"Calls"},
+    {"id":"errors","name":"Errors"},
+    {"id":"responsetime","name":"Response Time (ms)"}
+  ],
+  "instance": [
+    {"id":"calls","name":"Calls"},
+    {"id":"errors","name":"Errors"},
+    {"id":"responsetime","name":"Response Time (ms)"}
+  ],
+  "transaction": [
+    {"id":"calls","name":"Calls"},
+    {"id":"errors","name":"Errors"},
+    {"id":"responsetime","name":"Response Time (ms)"}
+  ],
+  "host": [
+    {"id":"cpuusage","name":"CPU userage(%)"},
+    {"id":"memusage","name":"Mem userage(%)"},
+    {"id":"diskusage","name":"Disk userage (%)"},
+    {"id":"networkin","name":"Network incomings (KB/S)"},
+    {"id":"networkout","name":"Network outcomings (KB/S)"},
+    {"id":"jvm","name":"JVM Heap userage(%)"},
+    {"id":"gcTime","name":"GC Time Spent (ms)"}
+  ],
+  "db": [
+    {"id":"calls","name":"calls/min"},
+    {"id":"connections","name":"number of connection"},
+    {"id":"spendtime","name":"time spent in executions"}
+  ]
+}

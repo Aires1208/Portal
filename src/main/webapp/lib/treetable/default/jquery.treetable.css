@@ -1,0 +1,56 @@
+.tree_table .default_node, .tree_table .default_active_node {width:16px;height:16px;border: medium none; margin: 0; padding: 0;display: inline-block;}
+.tree_table .default_active_node {cursor: pointer;}
+.tree_table .default_leaf{background:url(./allbgs.png) no-repeat -16px 0px;width:16px;}
+.tree_table .default_last_leaf{background:url(./allbgs.png) no-repeat -64px 0px;width:16px;}
+.tree_table .default_vertline{background:url(./allbgs.png) no-repeat -32px 0px;width:16px;}
+.tree_table .default_open, .tree_table .default_hover_open{background:url(./allbgs.png) no-repeat 0px 0px;width:16px;}
+.tree_table .default_shut, .tree_table .default_hover_shut{background:url(./allbgs.png) no-repeat -48px 0px;width:16px;}
+.tree_table .default_last_shut, .tree_table .default_hover_last_shut{background:url(./allbgs.png) no-repeat -96px 0px;width:16px;}
+.tree_table .default_last_open, .tree_table .default_hover_last_open{background:url(./allbgs.png) no-repeat -112px 0px;width:16px;}
+
+
+table {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    padding: 0;
+    margin: 0;
+}
+
+th {
+    /*font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    /*color: #4f6b72;*/
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    border-top: 1px solid #C1DAD7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    /*background: #CAE8EA url(images/bg_header.jpg) no-repeat;*/
+}
+
+th.nobg {
+    /*border-top: 0;
+    border-left: 0;
+    border-right: 1px solid #C1DAD7;
+    background: none;*/
+}
+
+td {
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    background: #fff;
+    font-size:12px;
+    padding: 6px 6px 6px 12px;
+    color: #4f6b72;
+}
+
+
+td.alt {
+    background: #F5FAFA;
+    color: #797268;
+}
+

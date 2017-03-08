@@ -1,0 +1,192 @@
+{
+  "typeList":[{"id":"","value":"All"},{"id":"/","value":"/"},{"id":"/favicon.ico","value":"/favicon.ico"},{"id":"/getCurrentTimestamp.pinpoint","value":"/getCurrentTimestamp.pinpoint"}],
+  "traceTable": [
+    {
+      "startTime": "2016-05-23 10:05:34",
+      "path": "/",
+      "responseTime": "2316",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464055513199^1",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-23 10:06:27",
+      "path": "/httpclient4/getEPLLeagueTable.pinpoint",
+      "responseTime": "15803",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464055513199^2",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-23 10:08:16",
+      "path": "/httpclient4/getEPLLeagueTable.pinpoint",
+      "responseTime": "19198",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464055513199^3",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-02 11:04:47",
+      "path": "/",
+      "responseTime": "1025",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^1",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-02 11:04:48",
+      "path": "/favicon.ico",
+      "responseTime": "1",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^2",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-02 11:05:47",
+      "path": "/callSelf/getCurrentTimestamp.pinpoint",
+      "responseTime": "1186",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^3",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-02 11:05:48",
+      "path": "/getCurrentTimestamp.pinpoint",
+      "responseTime": "69",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.100.77",
+      "transaction": "test-agent^1464923068416^3",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-12 04:30:43",
+      "path": "/",
+      "responseTime": "9",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^4",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-12 04:30:43",
+      "path": "/favicon.ico",
+      "responseTime": "1",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^5",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-18 10:44:11",
+      "path": "/",
+      "responseTime": "15",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1462525852071^47",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-18 10:44:11",
+      "path": "/favicon.ico",
+      "responseTime": "2",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1462525852071^48",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-12 04:30:45",
+      "path": "/callSelf/getCurrentTimestamp.pinpoint",
+      "responseTime": "27",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1464923068416^6",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-06-12 04:30:45",
+      "path": "/getCurrentTimestamp.pinpoint",
+      "responseTime": "4",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.100.77",
+      "transaction": "test-agent^1464923068416^6",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-22 11:31:42",
+      "path": "/favicon.ico",
+      "responseTime": "1",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1463974175254^2",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-22 11:31:47",
+      "path": "/getCurrentTimestamp.pinpoint",
+      "responseTime": "126",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.63.212.139",
+      "transaction": "test-agent^1463974175254^3",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-22 11:31:46",
+      "path": "/callSelf/getCurrentTimestamp.pinpoint",
+      "responseTime": "1577",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1463974175254^3",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    },
+    {
+      "startTime": "2016-05-22 11:31:40",
+      "path": "/",
+      "responseTime": "2280",
+      "exception": "N/A",
+      "agent": "test-agent",
+      "clientIP": "10.62.57.188",
+      "transaction": "test-agent^1463974175254^1",
+      "errors": "0",
+      "errorsPerMin": "0.0"
+    }
+  ]
+}

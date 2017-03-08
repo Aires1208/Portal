@@ -1,0 +1,24 @@
+{
+  "kafkaClusters": [
+    {
+      "name": "kafka_1",
+      "zookeeper": "10.62.100.241:2181",
+      "jmxPort": "ON",
+      "status": true,
+      "version": "0.9.0.1",
+      "topics": 5,
+      "brokers": 1,
+      "description": "for TEST"
+    },
+    {
+      "name": "kafka_2",
+      "zookeeper": "10.62.100.242:2181",
+      "jmxPort": "OFF",
+      "status": false,
+      "version": "0.9.0.1",
+      "topics": 5,
+      "brokers": 2,
+      "description": "for DEV"
+    }
+  ]
+}

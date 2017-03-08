@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Highcharts Example</title>
+
+    <script type="text/javascript" src="../jquery/jquery.min.js"></script>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    exporting: {
+                        enabled: false
+                    },
+                    credits: {
+                        text: '',
+                        href: '',
+                        enabled: false
+                    },
+                    events: {
+                        selection: function (event) {
+                            var text, text2, label;
+                            if (event.xAxis) {
+                                text = 'min: ' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', event.xAxis[0].min) + ', max: ' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', event.xAxis[0].max);
+
+                                text2 = 'min: ' + Highcharts.numberFormat(event.yAxis[0].min, 2) + ', max: ' + Highcharts.numberFormat(event.yAxis[0].max, 2);
+                            } else {
+                                text = 'Selection reset';
+                            }
+
+                            console.log(text);
+                            console.log(text2);
+                            label = this.renderer.label(text, 100, 120)
+                                    .attr({
+                                        fill: Highcharts.getOptions().colors[0],
+                                        padding: 10,
+                                        r: 5,
+                                        zIndex: 8
+                                    })
+                                    .css({
+                                        color: '#FFFFFF'
+                                    })
+                                    .add();
+                            setTimeout(function () {
+                                label.fadeOut();
+                            }, 1000);
+                        }
+                    },
+                    type: 'scatter',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: ' '
+                },
+                subtitle: {
+                    text: ' '
+                },
+
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        step: 4,
+                        formatter: function () {
+                            //return Highcharts.dateFormat('%m-%d %H:%M:%S', this.value);  
+                            var v = new Date(this.value).format('yyyy-MM-dd hh:mm:ss');
+                            return v;
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: '  (ms)'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 100,
+                    y: 70,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+                    borderWidth: 1
+                },
+                plotOptions: {
+                    scatter: {
+                        marker: {
+                            radius: 5,
+                            states: {
+                                hover: {
+                                    enabled: true,
+                                    lineColor: 'rgb(100,100,100)'
+                                }
+                            }
+                        },
+                        states: {
+                            hover: {
+                                marker: {
+                                    enabled: false
+                                }
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<b>{series.name}</b><br>',
+                            pointFormat: '{point.x}  , {point.y} ms'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Female',
+                    color: 'rgba(223, 83, 83, .5)',
+                    data: [[1470286682458, 150.2], [1470293882458, 167.5]]
+
+                }]
+            });
+        });
+
+
+        Date.prototype.format = function (format) {
+            var o = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S": this.getMilliseconds()
+            }
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
+        }
+
+    </script>
+</head>
+<body>
+<script src="highcharts.js"></script>
+
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 800px; margin: 0 auto"></div>
+
+</body>
+</html>

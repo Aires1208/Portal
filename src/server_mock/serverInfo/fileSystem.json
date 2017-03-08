@@ -1,0 +1,74 @@
+{
+  "fileSystem": {
+    "fileSystemDatas":[
+      {
+        "name": "/_",
+        "status": "UP",
+        "disk": "rootfs",
+        "type": "rootfs",
+        "size": 10229,
+        "usageAmount": 1855
+      },
+      {
+        "name": "/_",
+        "status": "UP",
+        "disk": "/dev/mapp...",
+        "type": "xfs",
+        "size": 10229,
+        "usageAmount": 1855
+      },
+      {
+        "name": "/dev",
+        "status": "UP",
+        "disk": "/tmpfs",
+        "type": "tmpfs",
+        "size": 7944,
+        "usageAmount": 0
+      },
+      {
+        "name": "/sys/fs/cqroup",
+        "status": "UP",
+        "disk": "/tmpfs",
+        "type": "tmpfs",
+        "size": 7944,
+        "usageAmount": 0
+      },
+      {
+        "name": "/opt/images",
+        "status": "UP",
+        "disk": "/dev/mapp...",
+        "type": "xfs",
+        "size": 153571,
+        "usageAmount": 37264
+      }
+    ],
+    "aggregatefilesystemusage":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "percentageUsed":[24, 24, 24, 24, 24, 24, 24],
+      "availablePercentage":[76, 76, 76, 76, 76, 76, 76]
+    },
+    "aggregatefilesystemspaceusage":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "used":[160000, 160000, 160000, 160000, 160000, 160000, 160000],
+      "total":[650000, 650000, 650000, 650000, 650000, 650000, 650000]
+    }
+  }
+}
+
+

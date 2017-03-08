@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name":"app1",
+      "level":"application",
+      "services":[
+        {
+          "name":"service11",
+          "level":"service",
+          "appName":"app1",
+          "instances":[
+            {
+              "name":"instance111",
+              "level":"instance",
+              "appName":"app1",
+              "serviceName":"service11"
+            },
+            {
+              "name":"instance111",
+              "level":"instance",
+              "appName":"app1",
+              "serviceName":"service11"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

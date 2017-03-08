@@ -1,0 +1,443 @@
+@body-bg-color: #fff;
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: @body-bg-color;
+  font: 12px Arial, "微软雅黑", sans-serif;
+}
+
+/*
+ * 通用样式
+ */
+
+@header-a-hover-color: #fff;
+@header-a-focus-color: #fff;
+a {
+  display: block;
+  text-decoration: none;
+
+  &:hover {
+    color: @header-a-hover-color;
+    text-decoration: none;
+  }
+
+  &:focus {
+    color: @header-a-focus-color;
+    text-decoration: none;
+  }
+}
+
+/*
+ * 覆盖 BootStrap 中的样式
+ */
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+/*
+ * 选中文本的样式表
+ */
+
+/*::-moz-selection {
+  background: red;
+  color: #fff;
+}
+
+::selection {
+  background: red;
+  color: #fff;
+}*/
+
+/*
+ * 头部导航区样式表
+ */
+
+@header-height: 42px;
+@header-bg-color: #008ed3;
+@header-z-index: 100;
+@header-font-color: #fff;
+@header-logo-width: 200px;
+@header-logo-padding-left: 10px;
+@header-logo-font-size: 20px;
+@header-a-font-color: #fff;
+@header-a-font-size: 16px;
+@header-a-padding-left-right: 18px;
+@header-login-padding-right: 10px;
+@header-login-font-size: 18px;
+@header-selected-bg-color: #1070b0;
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: @header-z-index;
+  display: block;
+  width: 100%;
+  height: @header-height;
+  color: @header-font-color;
+  background-color: @header-bg-color;
+
+  .navbar-logo {
+    float: left;
+    width: @header-logo-width;
+    line-height: @header-height;
+    padding-left: @header-logo-padding-left;
+    font-size: @header-logo-font-size;
+  }
+
+  .navbar-items {
+    float: left;
+    list-style: none;
+    line-height: @header-height;
+
+    li {
+      float: left;
+      text-decoration: none;
+    }
+  }
+
+  /*
+   * 头部 a 标签专用样式
+   */
+  a {
+    padding: 0 @header-a-padding-left-right;
+    font-size: @header-a-font-size;
+    color: @header-a-font-color;
+  }
+
+  .navbar-login {
+    float: right;
+    padding-right: @header-login-padding-right;
+    line-height: @header-height;
+    font-size: @header-login-font-size;
+  }
+
+  /*
+   * 头部导航栏选中项的样式
+   */
+  .header-selected {
+    background-color: @header-selected-bg-color;
+  }
+
+}
+
+/*
+ * 侧边栏样式表
+ */
+
+@sidebar-width: @header-logo-width; // 和 logo 的宽度一致
+@sidebar-bg-color: #fff;
+@sidebar-top: 74px;
+@sidebar-li-a-font-size: 14px;
+@sidebar-li-a-color: #444;
+@sidebar-selected-color: #f9f9f9;
+@sidebar-hover-color: #f2f2f2;
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: @sidebar-top;
+  background-color: @sidebar-bg-color;
+  width: @sidebar-width;
+  height: 100%;
+  
+  li > a:hover {
+    background-color: @sidebar-hover-color;
+  }
+}
+
+.sidebar-selected {
+  background-color: @sidebar-selected-color;
+}
+
+.jsc-sidebar-content {
+  position: absolute;
+  top: @header-height;
+  z-index: 10;
+  min-height: 100%;
+  left: 0;
+}
+
+.jsc-sidebar-pulled {
+  -webkit-transition: -webkit-transform 0.5s ease;
+  -moz-transition: -moz-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+
+.jsc-sidebar-pushed {
+  -webkit-transform: translate3d(@sidebar-width, 0, 0);
+  -moz-transform: translate3d(@sidebar-width, 0, 0);
+  transform: translate3d(@sidebar-width, 0, 0);
+
+  // 侧边栏展开时设置nav-link的绝对位置
+  // 侧边栏收缩时不用设置
+  > .nav-link {
+    position: absolute;
+    left: @nav-link-left;
+    z-index: 10;
+  }
+}
+
+@wrapper-width: 100%;
+@wrapper-bg-color: #fefefe;
+@wrapper-border-left-size: 1px;
+@wrapper-border-left-color: #ccc;
+.wrapper {
+  width: auto;
+  box-sizing: border-box;
+  background-color: @wrapper-bg-color;
+  border-left: @wrapper-border-left-size solid @wrapper-border-left-color;
+}
+
+@nav-link-font-size: 23px;
+@nav-link-width: @nav-link-font-size + 5;
+@nav-link-left: -35px;
+@nav-link-color: #bbb;
+@nav-link-hover-color: #807d7d;
+.nav-link {
+  position: absolute;
+  width: @nav-link-width;
+  font-size: @nav-link-font-size !important;
+  text-decoration: none;
+
+  a {
+    color: @nav-link-color;
+
+    &:hover {
+      color: @nav-link-hover-color;
+    }
+  }
+}
+
+@sup-menu-li-height: 25px;
+@sup-menu-glyphicon-margin-right: 12px;
+@sup-menu-a-color: #444;
+@sup-menu-a-font-size: 14px;
+@sup-menu-a-indent: 16px;
+@sub-menu-indent: 32px;
+@sub-menu-a-font-size: 14px;
+@sub-menu-a-color: #666;
+.sup-menu {
+  display: block;
+  margin-bottom: 1px;
+  box-shadow: 0 1px 0 #ccc;
+  cursor: pointer;
+
+  > a {
+    display: inline;
+    color: @sup-menu-a-color;
+    line-height: @sup-menu-li-height;
+    font-size: @sup-menu-a-font-size;
+    padding-left: @sup-menu-a-indent;
+  }
+
+  .glyphicon {
+    display: inline;
+    float: right;
+    margin-right: @sup-menu-glyphicon-margin-right;
+    line-height: @sup-menu-li-height;
+    color: #ccc;
+  }
+
+  // 侧边栏鼠标滑过样式
+/*  &:hover {
+    font-weight: bold;
+  }*/
+}
+
+.sub-menu {
+
+  > li {
+    height: @sup-menu-li-height;
+    padding-left: @sub-menu-indent;
+
+/*    &:hover {
+      font-weight: bold;
+    }*/
+  }
+
+  a {
+    display: block;
+    line-height: @sup-menu-li-height;
+    font-size: @sub-menu-a-font-size;
+  }
+}
+
+.glyphicon-chevron-right,
+.glyphicon-chevron-down {
+  color: #afafaf;
+  font-size: 12px;
+}
+
+.sub-menu {
+
+  > li {
+    height: @sup-menu-li-height;
+  }
+
+  a {
+    font-size: @sidebar-li-a-font-size;
+    line-height: @sup-menu-li-height;
+    color: @sub-menu-a-color;
+  }
+
+}
+
+.sidebar-selected {
+
+
+  > ul {
+    font-weight: normal;
+  }
+}
+
+/*
+ * 主体内容区样式表
+ */
+
+@main-content-left: 30px;
+@main-content-width: 1300px;
+@main-content-font-size: 14px;
+@main-content-font-color: #555;
+@main-content-bg-color: #fff;
+@main-content-img-left: 20px;
+@main-content-img-top: 20px;
+@main-content-img-scale: 100%;
+@content-area-left: 20px;
+@content-area-top: 20px;
+@content-area-width: 1200px;
+@content-area-height: 550px;
+@custom-h1-margin-top: 15px;
+@custom-h1-margin-bottom: 10px;
+@custom-h1-font-size: 20px;
+@custom-h2-margin-top: 10px;
+@custom-h2-margin-bottom: 10px;
+@custom-h2-font-size: 16px;
+.main-content {
+  position: relative;
+  left: @main-content-left;
+  top: 0;
+  width: @main-content-width;
+  margin-bottom: 60px;
+  font-size: @main-content-font-size;
+  color: @main-content-font-color;
+  background-color: @main-content-bg-color;
+  text-indent: 2em;
+
+  > img {
+    position: relative;
+    left: @main-content-img-left;
+    top: @main-content-img-top;
+    width: @main-content-img-scale;
+  }
+
+  > .content-area {
+    position: relative;
+    left: @content-area-left;
+    top: @content-area-top;
+    width: @content-area-width;
+  /*  height: @content-area-height;*/
+  }
+
+  .custom-h1 {
+    margin-top: @custom-h1-margin-top;
+    margin-bottom: @custom-h1-margin-bottom;
+    font-size: @custom-h1-font-size;
+    font-weight: bold;
+  }
+
+  .custom-h2 {
+    margin-top: @custom-h2-margin-top;
+    margin-bottom: @custom-h2-margin-bottom;
+    font-size: @custom-h2-font-size;
+    font-weight: bold;
+    text-indent: 0;
+  }
+
+}
+
+/*
+ * iFrame 样式表
+ */
+@iframe-margin-left: 20px;
+@iframe-margin-top: 20px;
+@iframe-width: 1200px;
+@iframe-height: 1950px;
+iframe {
+  margin-left: @iframe-margin-left;
+  margin-top: @iframe-margin-top;
+  width: @iframe-width;
+  height: @iframe-height;
+}
+
+/*
+ * 底部区样式表
+ */
+
+@footer-height: 38px;
+@footer-font-size: 12px;
+@footer-font-color: #afafaf;
+@footer-bg-color: #efefef;
+footer {
+  position: absolute;
+  margin-top: 30px;
+  bottom: 0;
+  width: 100%;
+  height: @footer-height;
+  font-size: @footer-font-size;
+  color: @footer-font-color;
+  background-color: @footer-bg-color;
+  line-height: @footer-height;
+  text-align: center;
+
+  > p {
+    margin: 0;
+  }
+}
+
+/*
+ * 首页样式
+ */
+
+.introduction-content {
+  position: relative;
+  left: 15%;
+  top: @header-height;
+  width: 70%;
+  height: auto;
+
+  .welcome-h1 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .welcome-content {
+    font-size: 14px;
+    text-indent: 2em;
+  }
+
+  a {
+    display: inline-block;
+    margin-left: 0;
+    text-indent: 0;
+   &:hover {
+     color: @header-bg-color;
+   }
+  }
+
+}
+
+/*
+ *  特殊样式
+ */
+
+

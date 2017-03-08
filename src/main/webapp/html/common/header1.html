@@ -1,0 +1,82 @@
+<!--header-->
+<header>
+    <div class="navbar-logo" style="font-size: 20px;font-weight: bold"><img src="../img/ztelogo.png">ESight<span style="font-size: 3px;vertical-align:bottom;font-weight: normal;padding-top: 20px"> - APM</span></div>
+    <ul class="navbar-items">
+        <li onclick="changeHeaderBg(this)" id="mihome"><a href="home.html">Home</a></li>
+        <li onclick="changeHeaderBg(this)" id="miapp"><a href="dashboard.html">Applications</a></li>
+        <li onclick="changeHeaderBg(this)" id="midb"><a href="databases.html">Databases</a></li>
+        <li onclick="changeHeaderBg(this)" id="miservers"><a href="servers.html">Servers</a></li>
+        <li onclick="changeHeaderBg(this)"><a href="#">Analytics</a></li>
+        <li onclick="changeHeaderBg(this)"><a href="#">Policies</a></li>
+    </ul>
+    <div class="navbar-login">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        <span></span>
+    </div>
+</header>
+
+
+<script>
+    var selectedMenuItem;
+
+    function changeHeaderBg(obj) {
+        console.log("selectedMenuItem = " + obj.innerHTML)
+        if (obj.innerHTML.toUpperCase().indexOf('HOME') != -1) {
+            document.cookie = "menuitem=home";
+        } else if (obj.innerHTML.toUpperCase().indexOf('APPLICATIONS') != -1) {
+            document.cookie = "menuitem=app";
+        } else if (obj.innerHTML.toUpperCase().indexOf('DATABASE') != -1) {
+            document.cookie = "menuitem=db";
+        } else if (obj.innerHTML.toUpperCase().indexOf('SERVERS') != -1) {
+            document.cookie = "menuitem=servers";
+        }
+        var headerItem = document.getElementsByClassName("header-selected");
+        if (headerItem[0] != undefined) {
+            headerItem[0].classList.remove("header-selected");
+        }
+
+        obj.classList.add("header-selected");
+    }
+
+    /*
+
+     $(document).ready(function(){
+     var url = location.href;
+     console.log("url = " + url);
+
+
+     var mi= getCookie('menuitem');
+     console.log("menuitem === "+getCookie('menuitem'));
+     switch (mi){
+     case 'home' :
+     $("#mihome").addClass("header-selected");
+     break;
+     case 'app' :
+     $("#miapp").addClass("header-selected");
+     break;
+     case 'db' :
+     $("#midb").addClass("header-selected");
+     break;
+     case 'servers' :
+     $("#miservers").addClass("header-selected");
+     break;
+     default :
+     $("#mihome").addClass("header-selected");
+     }
+     });*/
+
+    $(document).ready(function () {
+        var url = location.href;
+        if (url.toUpperCase().indexOf('HOME.HTML') != -1) {
+            $("#mihome").addClass("header-selected");
+        } else if (url.toUpperCase().indexOf('DASHBOARD.HTML') != -1 || url.toUpperCase().indexOf('APP.HTML') != -1
+                || url.toUpperCase().indexOf('SERVICE.HTML') != -1 || url.toUpperCase().indexOf('NODE.HTML') != -1
+                || url.toUpperCase().indexOf('TRACE.HTML') != -1 || url.toUpperCase().indexOf('TRANSACTION.HTML') != -1) {
+            $("#miapp").addClass("header-selected");
+        } else if (url.toUpperCase().indexOf('DATABASES.HTML') != -1 || url.toUpperCase().indexOf('DBINFO.HTML') != -1) {
+            $("#midb").addClass("header-selected");
+        } else if (url.toUpperCase().indexOf('SERVERS.HTML') != -1 || url.toUpperCase().indexOf('SERVERINFO.HTML') != -1) {
+            $("#miservers").addClass("header-selected");
+        }
+    });
+</script>

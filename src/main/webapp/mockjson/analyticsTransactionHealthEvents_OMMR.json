@@ -1,0 +1,22 @@
+{
+  "appNames": [
+    "EMS",
+    "OMMR"
+  ],
+  "appName": "OMMR",
+  "transactionInfoList":[
+    {
+      "createTime":"OMMRCreateTime1",
+      "transactionName":"OMMRalarm1",
+      "eventName":"OMMReventname1",
+      "eventLevel":"OMMREventLevel1",
+      "eventDetails":"OMMREventDetails1"
+    },{
+      "createTime":"OMMRCreateTime2",
+      "transactionName":"OMMRalarm2",
+      "eventName":"OMMReventname2",
+      "eventLevel":"OMMREventLevel2",
+      "eventDetails":"OMMREventDetails2"
+    }
+  ]
+}

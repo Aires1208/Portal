@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- FileName: index.html
+     Language: [en]
+-->
+<!--Head-->
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <title>McAfee Web Gateway - 通知</title>
+  <script src="/mwg-internal/de5fs23hu73ds/files/javascript/sw.js" type="text/javascript" ></script>
+  <link rel="stylesheet" href="/mwg-internal/de5fs23hu73ds/files/default/stylesheet.css" />
+</head>
+<!--/Head-->
+<!--Body-->
+<body onload="swOnLoad();">
+  <table class='bodyTable'>
+    <tr>
+      <td class='bodyData' background='/mwg-internal/de5fs23hu73ds/files/default/img/bg_body.gif'>
+<!--Logo-->
+<table class='logoTable'>
+  <tr>
+    <td class='logoData'>
+      <a href='http://www.mcafee.com'>
+        <img src='/mwg-internal/de5fs23hu73ds/files/default/img/logo_mwg.png'></a>
+    </td>
+  </tr>
+</table>
+<!--/Logo-->
+<!--Contents-->
+<!-- FileName: cannotconnect.html
+     Language: [en]
+-->
+<!--Title-->
+<table class='titleTable' background='/mwg-internal/de5fs23hu73ds/files/default/img/bg_navbar.jpg'>
+  <tr>
+    <td class='titleData'>IE无法显示该网页</td>
+  </tr>
+</table>
+<!--/Title-->
+
+<!--Content-->
+<table class="contentTable">
+  <tr>
+    <td class="contentData"><p align="left">IE无法显示该网页最可能的原因是： <br />
+      1.该网站遇到了问题，请稍后再试； <br />
+    2.在网址中可能存在输入错误，请重新输入。 <br /><br />
+      您看到本页面时说明该网站不能访问并非公司安全策略限制导致！ <br /></p></td>
+  </tr>
+</table>
+<!--/Content-->
+
+<!--Info-->
+<table class="infoTable">
+  <tr>
+    <td class="infoData">
+      <b>URL: </b><script type="text/javascript">break_line("http://www.google.com/ads/measurement/l?ebcid=ALh7CaQPUt9__HfcH6xqhMPAawszEtR6SMe1AOQ02C1oDx7esVjkTOTXH5ZZi4MpIo_FtknxkhNBSsEx8OVb3s-A2vj8YoxJjQ");</script><br />
+    </td>
+  </tr>
+</table>
+<!--/Info-->
+
+<!--/Contents-->
+
+<!--Foot-->
+<table class='footTable'>
+  <tr>
+    <td class='helpDeskData' background='/mwg-internal/de5fs23hu73ds/files/default/img/bg_navbar.jpg'>
+      如需帮助，请访问http://it.zte.com.cn或拨打0755-26778888、800-830-2329获取帮助。谢谢！
+。
+    </td>
+  </tr>
+
+</table>
+<!--/Foot-->
+      </td>
+    </tr>
+  </table>
+</body>
+<!--/Body-->
+</html>

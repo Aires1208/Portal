@@ -1,0 +1,93 @@
+{
+  "topo":
+  {
+    "nodes":[
+      {"key": 1, "name": "AppApp11111","type":"USER","count":2},
+      {"key": 2, "name": "AppApp2","type":"TOMCAT","count":1},
+      {"key": 3, "name": "Appxxx3","type":"PHP","count":3},
+      {"key": 4, "name": "App4","type": "MYSQL","count":1},
+      {"key": 5, "name": "App5","type":"USER","count":1}
+    ],
+    "links":[
+      {"from": 1, "to": 2, "respondTime": "2ms"},
+      {"from": 2, "to": 3, "respondTime": "1ms"},
+      {"from": 2, "to": 4, "respondTime": "2ms"},
+      {"from": 2, "to": 5, "respondTime": "2ms"},
+      {"from": 2, "to": 6, "respondTime": "2ms"},
+      {"from": 2, "to": 10, "respondTime": "2ms\n10ms"},
+      {"from": 2, "to": 12, "respondTime": "2ms"},
+      {"from": 4, "to": 5, "respondTime": "2ms\n2ms"},
+      {"from": 4, "to": 6, "respondTime": "2ms"},
+      {"from": 4, "to": 9, "respondTime": "2ms"}
+    ]
+  },
+  "cpuInfo":{
+    "info":"cpu info 0.9%  70error 8error/min",
+    "time":["09:03", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "memInfo":{
+    "info":"mem info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "storeInfo":{
+    "info":"store info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "netInfo":{
+    "info":"net info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "treeTable":[
+    {
+      "id":1,
+      "idParent":0,
+      "method":"method1",
+      "argument":"param1",
+      "startTime":"2011-11-11",
+      "gap":"1ms",
+      "exec":"1ms",
+      "execPer":"2%",
+      "self":"3ms",
+      "class":"java.util.",
+      "api":"Spring",
+      "agent":"agent1",
+      "app":"app1"
+    },
+    {
+      "id":2,
+      "idParent":1,
+      "method":"method2",
+      "argument":"param2",
+      "startTime":"2011-11-12",
+      "gap":"2ms",
+      "exec":"2ms",
+      "execPer":"2%",
+      "self":"2ms",
+      "class":"java.util2.",
+      "api":"Spring2",
+      "agent":"agent2",
+      "app":"app2"
+    },
+    {
+      "id":3,
+      "idParent":2,
+      "method":"method3",
+      "argument":"param3",
+      "startTime":"2011-11-13",
+      "gap":"3ms",
+      "exec":"32ms",
+      "execPer":"3%",
+      "self":"3ms",
+      "class":"java.util3.",
+      "api":"Spring3",
+      "agent":"agent3",
+      "app":"app3"
+    }
+
+  ]
+
+}

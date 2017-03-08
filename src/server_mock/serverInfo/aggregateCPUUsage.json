@@ -1,0 +1,76 @@
+{
+  "aggregateCPUUsage": {
+      "cpu":[
+        {
+          "identification": "0",
+          "vendorIdentification": "GenuineIntel",
+          "serialNumber": "",
+          "model": "6",
+          "modelName": "15 Intel(R) Xenon(R) CPU L5640 @ 2.27ghZ",
+          "clockSpeed": 2266.747,
+          "theCacheSize": 12288
+        },
+        {
+          "identification": "1",
+          "vendorIdentification": "GenuineIntel",
+          "serialNumber": "",
+          "model": "6",
+          "modelName": "15 Intel(R) Xenon(R) CPU L5640 @ 2.27ghZ",
+          "clockSpeed": 2266.747,
+          "theCacheSize": 12288
+        },
+        {
+          "identification": "2",
+          "vendorIdentification": "GenuineIntel",
+          "serialNumber": "",
+          "model": "6",
+          "modelName": "15 Intel(R) Xenon(R) CPU L5640 @ 2.27ghZ",
+          "clockSpeed": 2266.747,
+          "theCacheSize": 12288
+        },
+        {
+          "identification": "3",
+          "vendorIdentification": "GenuineIntel",
+          "serialNumber": "",
+          "model": "6",
+          "modelName": "15 Intel(R) Xenon(R) CPU L5640 @ 2.27ghZ",
+          "clockSpeed": 2266.747,
+          "theCacheSize": 12288
+        },
+        {
+          "identification": "4",
+          "vendorIdentification": "GenuineIntel",
+          "serialNumber": "",
+          "model": "6",
+          "modelName": "15 Intel(R) Xenon(R) CPU L5640 @ 2.27ghZ",
+          "clockSpeed": 2266.747,
+          "theCacheSize": 12288
+        }
+      ],
+      "topfivecpuusage":{
+        "cpuIdentification": ["1", "6", "3", "2", "5"],
+        "percentageOfSystemTime":[5, 5, 15, 5, 5],
+        "percentOfUserTime":[15, 10, 15, 5, 0],
+        "waitForIOTimePercentage":[5, 15, 5, 10, 5],
+        "percentageOfIdleTime":[75, 70, 65, 80, 90]
+      },
+    "aggregatecpuusagedetails":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "percentageOfUsers": [5, 8, 6, 4, 5, 11, 12],
+      "userNicePercentage": [15, 20, 12, 10, 11, 12, 1],
+      "percentageOfSystem": [11, 12, 5, 4, 8, 7, 2],
+      "waitForIOPercentage": [4, 5, 6, 8, 11, 12, 15],
+      "userToSystemPercentage": [5, 12, 11, 12, 14, 2, 5]
+    }
+  }
+}
+
+

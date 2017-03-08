@@ -1,0 +1,10 @@
+{
+  "topicSummary": {
+    "name": "result_event",
+    "ofPartitions": 0,
+    "detail": [
+      {"partition":"0","logSize":11,"consumerOffset":11,"lag":"","instanceOwner":"none"},
+      {"partition":"1","logSize":22,"consumerOffset":22,"lag":"","instanceOwner":"none"}
+    ]
+  }
+}

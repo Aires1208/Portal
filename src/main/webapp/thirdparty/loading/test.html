@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body ng-controller="testCtrl">
+    <button ng-click="tt()">点击按键</button>
+    <script src="../lib/angularjs/angular.min.js"></script>
+
+    <script src="./loading-bar.js"></script>
+    <link href='./loading-bar.css' rel='stylesheet' />
+    <script>
+        angular.module('myApp', ['chieffancypants.loadingBar'])
+
+            .controller('testCtrl', function($scope, $http){
+                var config = {
+                    url: 'http://localhost:28080/alarmRule.pinpoint',
+                    method: 'get'
+                };
+                $http(config).success(function(data){
+                    alert(data);
+                })
+
+                $scope.tt = function(){
+                    $http(config).success(function(data){
+                    alert(data);
+                })
+                }
+            })
+    </script>
+</body>
+</html>

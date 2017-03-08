@@ -1,0 +1,7 @@
+{
+  "consumedTopicInfo": [
+    {"topic":"result_event","partitionsCovered":1.0,"totalLag":"not available"},
+    {"topic":"result_event1","partitionsCovered":2.0,"totalLag":"not available"}
+
+  ]
+}

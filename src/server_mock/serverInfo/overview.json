@@ -1,0 +1,62 @@
+{
+  "overview": {
+    "aggregateCPUUsage": {
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07",
+        "2017-2-7 8:08"
+      ],
+      "busyPercentage": [75, 80, 75, 85, 80, 75, 100, 100],
+      "idlePercentage": [25, 20, 25, 15, 20, 15, 0, 0]
+    },
+    "smemory":{
+      "percentageUsed":[80, 70, 60],
+      "availablePercentage":[20, 30, 40]
+    },
+    "topfivefileststem":{
+      "installationPoint":["file1000000", "file200", "file30", "file42", "file5212"],
+      "percentageUsed":[20, 30, 40, 50, 60],
+      "availablePercentage":[80, 70, 60, 50, 40]
+    },
+    "topfivedisk":{
+      "disk":["file1000000", "file200", "file30", "file42", "file5212"],
+      "dataTransferredPerSecond":[2000, 3000, 4000, 5000, 6000]
+    },
+    "toptennetworkinterface":{
+      "networkinterface":["file1000000", "file200", "file30", "file42", "file5212","file10000", "file00", "fil30", "fle42", "fie5212"],
+      "packetsTransferredPerSecond":[2, 1, 0, 0, 0,0, 0, 0, 0, 0]
+    },
+    "processInformation":{
+      "numberOfActiveProcesses":140,
+      "numberOfZombieProcesses":0,
+      "numberOfThreads":569,
+      "theMaximumNumberOfProcessesAllowed":32768,
+      "theMaximumNumberOfThreadsAllowed":188917
+    },
+    "theLogFile":{
+      "theConfigurationThatHasBeenDistributed":[
+        {
+          "name":"Monit Lunux Syslog",
+          "status":"normal"
+        },
+        {
+          "name":"lz default configuration",
+          "status":"warning"
+        }
+      ]
+    },
+    "systemMessage":{
+      "operatingSystem":"Red Hat Enterprisel Linux Server re;ease 6.6(Santiago)",
+      "theKernelVersion":"2.6.32-504.23.4.el6.x86_64",
+      "FQDName":"worklight03.apmaas.ibm.com",
+      "hostAddress":"50.97.185.236",
+      "minutesOfTheSystem":"0/0/0",
+      "systemUptime":"103.22"
+    }
+  }
+}

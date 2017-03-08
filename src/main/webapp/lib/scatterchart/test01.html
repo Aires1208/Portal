@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>sortable demo</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+</head>
+<body>
+
+<div id="container"> 
+	<ul id="sortable">
+	  <li>Item 1</li>
+	  <li>Item 2</li>
+	  <li>Item 3</li>
+	  <li>Item 4</li>
+	  <li>Item 5</li>
+	</ul>
+</div>
+<button id="btn">Destroy and create</button>
+<button id="unbind">Unbind</button>
+
+<script>$("#sortable").sortable();</script>
+<script>
+	var html = $('#container').html();
+	$('#btn').click(function(){
+		$("#sortable").sortable('destroy');
+		$('#container').empty();
+		setTimeout(function(){
+			$('#container').append(html);
+			
+			$("#sortable").sortable();
+		}, 500);
+	});
+	$('#unbind').click(function(){
+		jQuery(document).unbind('mousemove').unbind('mouseup');
+	})
+</script>
+</body>
+</html>

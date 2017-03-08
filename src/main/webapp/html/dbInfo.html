@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Database</title>
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        /*.modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            /!*margin-left: 10px;*!/
+        }
+
+        a:hover {
+            color: #008ed3;
+        }*/
+
+        /*table tr:hover {*/
+            /*background-color: #0180FE;*/
+            /*color: #fff;*/
+            /*cursor:hand;*/
+        /*}*/
+        /*table th{
+            background-color: #c9c9c9;
+            color: #fff;
+            cursor:hand;
+        }*/
+
+        #objid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #objid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #objid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #objid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #objid .nav-tabs > li.active > a,
+        #objid .nav-tabs > li.active > a:hover,
+        #objid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #objid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #objid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #objid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #objid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+        /*report*/
+        #reportid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #reportid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #reportid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #reportid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #reportid .nav-tabs > li.active > a,
+        #reportid .nav-tabs > li.active > a:hover,
+        #reportid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #reportid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #reportid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #reportid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #reportid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+
+
+        /* 另一种尝试通过，把边框变成透明的。 */
+        .no-border {
+            border: 1px solid transparent !important;
+        }
+
+        .no-part-border {
+            border-right: 1px solid transparent !important;
+        }
+    </style>
+</head>
+<body ng-app="dbInfoApp" ng-controller="dbInfoCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" >
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+            <span style="font-size: 2em"><i class="fa fa-database" style="color: #31b0d5"></i>  {{dbName}} </span>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div id="reportrange" class="pull-right">
+                <i class="glyphicon glyphicon-calendar"></i>&nbsp;
+                <span></span> <b class="caret"></b>
+            </div>
+        </div>
+    </div>
+
+
+    <ul id="tranxTab" class="nav nav-tabs" style="font-size: 0.9em">
+        <li class="active"><a href="#dashboardid" data-toggle="tab">Dashboard</a></li>
+        <li><a href="#liveviewid" data-toggle="tab">Live View</a></li>
+        <li><a href="#queriesid" data-toggle="tab">Queries</a></li>
+        <li><a href="#clientid" data-toggle="tab">Clients</a></li>
+        <li><a href="#sessionid" data-toggle="tab">Sessions</a></li>
+        <li><a href="#objid" data-toggle="tab">DB Objects</a></li>
+        <li><a href="#reportid" data-toggle="tab">Reports</a></li>
+    </ul>
+
+    <div id="tranxTabContent" class="tab-content" style="background-color: #EAEAEA;padding: 10px">
+
+        <!-- dashboard -->
+        <div class="tab-pane fade in active" id="dashboardid" >
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Name
+                            <p style="font-size: 1.5em;">{{dbName}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Health
+                            <p style="font-size: 1.5em"><span ng-class="{true: 'glyphicon glyphicon-ok-sign', false: 'glyphicon glyphicon-exclamation-sign'}[dbHealth]" style="color: {{isHealthColor(dbHealth)}}"></span></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Database Type
+                            <p style="font-size: 1.5em;">{{dbType}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Total Loads
+                            <p style="font-size: 1.5em;">{{totalExec}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <loadtimespent-chart id="loadTimespent"  class="echart_height" ></loadtimespent-chart>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding-left: 30px">
+                            <sqlwaitstates-chart id="sqlWaitStates"  class="echart_height" ></sqlwaitstates-chart>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <avgconnect-chart id="avgConnect"  class="echart_height" ></avgconnect-chart>
+                        </div>
+                    </div>
+
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding-left: 50px">
+                            <cpu-chart id="cpuLine"  class="echart_height" ></cpu-chart>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <mem-chart id="memLine"  class="echart_height" ></mem-chart>
+                        </div>
+                    </div>
+
+
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding-left: 50px">
+                            <store-chart id="storeLine"  class="echart_height" ></store-chart>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <net-chart id="netLine"  class="echart_height" ></net-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- live view -->
+        <div class="tab-pane fade" id="liveviewid" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <p style="font-size: 1.5em;">{{dbName}}</p>
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <p style="padding-top: 5px"><input type="checkbox" ng-click="refreshLive()" ng-model="liveCheckbox">Auto Refresh</p>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="select_id" class="col-sm-3 " style="padding-top: 5px">Every </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id = "select_id" ng-change="changeLive()" ng-model="interval">
+                                        <option value ="1">1 minutes</option>
+                                        <option value ="5">5 minutes</option>
+                                        <option value ="10">10 minutes</option>
+                                        <option value ="15">15 minutes</option>
+                                        <option value ="30">30 minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;padding: 0px">
+                    <div class="row" style="padding: 0px">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px;padding-left: 50px;">
+                            <div id="cpuLive" style="padding: 0px">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px">
+                            <div id="memLive" style="padding: 0px">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px">
+                            <div id="sqlWaitLive" style="padding: 0px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <h4 style="font-weight: bold;color: #3BA1D6">Session List</h4>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>User</th>
+                                    <th>Host</th>
+                                    <th>DB</th>
+                                    <th>Command</th>
+                                    <th>Time</th>
+                                    <th>State</th>
+                                    <th>Info</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="record in sessionList">
+                                    <td>{{record.id}}</td>
+                                    <td>{{record.user}}</td>
+                                    <td>{{record.host}}</td>
+                                    <td>{{record.db}}</td>
+                                    <td>{{record.cmd}}</td>
+                                    <td>{{record.time}}</td>
+                                    <td>{{record.state}}</td>
+                                    <td>{{record.info}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- query top n -->
+        <div class="tab-pane fade" id="queriesid" style="">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_querytopn_id" class="col-sm-2 control-label  pull-left" style="text-align:left"><strong>Top </strong></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="select_querytopn_id" ng-change="getQueryTopNData()" ng-model="queryTopN">
+                                <option value ="5">5</option>
+                                <option value ="10">10</option>
+                                <option value ="20">20</option>
+                                <option value ="50">50</option>
+                                <option value ="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table  table-striped">
+                    <p></p>
+                    <thead>
+                    <tr>
+                        <th>Query</th>
+                        <th>Elapsed Time</th>
+                        <th>Weight(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in queries">
+                        <td>{{record.query}}</td>
+                        <td>{{record.elapsedTime}}</td>
+                        <td>{{record.weight}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- clients top n -->
+        <div class="tab-pane fade" id="clientid" style="">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_clienttopn_id" class="col-sm-2 control-label  pull-left" style="text-align:left"><strong>Top </strong></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="select_clienttopn_id" ng-change="getClientTopNData()" ng-model="clientTopN">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table  table-striped">
+                    <p></p>
+                    <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Count</th>
+                        <th>Weight(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in clients">
+                        <td>{{record.client}}</td>
+                        <td>{{record.count}}</td>
+                        <td>{{record.weight}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- sessions top n -->
+        <div class="tab-pane fade" id="sessionid" style="">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_sessiontopn_id" class="col-sm-2 control-label  pull-left" style="text-align:left"><strong>Top </strong></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="select_sessiontopn_id" ng-change="getSessionTopNData()" ng-model="sessionTopN">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table  table-striped">
+                    <p></p>
+                    <thead>
+                    <tr>
+                        <th>SessionID</th>
+                        <th>TimeSpent</th>
+                        <th>Weight(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in sessions">
+                        <td>{{record.sessionId}}</td>
+                        <td>{{record.timeSpent}}</td>
+                        <td>{{record.weight}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- db object -->
+        <div class="tab-pane fade" id="objid" style="padding-top: 20px">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#objuserid" data-toggle="tab">Users</a></li>
+                <li><a href="#objvarid" data-toggle="tab">Variables</a></li>
+                <li><a href="#objstoreid" data-toggle="tab">Storage</a></li>
+                <li><a href="#objlogid" data-toggle="tab">Error Log</a></li>
+                <li><a href="#objdbid" data-toggle="tab">Database</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="objuserid">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Host</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="record in objUsers">
+                                <td>{{record.username}}</td>
+                                <td>{{record.host}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="objvarid">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Variable Name</th>
+                                <th>Variable Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="record in objVariables">
+                                <td>{{record.variableName}}</td>
+                                <td>{{record.variableValue}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="objstoreid">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Database Name</th>
+                                <th>Index Length</th>
+                                <th>Data Length</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="record in objStorage">
+                                <td>{{record.databaseName}}</td>
+                                <td>{{record.indexLength}}</td>
+                                <td>{{record.dataLength}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="objlogid">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px 15px">
+                        Log Path : {{objLog}}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="objdbid">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <table class="table table-condensed" id="dbOjbDatabaseable">
+                            <tbody>
+                            <tr>
+                                <td class="no-border">Uptime</td>
+                                <td class="no-border">{{objDBUptime}}</td>
+                            </tr>
+                            <tr>
+                                <td class="no-border">Version</td>
+                                <td class="no-border">{{objDBVer}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- report -->
+        <div class="tab-pane fade" id="reportid" style="padding-top: 20px">
+            <ul id="myReportTab" class="nav nav-tabs">
+                <li class="active"><a href="#reportWaitStateId" data-toggle="tab">Wait State</a></li>
+                <li><a href="#reportActivityId" data-toggle="tab">Top Activity</a></li>
+            </ul>
+
+            <div id="myTabReportContent" class="tab-content">
+                <div class="tab-pane fade in active" id="reportWaitStateId">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <div id="waitStateReport" style="padding: 0px">
+                            <div style="padding: 10px 70px">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Wait State</th>
+                                        <th>Description</th>
+                                        <th>Total Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in reportWaitState">
+                                        <td>{{record.waitState}}</td>
+                                        <td>{{record.description}}</td>
+                                        <td>{{record.totalTime}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="reportActivityId">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <div id="topActivityReport" style="padding: 0px">
+                            <!--notice: here no </div>-->
+                            <div style="padding: 10px 70px">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>QueryId</th>
+                                    <th>Query</th>
+                                    <th>Total Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="record in reportTopActivity">
+                                    <td>{{record.queryid}}</td>
+                                    <td>{{record.query}}</td>
+                                    <td>{{record.totalTime}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div style="visibility:hidden;height: 5px;overflow :auto">
+    <cpulive-chart id="cpuLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></cpulive-chart>
+    <memlive-chart id="memLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></memlive-chart>
+    <sqlwaitlive-chart id="sqlWaitLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></sqlwaitlive-chart>
+
+    <waitstatereport-chart id="waitStateReportLineChart"  class="echart_height" style="visibility:hidden;width:100%;"></waitstatereport-chart>
+    <topactivityreport-chart id="topActivityLineChart"  class="echart_height" style="visibility:hidden;width:100%;"></topactivityreport-chart>
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/dbInfo.js"></script>
+
+</body>
+</html>

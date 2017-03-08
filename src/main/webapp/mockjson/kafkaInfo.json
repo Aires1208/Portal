@@ -1,0 +1,47 @@
+{
+  "overview": {
+    "name": "kafka_1",
+    "status": true,
+    "zookeeper": "10.62.57.201:2181",
+    "version": "0.9.0.1",
+    "topics": 5,
+    "brokers": 3,
+    "consumers": 11,
+    "clusters": [
+      {"name":"broker0","host":"10:62:100:100:9092","status":true},
+      {"name":"broker1","host":"10:62:100:101:9092","status":true},
+      {"name":"broker2","host":"10:62:100:102:9092","status":true}
+    ],
+    "msgCount":{
+      "times":["09:05:00", "09:05:30", "09:06:00", "09:06:30", "09:07:00", "09:07:30", "09:08:00","09:08:30","09:09:00","09:09:30"],
+      "producer":[0, 100, 10, 0, 200, 150, 50, 10, 120, 80],
+      "consumer":[10, 0, 200, 150, 50, 10, 120, 80, 0, 10]
+    }
+  },
+
+  "brokers":{
+    "combinedMetrics":[
+      {"name":"Messages in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes in /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes out /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Bytes rejected /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed fetch request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0},
+      {"name":"Failed produce request /sec","mean":0.0 ,"min1":0.0,"min5":0.0,"min15":0.0}
+    ],
+    "brokerList":[
+      {"id":"0","host":"10.62.57.100" ,"port":"9092","jmxport":"9095","bytesIn":0.0,"bytesOut":0.0},
+      {"id":"1","host":"10.62.57.101" ,"port":"9092","jmxport":"9095","bytesIn":0.0,"bytesOut":0.0},
+      {"id":"2","host":"10.62.57.102" ,"port":"9092","jmxport":"9095","bytesIn":0.0,"bytesOut":0.0}
+    ]
+  },
+
+  "topics":[
+    {"topic":"policy_event","partition":1 ,"brokers":1,"brokersSpread":1,"brokersSkew":1,"replicas":3,"underReplicated":5,"producerMessage":11.5},
+    {"topic":"test","partition":2 ,"brokers":2,"brokersSpread":1,"brokersSkew":1,"replicas":3,"underReplicated":25,"producerMessage":21.5}
+  ],
+
+  "consumers":[
+    {"name":"console-consumer-20","type":"ZK"},
+    {"name":"console-consumer-21","type":"ZK"}
+  ]
+}

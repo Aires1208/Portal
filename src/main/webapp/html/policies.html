@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Policies</title>
+    <!-- thirdparty css -->
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../lib/select2/dist/css/select2.css" rel="stylesheet"/>
+
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        .dialog-boldfont {
+            font-weight: bold;
+            padding-bottom: 12px;
+        }
+
+        .btn-clean {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean-sm {
+            display: inline-block;
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean:hover {
+            background: #448EF9;
+        }
+
+        table th {
+            background-color: #c9c9c9;
+            color: #fff;
+            cursor: hand;
+        }
+
+        .font_size {
+            font-size: 0.8cm;
+        }
+
+        table > tfoot td,
+        table > tfoot tr > td:first-child,
+        table > tfoot tr > td:last-child {
+            border: none;
+            padding: 0px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body ng-app="policiesApp" ng-controller="policiesCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" style="padding: 0px ;margin: 0px">
+        <div class="col-md-3 col-sm-12" style="padding: 0px ;margin: 0px">
+            <span style="font-size: 2em;padding: 0px ;margin: 0px"> Policies </span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="pull-left">
+                <button class="btn btn-primary btn-lg btn-clean" ng-click="clickBeforeAdd()">
+                    <span class="glyphicon glyphicon-plus"></span> Create Policy
+                </button>
+                <button class="btn btn-primary btn-lg btn-clean" ng-click="clickBeforeModify()">
+                    <span class="glyphicon glyphicon-cog"></span> Modify Policy
+                </button>
+                <button class="btn btn-primary btn-lg btn-clean" ng-click="clickBeforeDelete()">
+                    <span class="glyphicon glyphicon-trash"></span> Delete Policy
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 ">
+            <!--<form class="form-horizontal pull-right" role="form" style="width:300px;">-->
+                <!--<div class="form-group">-->
+                    <!--<div class="col-sm-10 pull-right" >-->
+                        <!--<input type="text" class="form-control" ng-model="filterInput" style="border: 1px solid #ccc;border-radius: 0px;" placeholder="Search">-->
+                        <!--<div style="position:absolute;bottom:5px; right:23px; "><span class="glyphicon glyphicon-search" style="font-size: 1.3em;color: darkgray"></span></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        </div>
+    </div>
+    <div class="table-responsive" style="margin-top: 20px">
+        <table class="table table-bordered table-striped" style="word-break:break-all; word-wrap:break-all;">
+            <tfoot ng-if="ispolicyDatasLoading || policyDatas.length==0">
+            <tr style="border: none;padding: 0px;height: 50px;">
+                <td colspan="10"
+                    style="text-align: center;border: none;padding: 0px;height: 50px;font-size: 16px;vertical-align: middle"
+                    ng-if="ispolicyDatasLoading && !(policyDatas.length==0)">
+                    <i class="fa fa-spinner fa-pulse fa-fw"></i>Loading...
+                </td>
+                <td colspan="10"
+                    style="text-align: center;border: none;padding: 0px;height: 50px;font-size: 16px;vertical-align: middle"
+                    ng-if="!ispolicyDatasLoading && policyDatas.length==0">
+                    there is no data yet!
+                </td>
+            </tr>
+            </tfoot>
+            <thead>
+            <tr>
+                <th><input type="checkbox" name="btSelectAll" ng-model="name_checkbox" ng-click="name_checkboxToggle()">Name
+                </th>
+                <th style="width:40%">EventType</th>
+                <th style="width: 30%">ObjDN</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="policyData in policyDatas">
+                <td>
+                    <input name="btSelectItem" type="checkbox" ng-click="policyName_checkboxToggle()">{{policyData.policyName}}
+                </td>
+                <td style="width: 40%">{{policyData.condition.eventTypes | removeSpecialsymbol}}</td>
+                <td style="width: 30%">{{policyData.condition.objDN}}</td>
+                <td>{{policyData.policyActions | removeSpecialsymbol}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--<nav aria-label="Page navigation" style="float: right">-->
+            <!--<ul class="pagination">-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Previous">-->
+                        <!--<span aria-hidden="true">&laquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li><a href="#">1</a></li>-->
+                <!--<li><a href="#">2</a></li>-->
+                <!--<li><a href="#">3</a></li>-->
+                <!--<li><a href="#">4</a></li>-->
+                <!--<li><a href="#">5</a></li>-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Next">-->
+                        <!--<span aria-hidden="true">&raquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</nav>-->
+    </div>
+
+
+    <!--create 模态框（Modal） -->
+    <div class="modal " id="createPolicyId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <p ng-if="!modifyPolicyFalg">Create Policy</p>
+                        <p ng-if="modifyPolicyFalg">Modify Policy</p>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" name="myForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="font-weight: bold">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-disabled="modifyPolicyFalg" class="form-control" name="policyName"
+                                       id="policyName" ng-model="policyName" placeholder="Input Name Please" required>
+                                <span style="color:red"
+                                      ng-show="myForm.policyName.$dirty && myForm.policyName.$invalid">
+                                    <span ng-show="myForm.policyName.$error.required">policy name is required</span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- trigger param -->
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label dialog-boldfont">Trigger</label>
+                        </div>
+                        <div ng-show="!modifyPolicyFalg">
+                            <div id="ObjectType" class="form-group">
+                                <label class="col-sm-3 control-label">Object Type</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-model="objectType" ng-disabled="modifyPolicyFalg"
+                                            ng-change="changeObjectTypes()">
+                                        <option ng-repeat="type in ObjectTypes" value="{{type}}">{{type}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentAPP" class="form-group"
+                                 ng-show="objectType=='APP' || objectType == 'Service' || objectType == 'Instance'">
+                                <label class="col-sm-3 control-label">Current APP</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-model="appType" ng-disabled="modifyPolicyFalg"
+                                            ng-change="changeAppTypes()">
+                                        <option ng-repeat="type in apps" value="{{type.name}}">{{type.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentService" class="form-group"
+                                 ng-show="objectType == 'Service' || objectType == 'Instance'">
+                                <label class="col-sm-3 control-label">Current Service</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-model="serviceType" ng-disabled="modifyPolicyFalg"
+                                            ng-change="changeServiceTypes()">
+                                        <option ng-repeat="type in ServiceTypes" value="{{type.name}}">{{type.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentInstance" class="form-group" ng-show="objectType == 'Instance'">
+                                <label class="col-sm-3 control-label">Current Instance</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-disabled="modifyPolicyFalg" ng-model="instanceType">
+                                        <option ng-repeat="type in InstanceTypes" value="{{type.name}}">{{type.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentTransaction" class="form-group" ng-show="objectType == 'Transaction'">
+                                <label class="col-sm-3 control-label">Transaction Name</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-disabled="modifyPolicyFalg"
+                                            ng-model="transactionType">
+                                        <option ng-repeat="type in TransactionTypes" value="{{type.simplifiedname}}"
+                                                title="{{type.fullname}}">{{type.simplifiedname}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentHost" class="form-group" ng-show="objectType == 'Host'">
+                                <label class="col-sm-3 control-label">Host ID</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-disabled="modifyPolicyFalg" ng-model="hostType">
+                                        <option ng-repeat="type in HostTypes" value="{{type.simplifiedname}}"
+                                                title="{{type.fullname}}">{{type.simplifiedname}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ACurrentDB" class="form-group" ng-show="objectType == 'DB'">
+                                <label class="col-sm-3 control-label">DB ID</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-disabled="modifyPolicyFalg" ng-model="DBType">
+                                        <option ng-repeat="type in DBTypes"
+                                                value="{{type.dbName+'_'+type.dbIp+'_'+type.dbPort}}">
+                                            {{type.dbName+'_'+type.dbIp+'_'+type.dbPort}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="CurrentDN" class="form-group" ng-show="modifyPolicyFalg">
+                            <label class="col-sm-3 control-label">Policy DN</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-disabled="true" class="form-control" name="policyDN"
+                                       ng-model="policyDN" placeholder="You have not selected a policy!" required>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label dialog-boldfont">Events</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Selected Events</label>
+                            <div class="col-sm-9">
+                                <select id="eventTypeID" class="js-multiple-select-events"
+                                        style="width: 100%;height: auto" multiple="multiple"
+                                        name="eventType" id="eventType" ng-model="eventType" required>
+                                    <!--<option ng-repeat="type in EventTypes" value="{{type}}">{{type}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <!-- action param -->
+                        <hr>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label dialog-boldfont">Action</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Selected Actions</label>
+                            <div class="col-sm-9">
+                                <select id="ActionID" class="js-multiple-select-actions"
+                                        style="width: 100%;height: auto" multiple="multiple" name="Action" id="Action"
+                                        ng-model="Action" required>
+                                    <!--<option ng-repeat="action in Actions" value="{{action}}">{{action}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-if="!modifyPolicyFalg"
+                            ng-disabled="myForm.policyName.$error.required||myForm.eventType.$error.required||myForm.Action.$error.required"
+                            ng-click="addPolicy()">Create
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="myForm.policyName.$error.required||myForm.policyDN.$error.required"
+                            ng-if="modifyPolicyFalg"
+                            ng-click="modifyPolicy()">Modify
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal " id="deletePolicyId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Delete Policy
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="deletePolicy()" data-dismiss="modal">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+<script src="../lib/select2/dist/js/select2.js"></script>
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/policies.js"></script>
+<script type="text/javascript">
+    $(".js-multiple-select-actions").select2({
+//        placeholder:'select actions',
+        allowClear: true
+    })
+    $(".js-multiple-select-events").select2({
+//        placeholder:'select events',
+        allowClear: true
+    })
+</script>
+</body>
+
+</html>

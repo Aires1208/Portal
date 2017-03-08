@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Middleware</title>
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+         .modal-dialog-css {
+            width: 80%;
+            margin: auto;
+            margin-top: 10px;
+            /!*margin-left: 10px;*!/
+        }
+
+        #objid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #objid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #objid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #objid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #objid .nav-tabs > li.active > a,
+        #objid .nav-tabs > li.active > a:hover,
+        #objid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #objid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #objid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #objid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #objid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+        /*report*/
+        #reportid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #reportid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #reportid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #reportid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #reportid .nav-tabs > li.active > a,
+        #reportid .nav-tabs > li.active > a:hover,
+        #reportid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #reportid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #reportid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #reportid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #reportid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+    </style>
+</head>
+<body ng-app="rabbitmqInfoApp" ng-controller="rabbitmqInfoCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" >
+        <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+            <span style="font-size: 1.8em"> <img src="../img/rabbitmqlogosm.png" height="30px" style="margin-bottom: 10px">rabbit@A2331111.zte.intra </span>
+        </div>
+        <div class="col-md-3 col-xs-12 pull-right" >
+            <div class="form-group">
+                <label for="" class="col-sm-3 control-label" style="padding-top: 8px">Update</label>
+                <div class="col-sm-9" >
+                    <select style="border: 1px solid #ccc;border-radius: 0px;" class="form-control" id="select_clienttopn_id" value="5" >
+                        <option value="5">every 5 seconds</option>
+                        <option value="30">every 30 seconds</option>
+                        <option value="600">every 5 minutes</option>
+                        <option value="-1">never</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ul id="tranxTab" class="nav nav-tabs" style="font-size: 0.9em">
+        <li class="active"><a href="#dashboardid" data-toggle="tab">Overview</a></li>
+        <li><a href="#connectionsId" data-toggle="tab">Connections</a></li>
+        <li><a href="#channelsId" data-toggle="tab">Channels</a></li>
+        <li><a href="#exchangesId" data-toggle="tab">Exchanges</a></li>
+        <li><a href="#queuesId" data-toggle="tab">Queues</a></li>
+        <li><a href="#nodesId" data-toggle="tab">Nodes</a></li>
+    </ul>
+
+    <div id="tranxTabContent" class="tab-content" style="background-color: #EAEAEA;padding: 10px">
+        <!-- Overview -->
+        <div class="tab-pane fade in active" id="dashboardid" >
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Name
+                            <p style="font-size: 1.1em;">rabbit@A2331111.zte.intra</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Health
+                            <p style="font-size: 1.5em"><span ng-class="{true: 'glyphicon glyphicon-ok-sign', false: 'glyphicon glyphicon-exclamation-sign'}[true]" style="color: {{isHealthColor(true)}}"></span></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Cluster
+                            <p style="font-size: 1.5em;">10.62.57.201:15672</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Consumers
+                            <p style="font-size: 1.5em;">2</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Connections
+                            <p style="font-size: 1.5em;">5</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Channels
+                            <p style="font-size: 1.5em">3</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Exchanges
+                            <p style="font-size: 1.5em">1</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Queues
+                            <p style="font-size: 1.5em">5</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <loadtimespent-chart id="loadTimespent"  class="echart_height" ></loadtimespent-chart>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <p style="font-size: 1.2em;padding-left: 10px;padding-bottom: 8px">Message rates</p>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Publish
+                            <p style="font-size: 1.5em;background-color: #e1e1e1;" class="bgAnimation">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Confirm
+                            <p style="font-size: 1.5em;" class="bgAnimation1">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Publish (In)
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Publish (Out)
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Deliver
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Redelivered
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Acknowledge
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Get
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Deliver (noack)
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Get (noack)
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Return
+                            <p style="font-size: 1.5em;">0.00/s</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px;padding-top: 10px">
+                            <div class="table-responsive">
+                                <table class="table  table-striped" id="dbsTable" cellspacing="0" cellpadding="0">
+                                    <p style="font-size: 1.2em">Listening ports </p>
+                                    <thead>
+                                    <tr>
+                                        <th>Protocol</th>
+                                        <th>Bound to</th>
+                                        <th>Port</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>amqp</td>
+                                        <td>0.0.0.0</td>
+                                        <td>5672</td>
+                                    </tr>
+                                    <tr>
+                                        <td>amqp</td>
+                                        <td>::</td>
+                                        <td>5672</td>
+                                    </tr>
+                                    <tr>
+                                        <td>clustering</td>
+                                        <td>::</td>
+                                        <td>25672</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table  table-striped" id="dbsTable" cellspacing="0" cellpadding="0">
+                                    <p style="font-size: 1.2em">Web contexts</p>
+                                    <thead>
+                                    <tr>
+                                        <th>Context</th>
+                                        <th>Bound to</th>
+                                        <th>Port</th>
+                                        <th>SSL</th>
+                                        <th>Path</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>amqp</td>
+                                        <td>0.0.0.0</td>
+                                        <td>5672</td>
+                                        <td><span class="badge hvr-sweep-to-left" style="background-color: {{isOnBgColor('ON')}}">ON</span></td>
+                                        <td>/</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <!-- Connections -->
+        <div class="tab-pane fade" id="connectionsId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                 <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;margin-top:-8px">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <br>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>State</th>
+                                    <th>SSL/TLS</th>
+                                    <th>Protocol</th>
+                                    <th>Channels</th>
+                                    <th>From Client</th>
+                                    <th>To Client</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>10.62.57.209:59864</td>
+                                    <td>guest</td>
+                                    <td id="twkl"><span class="glyphicon glyphicon-play"></span>Running</td>
+                                    <td><span class="badge hvr-sweep-to-left" style="background-color: {{isOnBgColor('ON')}}">ON</span></td>
+                                    <td>AMQP 0-9-1</td>
+                                    <td>1</td>
+                                    <td>0B/s</td>
+                                    <td>0B/s</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Channels -->
+        <div class="tab-pane fade" id="channelsId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;margin-top:-8px">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <br>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Channel</th>
+                                    <th>Username</th>
+                                    <th>Mode</th>
+                                    <th>State</th>
+                                    <th>Unconfirmed</th>
+                                    <th>Prefetch</th>
+                                    <th>Unacked</th>
+                                    <th>Publish</th>
+                                    <th>Confirm</th>
+                                    <th>Deliver/Get</th>
+                                    <th>Ack</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>10.62.57.209:59864</td>
+                                    <td>guest</td>
+                                    <td>transactional</td>
+                                    <td>idle</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Exchanges -->
+        <div class="tab-pane fade" id="exchangesId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;margin-top:-8px">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <br>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Features</th>
+                                    <th>Message rate in</th>
+                                    <th>Message rate out</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>amq.topic</td>
+                                    <td>topic</td>
+                                    <td>D</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                </tr>
+                                <tr>
+                                    <td>amq.match</td>
+                                    <td>headers</td>
+                                    <td>D</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Queues -->
+        <div class="tab-pane fade" id="queuesId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;margin-top:-8px">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <br>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Features</th>
+                                    <th>State</th>
+                                    <th>Ready</th>
+                                    <th>Unacked</th>
+                                    <th>Total</th>
+                                    <th>Incoming</th>
+                                    <th>Deliver/Get</th>
+                                    <th>Ack</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>test</td>
+                                    <td>D</td>
+                                    <td>idle</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                    <td>0.0/s</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- nodes -->
+        <div class="tab-pane fade" id="nodesId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;margin-top:-8px">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <br>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Node</th>
+                                    <th>File descriptors</th>
+                                    <th>Socket descriptors</th>
+                                    <th>Erlang processes</th>
+                                    <th>Memory</th>
+                                    <th>Disk space</th>
+                                    <th>Rates mode</th>
+                                    <th>Info</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(null);"  data-toggle="modal" data-target="#nodeInfoModalId">rabbit@A23350148</a></td>
+                                    <td>0/8192</td>
+                                    <td>1/7280</td>
+                                    <td>263/1048576</td>
+                                    <td>50MB/3.2GB</td>
+                                    <td>252GB/48MB</td>
+                                    <td>basic</td>
+                                    <td>Disc 1 Stats</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- sessions top n -->
+        <div class="tab-pane fade" id="sessionid" style="">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_sessiontopn_id" class="col-sm-2 control-label  pull-left" style="text-align:left"><strong>Top </strong></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="select_sessiontopn_id" ng-change="getSessionTopNData()" ng-model="sessionTopN">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table  table-striped">
+                    <p></p>
+                    <thead>
+                    <tr>
+                        <th>SessionID</th>
+                        <th>TimeSpent</th>
+                        <th>Weight(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in sessions">
+                        <td>{{record.sessionId}}</td>
+                        <td>{{record.timeSpent}}</td>
+                        <td>{{record.weight}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <!-- report -->
+        <div class="tab-pane fade" id="reportid" style="padding-top: 20px">
+            <ul id="myReportTab" class="nav nav-tabs">
+                <li class="active"><a href="#reportWaitStateId" data-toggle="tab">Wait State</a></li>
+                <li><a href="#reportActivityId" data-toggle="tab">Top Activity</a></li>
+            </ul>
+
+            <div id="myTabReportContent" class="tab-content">
+                <div class="tab-pane fade in active" id="reportWaitStateId">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <div id="waitStateReport" style="padding: 0px">
+                            <div style="padding: 10px 70px">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Wait State</th>
+                                        <th>Description</th>
+                                        <th>Total Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in reportWaitState">
+                                        <td>{{record.waitState}}</td>
+                                        <td>{{record.description}}</td>
+                                        <td>{{record.totalTime}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="reportActivityId">
+                    <div style="background-color: white;margin:0px 1px;padding: 10px">
+                        <div id="topActivityReport" style="padding: 0px">
+                            <!--notice: here no </div>-->
+                            <div style="padding: 10px 70px">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>QueryId</th>
+                                    <th>Query</th>
+                                    <th>Total Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="record in reportTopActivity">
+                                    <td>{{record.queryid}}</td>
+                                    <td>{{record.query}}</td>
+                                    <td>{{record.totalTime}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- broker Info 模态框（Modal） -->
+        <div class="modal " id="brokerInfoId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Topic Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="myTab" class="nav nav-tabs" style="font-size: x-small">
+                            <li class="active"><a href="#home" data-toggle="tab">Metric</a></li>
+                            <li><a href="#ios" data-toggle="tab">Partition Information</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Rate</th>
+                                        <th>Mean</th>
+                                        <th>1 min</th>
+                                        <th>5 min</th>
+                                        <th>15 min</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Messages in /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bytes in /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bytes out /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bytes rejected /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Failed fetch request /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Failed produce request /sec</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="ios">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Partition</th>
+                                        <th>Latest Offset</th>
+                                        <th>Leader</th>
+                                        <th>Replicas</th>
+                                        <th>In Sync Replicas</th>
+                                        <th>Preferred Leader?</th>
+                                        <th>Under Replicated?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>true</td>
+                                        <td>false</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+
+
+        <!-- node Info 模态框（Modal） -->
+        <div class="modal " id="nodeInfoModalId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Node Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" style="font-size: x-small">
+                            <li class="active"><a href="#nodeInfoTabOverviewId" data-toggle="tab">Overview</a></li>
+                            <li><a href="#nodeInfoTabProcessId" data-toggle="tab">Process</a></li>
+                        </ul>
+                        <div id="" class="tab-content">
+                            <div class="tab-pane fade in active" id="nodeInfoTabOverviewId">
+                                <div>
+                                    <table class="table table-striped table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>File</th>
+                                            <th>Path</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Config file</td>
+                                            <td>c:/Users/Yeh/AppData/Roaming/RabbitMQ/rabbitmq.config</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Database directory</td>
+                                            <td>c:/Users/Yeh/AppData/Roaming/RabbitMQ/db/RABBIT~1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Log file</td>
+                                            <td>C:/Users/Yeh/AppData/Roaming/RabbitMQ/log/RABBIT~1.LOG</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SASL log file</td>
+                                            <td>C:/Users/Yeh/AppData/Roaming/RabbitMQ/log/RABBIT~2.LOG</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nodeInfoTabProcessId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Partition</th>
+                                        <th>Latest Offset</th>
+                                        <th>Leader</th>
+                                        <th>Replicas</th>
+                                        <th>In Sync Replicas</th>
+                                        <th>Preferred Leader?</th>
+                                        <th>Under Replicated?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>true</td>
+                                        <td>false</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+
+        <!-- consumer Info 模态框（Modal） -->
+        <div class="modal " id="consumerInfoId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Consumed Topic Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Partitions Covered %</th>
+                                <th>Total Lag</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>test2</td>
+                                <td>0</td>
+                                <td>not available</td>
+                            </tr>
+                            <tr>
+                                <td>test</td>
+                                <td>5</td>
+                                <td>not available</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+</div>
+
+<div style="visibility:hidden;height: 5px;overflow :auto">
+    <cpulive-chart id="cpuLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></cpulive-chart>
+    <memlive-chart id="memLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></memlive-chart>
+    <sqlwaitlive-chart id="sqlWaitLiveLineChart"  class="echart_height" style="visibility:hidden;width:30%;"></sqlwaitlive-chart>
+
+    <waitstatereport-chart id="waitStateReportLineChart"  class="echart_height" style="visibility:hidden;width:100%;"></waitstatereport-chart>
+    <topactivityreport-chart id="topActivityLineChart"  class="echart_height" style="visibility:hidden;width:100%;"></topactivityreport-chart>
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/rabbitmqInfo.js"></script>
+
+</body>
+</html>

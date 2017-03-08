@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en-US" class="no-js">
+<head>
+    <title>SmartSight</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="./css/bootstrap.css" type="text/css"/>
+
+    <script src="./lib/jquery/jquery.min.js"></script>
+
+    <!-- common css -->
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            /*margin-left: 10px;*/
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        /*table tr:hover {*/
+        /*background-color: #0180FE;*/
+        /*color: #fff;*/
+        /*cursor:hand;*/
+        /*}*/
+        /*table th{
+            background-color: #c9c9c9;
+            color: #fff;
+            cursor:hand;
+        }*/
+
+
+        .btn-clean {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #fafafa;
+            /*border: 1px solid #bfbfbf;*/
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            /*color: #8f8f8f;*/
+            /*color: #9AA3B3;*/
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean:hover{background:#448EF9;}
+    </style>
+
+</head>
+<body>
+<div class="container" style="padding: 125px">
+    <div style="text-align: center;font-weight: bold;font-size: 3.5em;margin: 20px"> SmartSight </div>
+    <div style="text-align: center;vertical-align: middle;height:auto;width:100%;height:100%;vertical-align:middle;">
+        <button id="demo" class="btn btn-primary btn-lg btn-clean">
+            Demo Version
+        </button>
+
+        <button id="deploy" class="btn btn-primary btn-lg btn-clean">
+            Deploy Version
+        </button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#demo").click(function(){
+            var r=confirm("Demo Version!");
+            if (r==true){
+                setCookie("demo","true",1);
+                location.href="./html/dashboard.html";
+            }
+        });
+
+        $("#deploy").click(function(){
+            var r=confirm("Deploy Version!");
+            if (r==true){
+                delCookie("demo");
+                location.href="./html/dashboard.html";
+            }
+        });
+    });
+
+    /* ----- Cookie ----- */
+    function getCookie(cname)
+    {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++)
+        {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+        }
+        return "";
+    }
+
+    function setCookie(cname,cvalue,exdays){
+        var d = new Date();
+        d.setTime(d.getTime()+(exdays*24*60*60*1000));
+        var expires = "expires="+d.toGMTString();
+        document.cookie = cname+"="+cvalue+"; "+expires;
+    }
+
+    function delCookie(cname){
+        document.cookie = cname+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+</script>
+
+</body>
+</html>

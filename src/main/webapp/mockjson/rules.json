@@ -1,0 +1,57 @@
+[
+  {
+    "ruleName": "test1",
+    "ruleType": "app",
+    "checkTime": "00:00-01:00",
+    "enableStatus": 0,
+    "inputDataRanges": 10,
+    "affectObjects": "appName=app1;appName=yyy",
+    "ruleWarningCondition": {
+      "metricName": "calls",
+      "operator": ">",
+      "evaluationValue": 80.0
+    },
+    "ruleCriticalCondition": {
+      "metricName": "calls",
+      "operator": ">",
+      "evaluationValue": 90.0
+    }
+  },
+  {
+    "ruleName": "test2",
+    "ruleType": "app",
+    "checkTime": null,
+    "enableStatus": 0,
+    "inputDataRanges": null,
+    "affectObjects": "",
+    "ruleWarningCondition": {
+      "metricName": "errors",
+      "operator": ">",
+      "evaluationValue": 0.0
+    },
+    "ruleCriticalCondition": {
+      "metricName": "errors",
+      "operator": ">",
+      "evaluationValue": 10.0
+    }
+  },
+
+  {
+    "ruleName": "test3",
+    "ruleType": "transaction",
+    "checkTime": null,
+    "enableStatus": 0,
+    "inputDataRanges": null,
+    "affectObjects": "appName=app1",
+    "ruleWarningCondition": {
+      "metricName": "minresponsetime",
+      "operator": ">",
+      "evaluationValue": 1.0
+    },
+    "ruleCriticalCondition": {
+      "metricName": "minresponsetime",
+      "operator": ">",
+      "evaluationValue": 5.0
+    }
+  }
+]

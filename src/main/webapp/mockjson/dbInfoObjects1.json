@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "username": "root",
+      "userid": "1",
+      "accountStatus": "OPEN",
+      "defaultTablespace": "SYSAUX",
+      "temporaryTablespace": "TEMP",
+      "created": "2016-08-25 02:26:10"
+    },
+    {
+      "username": "root2",
+      "userid": "2",
+      "accountStatus": "CLOSE",
+      "defaultTablespace": "SYSAUX",
+      "temporaryTablespace": "TEMP",
+      "created": "2016-09-25 02:26:10"
+    }
+  ],
+  "variables": [
+    {
+      "variableName": "auto-increment-increment",
+      "variableValue": "1"
+    },
+    {
+      "variableName": "auto-increment-offset",
+      "variableValue": "2"
+    }
+  ],
+  "storage": [
+    {
+      "databaseName": "db1",
+      "indexLength": "5",
+      "dataLength": "5"
+    },
+    {
+      "databaseName": "db2",
+      "indexLength": "15",
+      "dataLength": "15"
+    }
+  ],
+  "database":{
+    "uptime":1212312,
+    "version":"5.8.11"
+  }
+
+}

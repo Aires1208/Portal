@@ -1,0 +1,12 @@
+{
+  "clientTopN": [
+    {
+      "client": "localhost",
+      "weight": "95"
+    },
+    {
+      "client": "otherhost",
+      "weight": "5"
+    }
+  ]
+}

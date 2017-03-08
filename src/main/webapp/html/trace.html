@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Traces</title>
+
+    <!-- thirdparty css -->
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link href="../lib/treetable/default/jquery.treetable.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 99%;
+            margin: auto;
+            margin-top: 10px;
+            /*margin-left: 10px;*/
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        table th{
+            background-color: #c9c9c9;
+            color: #fff;
+            cursor:hand;
+        }
+
+        table td{
+            color: #5f5f5f;
+        }
+
+        .echart_height {
+            height: 240px;
+            /*padding: -20px;*/
+            margin-bottom: -100px;
+        }
+
+        .labelspan {
+            margin-right: 10px;
+        }
+
+
+    </style>
+</head>
+<body ng-app="traceApp" ng-controller="traceCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" ng-cloak style="padding:10px auto;margin: 0px auto;border: 0px;width: 100%">
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <span style="font-size: 1.8em"> Traces  </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <span ng-show="appId!= ''" class="labelspan"><span class="label label-info">App</span> {{appId}} </span>
+            <span ng-show="serviceId!= ''" class="labelspan"><span class="label label-info">Service</span> {{serviceId}} </span>
+            <span ng-show="instanceId!= ''" class="labelspan"><span class="label label-info">Instance</span> {{instanceId}} </span>
+            <span class="labelspan"><span class="label label-info">Path</span> {{command}} </span>
+            <span class=""><span class="label label-info">Time</span> {{fromStr}} &nbsp; to &nbsp;{{toStr}}</span>
+        </div>
+    </div>
+
+    <div class="row" style="margin: 0px;padding-top: 10px">
+        <div class="table-responsive" style="overflow:auto">
+            <table class="table table-bordered table-striped" id="traceTableId" >
+                <thead>
+                <tr>
+                    <th>StartTime</th>
+                    <th>Path</th>
+                    <th>Response Time(ms)</th>
+                    <th>Errors</th>
+                    <th>Type</th>
+                    <th>Exception</th>
+                    <th>Agent</th>
+                    <th>ClientIP</th>
+                    <th>Transaction ID</th>
+
+                </tr>
+                </thead>
+
+                <tfoot ng-if="isrecordsLoading || records.length==0">
+                <tr style="border: none;padding: 0px;height: 50px;background-color: white">
+                    <td colspan="9"
+                        style="text-align: center;border: none;padding: 20px 0px;height: 50px;font-size: 16px;vertical-align: middle"
+                        ng-if="isrecordsLoading && !(records.length==0)">
+                        <i class="fa fa-spinner fa-pulse fa-fw"></i>Loading...
+                    </td>
+                    <td colspan="9"
+                        style="text-align: center;border: none;padding: 0px;height: 50px;font-size: 16px;vertical-align: middle"
+                        ng-if="!isrecordsLoading && records.length==0">
+                        No Data
+                    </td>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr ng-repeat="record in records | filter:{type:typeFilter}:false ">
+                    <td><a data-toggle="modal" data-target="#myModal" ng-click="selectOneTrace(record.startTime,record.transaction);"><!--<img src="../img/topic_small.gif">-->{{record.startTime}}</a></td>
+                    <td>{{record.path}}</td>
+                    <td>{{record.responseTime}}</td>
+                    <td ng-class="{true: 'errorFont', false: 'normalFont'}[record.errors > 0]">{{record.errors}}</td>
+                    <td>{{record.type}}</td>
+                    <td>{{record.exception}}</td>
+                    <td>{{record.agent}}</td>
+                    <td>{{record.clientIP}}</td>
+                    <td>{{record.transaction}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div style="visibility:hidden;height: 5px;overflow :auto">
+        <Cpu-chart id="cpuLineChart"  class="echart_height" style="visibility:hidden;width:45%;"></Cpu-chart>
+        <Mem-chart id="memLineChart"  class="echart_height" style="visibility:hidden;width:45%;"></Mem-chart>
+        <Store-chart id="storeLineChart"  class="echart_height" style="visibility:hidden;width:45%;"></Store-chart>
+        <Net-chart id="netLineChart"  class="echart_height" style="visibility:hidden;width:45%;"></Net-chart>
+
+        <div style="width: 90%">
+            <div id="myDiagramDiv"
+                 style="background-color: white;visibility:hidden;border: solid 0px black; width: auto; height: 500px;">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-css">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Detail
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="width: auto;margin: 0px;padding: 0px">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tableId" data-toggle="tab"><span class="glyphicon glyphicon glyphicon-th-list"></span></a>
+                        </li>
+                        <li>
+                            <a href="#gridId" data-toggle="tab"><span class="glyphicon glyphicon-th-large"></span></a>
+                        </li>
+                        <li>
+                            <a href="#topoId" data-toggle="tab"><span class="glyphicon glyphicon-search"></span></a>
+                        </li>
+                    </ul>
+
+
+                    <div id="myTabContent" class="tab-content" style="background-color: #EAEAEA;border: 10px solid #EAEAEA">
+                        <div class="tab-pane fade " id="gridId">
+                            <div class="container" style="width: auto;">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: white;">
+                                        <div id="cpuLine">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: white;">
+                                        <div id="memLine">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: white;">
+                                        <div id="storeLine">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: white;">
+                                        <div id="netLine">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade in active " id="tableId">
+                            <div class="table-responsive" style="overflow:auto">
+                                <table id="mytable" cellspacing="0" cellpadding="0"  class="table">
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Argument</th>
+                                        <th>StartTime</th>
+                                        <th>Exec(ms)</th>
+                                        <th>Self(ms)</th>
+                                        <th><a style="color: white" href="#" data-toggle="tooltip" data-placement="top" title="Self(%) = Self(ms)/Max(Exec(ms))">Self(%)<span style="color:#008ed3 " class="glyphicon glyphicon-question-sign"></span></a></th>
+                                        <th>Class</th>
+                                        <th>API</th>
+                                        <th>Agent</th>
+                                        <th>Service</th>
+                                        <th><a style="color: white" href="#" data-toggle="tooltip" data-placement="top" title="Gap Time between Agent points">Gap(ms)<span style="color:#008ed3 " class="glyphicon glyphicon-question-sign"></span></a></th>
+                                    </tr>
+                                    <tbody id="tbodyId">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- topo -->
+                        <div class="tab-pane fade" id="topoId" width="100%">
+                            <div id="sample" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+<div id="goTopBtn"><span class="glyphicon glyphicon-chevron-up"></span></div>
+
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/treetable/jquery.treetable.js"></script>
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/trace.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.runoob.com/bootstrap/bootstrap-breadcrumbs.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 面包屑导航 | 菜鸟教程</title>
+
+    <link rel="canonical" href="http://www.runoob.com/bootstrap/bootstrap-breadcrumbs.html">
+    <meta name="keywords" content="Bootstrap 面包屑导航">
+    <meta name="description"
+          content="Bootstrap 面包屑导航（Breadcrumbs）  面包屑导航（Breadcrumbs）是一种基于网站层次信息的显示方式。以博客为例，面包屑导航可以显示发布日期、类别或标签。它们表示当前页面在导航层次结构内的位置。 Bootstrap 中的面包屑导航（Breadcrumbs）是一个简单的带有 .breadcrumb class 的无序列表。分隔符会通过 CSS（bootstrap.min.css）中下面所示的 class 自动被..">
+
+    <link rel="shortcut icon" href="http://www.runoob.com/favicon.ico" mce_href="http://www.runoob.com/favicon.ico"
+          type="image/x-icon">
+    <link rel="stylesheet" href="./breadcrumbs_files/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./breadcrumbs_files/font-awesome.min.css" media="all">
+    <script src="./breadcrumbs_files/push.js"></script>
+    <script src="./breadcrumbs_files/hm.js"></script>
+    <script src="./breadcrumbs_files/ca-pub-5751451760833794.js"></script>
+    <script src="./breadcrumbs_files/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+    <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png">
+    <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+    <link rel="stylesheet" type="text/css" href="./breadcrumbs_files/prettify.css">
+</head>
+<body>
+<!--  头部 -->
+
+<!-- 导航栏 -->
+<!-- 导航栏 -->
+<!--  内容  -->
+<div class="container main">
+    <!-- 中间 -->
+    <div class="row">
+
+        <div class="col middle-column">
+
+
+            <div class="article">
+                <div class="article-body">
+
+                    <div class="article-intro" id="content">
+
+                        <h1>Bootstrap <span class="color_h1">面包屑导航（Breadcrumbs）</span></h1>
+
+                        <p>面包屑导航（Breadcrumbs）是一种基于网站层次信息的显示方式。以博客为例，面包屑导航可以显示发布日期、类别或标签。它们表示当前页面在导航层次结构内的位置。</p>
+                        <p>Bootstrap 中的面包屑导航（Breadcrumbs）是一个简单的带有 <b>.breadcrumb</b> class 的无序列表。分隔符会通过
+                            CSS（bootstrap.min.css）中下面所示的 class 自动被添加：</p>
+<pre class="prettyprint prettyprinted"><span class="pun">.</span><span class="pln">breadcrumb </span><span class="pun">&gt;</span><span
+        class="pln"> li </span><span class="pun">+</span><span class="pln"> li</span><span class="pun">:</span><span
+        class="pln">before </span><span class="pun">{</span><span class="pln">
+    color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#CCCCCC;</span><span class="pln">
+    content</span><span class="pun">:</span><span class="pln"> </span><span class="str">"/ "</span><span
+        class="pun">;</span><span class="pln">
+    padding</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span
+        class="pln"> </span><span class="lit">5px</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                        <p>下面的实例演示了面包屑导航：</p>
+<pre class="prettyprint prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+   </span><span class="tag">&lt;title&gt;</span><span class="pln">Bootstrap 实例 - 面包屑导航</span><span class="tag">&lt;/title&gt;</span><span
+        class="pln">
+   </span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span
+        class="pun">=</span><span class="atv">"/bootstrap/css/bootstrap.min.css"</span><span class="pln"> </span><span
+        class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span
+        class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span
+        class="pun">=</span><span class="atv">"/scripts/jquery.min.js"</span><span
+        class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span
+        class="pun">=</span><span class="atv">"/bootstrap/js/bootstrap.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span
+        class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;ol</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span
+        class="atv">"breadcrumb"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span
+        class="pun">=</span><span class="atv">"#"</span><span class="tag">&gt;</span><span class="pln">Home</span><span
+        class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+  </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span
+        class="pun">=</span><span class="atv">"#"</span><span class="tag">&gt;</span><span class="pln">2013</span><span
+        class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+  </span><span class="tag">&lt;li</span><span class="pln"> </span><span class="atn">class</span><span
+        class="pun">=</span><span class="atv">"active"</span><span class="tag">&gt;</span><span
+        class="pln">十一月</span><span class="tag">&lt;/li&gt;</span><span class="pln">
+</span><span class="tag">&lt;/ol&gt;</span><span class="pln">
+
+
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+                        <p><a href="http://www.runoob.com/try/tryit.php?filename=bootstrap3-breadcrumb" target="_blank">
+                            <button class="btn example-btn">尝试一下 »</button>
+                        </a></p>
+                        <p>结果如下所示：</p>
+                        <div class="cover" style="border: 1px solid #D6D6D6;padding: 5px;">
+                            <img src="./breadcrumbs_files/breadcrumb_demo.jpg" alt="面包屑导航">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div style="display:none;">
+            <script src="./breadcrumbs_files/stat.php" language="JavaScript"></script>
+            <script src="./breadcrumbs_files/core.php" charset="utf-8" type="text/javascript"></script>
+            <a href="http://www.cnzz.com/stat/website.php?web_id=5578006" target="_blank" title="站长统计">站长统计</a>
+            <script>
+                var _hmt = _hmt || [];
+                (function () {
+                    var hm = document.createElement("script");
+                    hm.src = "//hm.baidu.com/hm.js?8e2a116daf0104a78d601f40a45c75b4";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            </script>
+        </div>
+        <script src="./breadcrumbs_files/main.js"></script>
+
+
+</body>
+</html>

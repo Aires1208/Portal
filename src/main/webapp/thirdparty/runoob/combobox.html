@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://www.jeasyui.net/plugins/169.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Easyui Combobox 组合框_EasyUI 插件</title>
+    <meta name="keywords" content="Combobox 组合框,EasyUI 插件">
+    <meta name="description" content="">
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script><![endif]--><!--[if lt IE 9]>
+    <script src="http://v3.bootcss.com/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <link href="./combobox_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./combobox_files/style.css" rel="stylesheet">
+    <link href="./combobox_files/prettify.css" rel="stylesheet">
+    <link rel="shortcut icon" href="http://www.jeasyui.net/Public/index/img/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" async="" src="./combobox_files/acom"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(1)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(2)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(3)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(4)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(5)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(6)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(7)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(8)"></script>
+    <script src="./combobox_files/ca-pub-6117966252207595.js"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(9)"></script>
+    <script type="text/javascript" async="" src="./combobox_files/acom(10)"></script>
+    <script src="./combobox_files/prettify.js"></script>
+    <script src="./combobox_files/share.js"></script>
+    <script type="BAIDU_HH" runed="true">
+        {"type":"flowbar","fixed_tpl":"2","di":"u2092080","rsi0":"auto","rsi1":"50","n":"1"}
+    </script>
+    <script src="./combobox_files/ls.js"></script>
+    <link rel="stylesheet" href="./combobox_files/share_style1_16.css">
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar" onload="prettyPrint()">
+<div id="BAIDU_DUP_fp_wrapper"
+     style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;">
+    <iframe id="BAIDU_DUP_fp_iframe" src="./combobox_files/o.html"
+            style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe>
+</div>
+<header class="navbar  navbar-fixed-top navbar-static-top bs-docs-nav" id="top" role="banner">
+
+</header>
+<div class="container bs-docs-container" style="margin-top:20px;">
+    <div id="right">
+        <div id="right-main">
+            <div class="page-header" style="margin:10px 0;">
+                <script>window._bd_share_config = {
+                    "common": {
+                        "bdSnsKey": {},
+                        "bdText": "",
+                        "bdMini": "2",
+                        "bdMiniList": false,
+                        "bdPic": "",
+                        "bdStyle": "1",
+                        "bdSize": "24"
+                    },
+                    "share": {"bdSize": 16},
+                    "selectShare": {
+                        "bdContainerClass": null,
+                        "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+                    }
+                };
+                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                <h1>EasyUI Combobox 组合框</h1></div>
+            <div style="margin-bottom:10px;">
+                <script async="" src="./combobox_files/adsbygoogle.js"></script><!-- 728x90 -->
+                <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+                     data-ad-client="ca-pub-6117966252207595" data-ad-slot="2639707541" data-adsbygoogle-status="done">
+                    <ins id="aswift_1_expand"
+                         style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent">
+                        <ins id="aswift_1_anchor"
+                             style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent">
+                            <iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0"
+                                    hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true"
+                                    onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}"
+                                    id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;"></iframe>
+                        </ins>
+                    </ins>
+                </ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div class="tutintro"><p>扩展自 $.fn.combo.defaults。通过 $.fn.combobox.defaults 重写默认的 defaults。</p>
+                <p>组合框（combobox）显示一个可编辑的<span id="5_nwp" style="width: auto; height: auto; float: none;"><a id="5_nwl"
+                                                                                                            href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=%CE%C4%B1%BE%BF%F2&amp;k0=%CE%C4%B1%BE%BF%F2&amp;kdi0=0&amp;luki=2&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                                                                                            target="_blank"
+                                                                                                            mpid="5"
+                                                                                                            style="text-decoration: none;"><span
+                        style="color:#0000ff;font-size:14px;width:auto;height:auto;float:none;">文本框</span></a></span>和下拉列表，用户可以从下拉列表中选择一个或多个值。用户可以直接输入文本到列表的顶部，或者从列表中选择一个或多个现成的值。
+                </p></div>
+            <img src="./combobox_files/combobox.png">
+            <h2>依赖</h2>
+            <ul>
+                <li>combo</li>
+            </ul>
+            <h2>用法</h2>
+            <p>从带有预定义结构的 &lt;select&gt; 元素创建组合框（combobox）。</p>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="tag">&lt;select</span><span class="pln"> </span><span
+                        class="atn">id</span><span class="pun">=</span><span class="atv">"cc"</span><span
+                        class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-combobox"</span><span
+                        class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"dept"</span><span
+                        class="pln"> </span><span id="7_nwp" style="width: auto; height: auto; float: none;"><a
+                        id="7_nwl"
+                        href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=style&amp;k0=style&amp;kdi0=0&amp;luki=6&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                        target="_blank" mpid="7" style="text-decoration: none;"><span
+                        style="color:#0000ff;font-size:13px;width:auto;height:auto;float:none;"><span
+                        class="atn">style</span></span></a></span><span class="pun">=</span><span
+                        class="atv">"</span><span class="pln">width</span><span class="pun">:</span><span class="lit">200px</span><span
+                        class="pun">;</span><span class="atv">"</span><span class="tag">&gt;</span></li>
+                <li class="L1"><span class="pln">    </span><span class="tag">&lt;option</span><span
+                        class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"aa"</span><span
+                        class="tag">&gt;</span><span class="pln">aitem1</span><span class="tag">&lt;/option&gt;</span>
+                </li>
+                <li class="L2"><span class="pln">    </span><span class="tag">&lt;option&gt;</span><span class="pln">bitem2</span><span
+                        class="tag">&lt;/option&gt;</span></li>
+                <li class="L3"><span class="pln">    </span><span class="tag">&lt;option&gt;</span><span class="pln">bitem3</span><span
+                        class="tag">&lt;/option&gt;</span></li>
+                <li class="L4"><span class="pln">    </span><span class="tag">&lt;option&gt;</span><span class="pln">ditem4</span><span
+                        class="tag">&lt;/option&gt;</span></li>
+                <li class="L5"><span class="pln">    </span><span class="tag">&lt;option&gt;</span><span class="pln">eitem5</span><span
+                        class="tag">&lt;/option&gt;</span></li>
+                <li class="L6"><span class="tag">&lt;/select&gt;</span></li>
+            </ol></pre>
+            <p>从 &lt;input&gt; 标记创建组合框（combobox）。</p>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="tag">&lt;input</span><span class="pln"> </span><span
+                        class="atn">id</span><span class="pun">=</span><span class="atv">"cc"</span><span
+                        class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-combobox"</span><span
+                        class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"dept"</span>
+                </li>
+                <li class="L1"><span class="pln">    </span><span class="atn">data-options</span><span
+                        class="pun">=</span><span
+                        class="atv">"valueField:'id',textField:'text',url:'get_data.php'"</span><span
+                        class="tag">&gt;</span></li>
+            </ol></pre>
+            <p>使用 <span id="6_nwp" style="width: auto; height: auto; float: none;"><a id="6_nwl"
+                                                                                      href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=javascript&amp;k0=javascript&amp;kdi0=0&amp;luki=3&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                                                                      target="_blank" mpid="6"
+                                                                                      style="text-decoration: none;"><span
+                    style="color:#0000ff;font-size:14px;width:auto;height:auto;float:none;">javascript</span></a></span>
+                创建组合框（combobox）。</p>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="tag">&lt;input</span><span class="pln"> </span><span
+                        class="atn">id</span><span class="pun">=</span><span class="atv">"cc"</span><span
+                        class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"dept"</span><span
+                        class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"aa"</span><span
+                        class="tag">&gt;</span></li>
+            </ol></pre>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                        class="pun">).</span><span class="pln">combobox</span><span class="pun">({</span></li>
+                <li class="L1"><span class="pln">    url</span><span class="pun">:</span><span class="str">'combobox_data.json'</span><span
+                        class="pun">,</span></li>
+                <li class="L2"><span class="pln">    valueField</span><span class="pun">:</span><span
+                        class="str">'id'</span><span class="pun">,</span></li>
+                <li class="L3"><span class="pln">    textField</span><span class="pun">:</span><span
+                        class="str">'text'</span></li>
+                <li class="L4"><span class="pun">});</span></li>
+            </ol></pre>
+            <p>创建两个依赖的组合框（combobox）。</p>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="tag">&lt;input</span><span class="pln"> </span><span
+                        class="atn">id</span><span class="pun">=</span><span class="atv">"cc1"</span><span
+                        class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-combobox"</span><span
+                        class="pln"> </span><span class="atn">data-options</span><span class="pun">=</span><span
+                        class="atv">"</span></li>
+                <li class="L1"><span class="atv">    valueField: 'id',</span></li>
+                <li class="L2"><span class="atv">    textField: 'text',</span></li>
+                <li class="L3"><span class="atv">    url: 'get_data1.php',</span></li>
+                <li class="L4"><span class="atv">    onSelect: function(rec){</span></li>
+                <li class="L5"><span class="atv">    var url = 'get_data2.php?id='+rec.id;</span></li>
+                <li class="L6"><span class="atv">    $('#cc2').combobox('reload', url);</span></li>
+                <li class="L7"><span class="atv">    }"</span><span class="tag">&gt;</span></li>
+                <li class="L8"><span class="tag">&lt;input</span><span class="pln"> </span><span
+                        class="atn">id</span><span class="pun">=</span><span class="atv">"cc2"</span><span
+                        class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-combobox"</span><span
+                        class="pln"> </span><span class="atn">data-options</span><span class="pun">=</span><span
+                        class="atv">"valueField:'id',textField:'text'"</span><span class="tag">&gt;</span></li>
+            </ol></pre>
+            <p>json 数据格式的示例：</p>
+            <pre class="prettyprint linenums"><ol class="linenums">
+                <li class="L0"><span class="pun">[{</span></li>
+                <li class="L1"><span class="pln">    </span><span class="str">"id"</span><span class="pun">:</span><span
+                        class="lit">1</span><span class="pun">,</span></li>
+                <li class="L2"><span class="pln">    </span><span class="str">"text"</span><span
+                        class="pun">:</span><span class="str">"text1"</span></li>
+                <li class="L3"><span class="pun">},{</span></li>
+                <li class="L4"><span class="pln">    </span><span class="str">"id"</span><span class="pun">:</span><span
+                        class="lit">2</span><span class="pun">,</span></li>
+                <li class="L5"><span class="pln">    </span><span class="str">"text"</span><span
+                        class="pun">:</span><span class="str">"text2"</span></li>
+                <li class="L6"><span class="pun">},{</span></li>
+                <li class="L7"><span class="pln">    </span><span class="str">"id"</span><span class="pun">:</span><span
+                        class="lit">3</span><span class="pun">,</span></li>
+                <li class="L8"><span class="pln">    </span><span class="str">"text"</span><span
+                        class="pun">:</span><span class="str">"text3"</span><span class="pun">,</span></li>
+                <li class="L9"><span class="pln">    </span><span class="str">"selected"</span><span
+                        class="pun">:</span><span class="kwd">true</span></li>
+                <li class="L0"><span class="pun">},{</span></li>
+                <li class="L1"><span class="pln">    </span><span class="str">"id"</span><span class="pun">:</span><span
+                        class="lit">4</span><span class="pun">,</span></li>
+                <li class="L2"><span class="pln">    </span><span class="str">"text"</span><span
+                        class="pun">:</span><span class="str">"text4"</span></li>
+                <li class="L3"><span class="pun">},{</span></li>
+                <li class="L4"><span class="pln">    </span><span class="str">"id"</span><span class="pun">:</span><span
+                        class="lit">5</span><span class="pun">,</span></li>
+                <li class="L5"><span class="pln">    </span><span class="str">"text"</span><span
+                        class="pun">:</span><span class="str">"text5"</span></li>
+                <li class="L6"><span class="pun">}]</span></li>
+            </ol></pre>
+            <h2>属性</h2>
+            <p>该属性扩展自组合（combo），下面是为组合框（combobox）添加的属性。</p>
+            <div class="table_box">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <tr>
+                        <th align="left">名称</th>
+                        <th align="left">类型</th>
+                        <th align="left">描述</th>
+                        <th align="left">默认值</th>
+                    </tr>
+                    <tr>
+                        <td>valueField</td>
+                        <td>string</td>
+                        <td>绑定到该组合框（ComboBox）的 value 上的基础数据的名称。</td>
+                        <td>value</td>
+                    </tr>
+                    <tr>
+                        <td>textField</td>
+                        <td>string</td>
+                        <td>绑定到该组合框（ComboBox）的 text 上的基础数据的名称。</td>
+                        <td>text</td>
+                    </tr>
+                    <tr>
+                        <td>groupField</td>
+                        <td>string</td>
+                        <td>指示要被分组的字段。该属性自版本 1.3.4 起可用。</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>groupFormatter</td>
+                        <td>function(<span id="4_nwp" style="width: auto; height: auto; float: none;"><a id="4_nwl"
+                                                                                                         href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=group&amp;k0=group&amp;kdi0=0&amp;luki=4&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                                                                                         target="_blank"
+                                                                                                         mpid="4"
+                                                                                                         style="text-decoration: none;"><span
+                                style="color:#0000ff;font-size:14px;width:auto;height:auto;float:none;">group</span></a></span>)
+                        </td>
+                        <td>返回要显示在分组项目上的分组文本。该属性自版本 1.3.4 起可用。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span
+                                        class="pun">({</span></li>
+                                <li class="L1"><span class="pln">	</span><span id="0_nwp"
+                                                                                  style="width: auto; height: auto; float: none;"><a
+                                        id="0_nwl"
+                                        href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=group&amp;k0=group&amp;kdi0=0&amp;luki=4&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                        target="_blank" mpid="0" style="text-decoration: none;"><span
+                                        style="color:#0000ff;font-size:13px;width:auto;height:auto;float:none;"><span
+                                        class="pln">group</span></span></a></span><span
+                                        class="pln">Formatter</span><span class="pun">:</span><span class="pln"> </span><span
+                                        class="kwd">function</span><span class="pun">(</span><span
+                                        class="kwd">group</span><span class="pun">){</span></li>
+                                <li class="L2"><span class="pln">		</span><span class="kwd">return</span><span
+                                        class="pln"> </span><span class="str">'&lt;</span><span id="1_nwp"
+                                                                                                style="width: auto; height: auto; float: none;"><a
+                                        id="1_nwl"
+                                        href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=span&amp;k0=span&amp;kdi0=0&amp;luki=5&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                        target="_blank" mpid="1" style="text-decoration: none;"><span
+                                        style="color:#0000ff;font-size:13px;width:auto;height:auto;float:none;"><span
+                                        class="str">span</span></span></a></span><span class="str"> </span><span
+                                        id="2_nwp" style="width: auto; height: auto; float: none;"><a id="2_nwl"
+                                                                                                      href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=style&amp;k0=style&amp;kdi0=0&amp;luki=6&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                                                                                      target="_blank"
+                                                                                                      mpid="2"
+                                                                                                      style="text-decoration: none;"><span
+                                        style="color:#0000ff;font-size:13px;width:auto;height:auto;float:none;"><span
+                                        class="str">style</span></span></a></span><span class="str">="color:</span><span
+                                        id="3_nwp" style="width: auto; height: auto; float: none;"><a id="3_nwl"
+                                                                                                      href="http://cpro.baidu.com/cpro/ui/uijs.php?adclass=0&amp;app_id=0&amp;c=news&amp;cf=1001&amp;ch=0&amp;di=128&amp;fv=20&amp;is_app=0&amp;jk=8a2028376329bef3&amp;k=red&amp;k0=red&amp;kdi0=0&amp;luki=1&amp;mcpm=0&amp;n=10&amp;p=baidu&amp;q=75027160_cpr&amp;rb=0&amp;rs=1&amp;seller_id=1&amp;sid=f3be29633728208a&amp;ssp2=1&amp;stid=9&amp;t=tpclicked3_hc&amp;td=1948811&amp;tu=u1948811&amp;u=http%3A%2F%2Fwww%2Ejeasyui%2Enet%2Fplugins%2F169%2Ehtml&amp;urlid=0"
+                                                                                                      target="_blank"
+                                                                                                      mpid="3"
+                                                                                                      style="text-decoration: none;"><span
+                                        style="color:#0000ff;font-size:13px;width:auto;height:auto;float:none;"><span
+                                        class="str">red</span></span></a></span><span class="str">"&gt;'</span><span
+                                        class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span
+                                        class="kwd">group</span><span class="pln"> </span><span
+                                        class="pun">+</span><span class="pln"> </span><span
+                                        class="str">'&lt;/span&gt;'</span><span class="pun">;</span></li>
+                                <li class="L3"><span class="pln">	</span><span class="pun">}</span></li>
+                                <li class="L4"><span class="pun">});</span></li>
+                            </ol></pre>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>mode</td>
+                        <td>string</td>
+                        <td>定义在文本改变时如何加载列表数据。如果组合框（combobox）从服务器加载就设置为 'remote'。当设置为 'remote' 模式时，用户输入的值将会被作为名为 'q' 的
+                            http 请求参数发送到服务器，以获取新的数据。
+                        </td>
+                        <td>local</td>
+                    </tr>
+                    <tr>
+                        <td>url</td>
+                        <td>string</td>
+                        <td>从远程加载列表数据的 URL 。</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>method</td>
+                        <td>string</td>
+                        <td>用来检索数据的 http 方法。</td>
+                        <td>post</td>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>array</td>
+                        <td>被加载的列表数据。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="tag">&lt;input</span><span class="pln"> </span><span
+                                        class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-combobox"</span><span
+                                        class="pln"> </span><span class="atn">data-options</span><span
+                                        class="pun">=</span><span class="atv">"</span></li>
+                                <li class="L1"><span class="atv">		valueField: 'label',</span></li>
+                                <li class="L2"><span class="atv">		textField: 'value',</span></li>
+                                <li class="L3"><span class="atv">		data: [{</span></li>
+                                <li class="L4"><span class="atv">			label: 'java',</span></li>
+                                <li class="L5"><span class="atv">			value: 'Java'</span></li>
+                                <li class="L6"><span class="atv">		},{</span></li>
+                                <li class="L7"><span class="atv">			label: 'perl',</span></li>
+                                <li class="L8"><span class="atv">			value: 'Perl'</span></li>
+                                <li class="L9"><span class="atv">		},{</span></li>
+                                <li class="L0"><span class="atv">			label: 'ruby',</span></li>
+                                <li class="L1"><span class="atv">			value: 'Ruby'</span></li>
+                                <li class="L2"><span class="atv">		}]"</span><span class="pln"> </span><span
+                                        class="tag">/&gt;</span></li>
+                            </ol></pre>
+                        </td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>filter</td>
+                        <td>function</td>
+                        <td>定义当 'mode' 设置为 'local' 时如何过滤本地数据。该函数有两个参数：<br> q：用户输入的文本。<br> row：列表中的行数据。<br> 返回 true
+                            则允许显示该行。<br> <br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span
+                                        class="pun">({</span></li>
+                                <li class="L1"><span class="pln">	filter</span><span class="pun">:</span><span
+                                        class="pln"> </span><span class="kwd">function</span><span
+                                        class="pun">(</span><span class="pln">q</span><span class="pun">,</span><span
+                                        class="pln"> row</span><span class="pun">){</span></li>
+                                <li class="L2"><span class="pln">		</span><span class="kwd">var</span><span
+                                        class="pln"> opts </span><span class="pun">=</span><span
+                                        class="pln"> $</span><span class="pun">(</span><span
+                                        class="kwd">this</span><span class="pun">).</span><span
+                                        class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'options'</span><span class="pun">);</span></li>
+                                <li class="L3"><span class="pln">		</span><span class="kwd">return</span><span
+                                        class="pln"> row</span><span class="pun">[</span><span
+                                        class="pln">opts</span><span class="pun">.</span><span
+                                        class="pln">textField</span><span class="pun">].</span><span
+                                        class="pln">indexOf</span><span class="pun">(</span><span
+                                        class="pln">q</span><span class="pun">)</span><span class="pln"> </span><span
+                                        class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span
+                                        class="pun">;</span></li>
+                                <li class="L4"><span class="pln">	</span><span class="pun">}</span></li>
+                                <li class="L5"><span class="pun">});</span></li>
+                            </ol></pre>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>formatter</td>
+                        <td>function</td>
+                        <td>定义如何呈现行。该函数有一个参数：row。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span
+                                        class="pun">({</span></li>
+                                <li class="L1"><span class="pln">	formatter</span><span class="pun">:</span><span
+                                        class="pln"> </span><span class="kwd">function</span><span
+                                        class="pun">(</span><span class="pln">row</span><span class="pun">){</span></li>
+                                <li class="L2"><span class="pln">		</span><span class="kwd">var</span><span
+                                        class="pln"> opts </span><span class="pun">=</span><span
+                                        class="pln"> $</span><span class="pun">(</span><span
+                                        class="kwd">this</span><span class="pun">).</span><span
+                                        class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'options'</span><span class="pun">);</span></li>
+                                <li class="L3"><span class="pln">		</span><span class="kwd">return</span><span
+                                        class="pln"> row</span><span class="pun">[</span><span
+                                        class="pln">opts</span><span class="pun">.</span><span
+                                        class="pln">textField</span><span class="pun">];</span></li>
+                                <li class="L4"><span class="pln">	</span><span class="pun">}</span></li>
+                                <li class="L5"><span class="pun">});</span></li>
+                            </ol></pre>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>loader</td>
+                        <td>function(param,success,error)</td>
+                        <td>定义如何从远程服务器加载数据。返回 false 则取消该动作。该函数有下列参数：<br> param：要传到远程服务器的参数对象。<br>
+                            success(data)：当获取数据成功时将被调用的回调函数。<br> error()：当获取数据失败时将被调用的回调函数。<br></td>
+                        <td>json loader</td>
+                    </tr>
+                    <tr>
+                        <td>loadFilter</td>
+                        <td>function(data)</td>
+                        <td>返回要显示的过滤数据。该属性自版本 1.3.3 起可用。</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>事件</h2>
+            <p>该事件扩展自组合（combo），下面是为组合框（combobox）添加的事件。</p>
+            <div class="table_box">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <tr>
+                        <th align="left">名称</th>
+                        <th align="left">参数</th>
+                        <th align="left">描述</th>
+                    </tr>
+                    <tr>
+                        <td>onBeforeLoad</td>
+                        <td>param</td>
+                        <td>在请求加载数据之前触发，返回 false 则取消加载动作。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="com">// change the http request parameters before load data from server</span>
+                                </li>
+                                <li class="L1"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span
+                                        class="pun">({</span></li>
+                                <li class="L2"><span class="pln">	onBeforeLoad</span><span class="pun">:</span><span
+                                        class="pln"> </span><span class="kwd">function</span><span
+                                        class="pun">(</span><span class="pln">param</span><span class="pun">){</span>
+                                </li>
+                                <li class="L3"><span class="pln">		param</span><span class="pun">.</span><span
+                                        class="pln">id </span><span class="pun">=</span><span class="pln"> </span><span
+                                        class="lit">2</span><span class="pun">;</span></li>
+                                <li class="L4"><span class="pln">		param</span><span class="pun">.</span><span
+                                        class="pln">language </span><span class="pun">=</span><span class="pln"> </span><span
+                                        class="str">'js'</span><span class="pun">;</span></li>
+                                <li class="L5"><span class="pln">	</span><span class="pun">}</span></li>
+                                <li class="L6"><span class="pun">});</span></li>
+                            </ol></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>onLoadSuccess</td>
+                        <td>none</td>
+                        <td>当远程数据加载成功时触发。</td>
+                    </tr>
+                    <tr>
+                        <td>onLoadError</td>
+                        <td>none</td>
+                        <td>当远程数据加载失败时触发。</td>
+                    </tr>
+                    <tr>
+                        <td>onSelect</td>
+                        <td>record</td>
+                        <td>当用户选择一个列表项时触发。</td>
+                    </tr>
+                    <tr>
+                        <td>onUnselect</td>
+                        <td>record</td>
+                        <td>当用户取消选择一个列表项时触发。</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>方法</h2>
+            <p>该方法扩展自组合（combo），下面是为组合框（combobox）添加或重写的方法。</p>
+            <div class="table_box">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <tr>
+                        <th align="left">名称</th>
+                        <th align="left">参数</th>
+                        <th align="left">描述</th>
+                    </tr>
+                    <tr>
+                        <td>options</td>
+                        <td>none</td>
+                        <td>返回选项（options）对象。</td>
+                    </tr>
+                    <tr>
+                        <td>getData</td>
+                        <td>none</td>
+                        <td>返回加载的数据。</td>
+                    </tr>
+                    <tr>
+                        <td>loadData</td>
+                        <td>data</td>
+                        <td>加载本地列表数据。</td>
+                    </tr>
+                    <tr>
+                        <td>reload</td>
+                        <td>url</td>
+                        <td>请求远程的列表数据。传 'url' 参数来重写原始的 URL 值。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'reload'</span><span class="pun">);</span><span
+                                        class="pln">  </span><span class="com">// reload list data using old URL</span>
+                                </li>
+                                <li class="L1"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'reload'</span><span class="pun">,</span><span class="str">'get_data.php'</span><span
+                                        class="pun">);</span><span class="pln">  </span><span class="com">// reload list data using new URL</span>
+                                </li>
+                            </ol></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>setValues</td>
+                        <td>values</td>
+                        <td>设置组合框（combobox）值的数组。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'setValues'</span><span class="pun">,</span><span
+                                        class="pln"> </span><span class="pun">[</span><span
+                                        class="str">'001'</span><span class="pun">,</span><span class="str">'002'</span><span
+                                        class="pun">]);</span></li>
+                            </ol></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>setValue</td>
+                        <td>value</td>
+                        <td>设置组合框（combobox）的值。<br> 代码实例：
+                            <pre class="prettyprint linenums"><ol class="linenums">
+                                <li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#cc'</span><span
+                                        class="pun">).</span><span class="pln">combobox</span><span class="pun">(</span><span
+                                        class="str">'setValue'</span><span class="pun">,</span><span
+                                        class="pln"> </span><span class="str">'001'</span><span class="pun">);</span>
+                                </li>
+                            </ol></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>clear</td>
+                        <td>none</td>
+                        <td>清除组合框（combobox）的值。</td>
+                    </tr>
+                    <tr>
+                        <td>select</td>
+                        <td>value</td>
+                        <td>选择指定的选项。</td>
+                    </tr>
+                    <tr>
+                        <td>unselect</td>
+                        <td>value</td>
+                        <td>取消选择指定的选项。</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div style="float:right;">
+                <script async="" src="./combobox_files/adsbygoogle.js"></script><!-- 336 x 280 -->
+                <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-6117966252207595" data-ad-slot="9942648348" data-adsbygoogle-status="done">
+                    <ins id="aswift_2_expand"
+                         style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent">
+                        <ins id="aswift_2_anchor"
+                             style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent">
+                            <iframe width="336" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0"
+                                    hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true"
+                                    onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}"
+                                    id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;"></iframe>
+                        </ins>
+                    </ins>
+                </ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="clear"></div><!--------><!--------></div>
+    </div>
+</div>
+<script type="text/javascript" src="./combobox_files/m.js"></script>
+
+</script>
+
+</div></body>
+</html>

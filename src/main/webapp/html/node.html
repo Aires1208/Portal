@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Instances</title>
+    <!-- thirdparty css -->
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+    <style type="text/css">
+        .progress-bar-success {
+            background-color: #79DD1B;
+        }
+
+        .progress-bar-danger {
+            background-color: #EF5C5D;
+        }
+
+        .container {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 95%
+        }
+
+        .modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            /*margin-left: 10px;*/
+        }
+
+        .echart_heighth {
+            height: 260px;
+        }
+
+        .col-xs-6 {
+            padding-bottom: -80px;
+            margin-bottom: -80px ;
+        }
+    </style>
+</head>
+<body ng-app="nodeApp" ng-controller="nodeCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" style="height: 50px">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="padding:0px ; vertical-align: text-bottom">
+            <span style="font-size: 2em;">Instance: {{appName}}</span>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="padding: 0px">
+            <div id="reportrange" class="pull-right">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                <span></span> <b class="caret"></b>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12" style="border: solid 1px #E3E3E4;box-shadow:inset 1px -1px 1px #E3E3E4, inset -1px 1px 1px #E3E3E4;">
+            <div id="sample">
+                <div id="myDiagramDiv"></div>
+                <div id="myOverviewDiv"></div>
+                <div id="toolbarDiv"><span class="glyphicon glyphicon-fullscreen"></span></div>
+            </div>
+        </div>
+        <div id="overviewPanelId" class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Events</h4>
+                <a href="./healthRuleViolationsList.html?level=instance&appid={{appId}}&serviceid={{serviceId}}&instanceid={{instanceId}}&from={{selectedStartTime|reverse}}&to={{selectedEndTime|reverse}}">{{healthRuleViolations}}</a>
+            </div>
+
+            <div style="margin-bottom: 1px" class="overviewPanelDiv">
+                <h4 style="font-weight: bold"><a href="./transaction.html?level=instance&health=All&appid={{appId}}&serviceid={{serviceId}}&instanceid={{instanceId}}&from={{selectedStartTime|reverse}}&to={{selectedEndTime|reverse}}">Business Transactions Health</a></h4>
+
+                <div class="progress" style="height:8px">
+                    <div class="progress-bar progress-bar-danger" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentCritical(transactionHealth.critical,transactionHealth.warning,transactionHealth.normal)}};background-color: #EF5C5D;">
+                    </div>
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentWarning(transactionHealth.critical,transactionHealth.warning,transactionHealth.normal)}};background-color: #FF9326;">
+                    </div>
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentNormal(transactionHealth.critical,transactionHealth.warning,transactionHealth.normal)}};background-color: #79DD1B;">
+                    </div>
+                </div>
+                <div>
+                    critical
+                    <a style="display: inline" href="./transaction.html?level=instance&health=Critical&appid={{appId}}&serviceid={{serviceId}}&instanceid={{instanceId}}&from={{selectedStartTime|reverse}}&to={{selectedEndTime|reverse}}">{{transactionHealth.critical}}</a>
+                    warning
+                    <a style="display: inline" href="./transaction.html?level=instance&health=Warning&appid={{appId}}&serviceid={{serviceId}}&instanceid={{instanceId}}&from={{selectedStartTime|reverse}}&to={{selectedEndTime|reverse}}">{{transactionHealth.warning}}</a>
+                    normal
+                    <a style="display: inline" href="./transaction.html?level=instance&health=Normal&appid={{appId}}&serviceid={{serviceId}}&instanceid={{instanceId}}&from={{selectedStartTime|reverse}}&to={{selectedEndTime|reverse}}">{{transactionHealth.normal}}</a>
+
+                </div>
+            </div>
+
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">{{runIn}} IP</h4>
+                <a target="_blank" href="./serverInfo.html?hostid={{hostId }}&from={{from}}&to={{to}}">{{serverIp}}</a>
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">PID</h4>
+                {{pid}}
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Service Type</h4>
+                <a data-toggle="modal" data-target="#myModal" style="cursor:pointer">{{serviceType}}</a>
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Agent ID</h4>
+                {{agentId}}
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Agent Version</h4>
+                {{agentVersion}}
+            </div>
+
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Start Time</h4>
+                {{startTime}}
+            </div>
+
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Status</h4>
+                {{status}}
+            </div>
+
+            <!--
+            <div style="margin-bottom: 1px;" class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Nodes Health</h4>
+                <div class="progress" style="height:8px">
+                    <div class="progress-bar progress-bar-danger" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentCritical(nodeHealth.critical,nodeHealth.warning,nodeHealth.normal)}};" style="background-color: #458EF9;color:blue;">
+                    </div>
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentWarning(nodeHealth.critical,nodeHealth.warning,nodeHealth.normal)}};background-color: #FF9326;">
+                    </div>
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{percentNormal(nodeHealth.critical,nodeHealth.warning,nodeHealth.normal)}};background-color: #79DD1B;">
+                    </div>
+                </div>
+                <div>{{nodeHealth.critical}} critical,  {{nodeHealth.warning}}  warning,  {{nodeHealth.normal}}  normal</div>
+            </div>
+
+
+
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Calls</h4>
+                {{calls}}
+            </div>
+
+            <div>
+                <h4 style="font-weight: bold">Calls/min</h4>
+                {{callsPerMin}}
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">ResponseTime</h4>
+                {{responseTime}}
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Errors(%)</h4>
+                {{errorsPercent}}
+            </div>
+
+            <div class="overviewPanelDiv">
+                <h4 style="font-weight: bold">Errors</h4>
+                {{errors}}
+            </div>
+
+            <div>
+                <h4 style="font-weight: bold">Errors/min</h4>
+                {{errorsPerMin}}
+            </div>-->
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="background-color: #ffffff;box-shadow:
+                     inset 1px -1px 1px #E3E3E4, inset -1px 1px 1px #E3E3E4;margin:0px;padding:0px;border:0px;border-left: solid 1px #E3E3E4">
+            <Load-chart id="loadLineChart"  class="echart_height" ></Load-chart>
+            <h3 class="text-center"></h3>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="background-color: #ffffff;box-shadow:
+                     inset 1px -1px 1px #E3E3E4, inset -1px 1px 1px #E3E3E4;;margin:0px;padding:0px;border:0px;">
+            <Respond-chart id="respondLineChart"  class="echart_height" ></Respond-chart>
+            <h3 class="text-center"></h3>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="background-color: #ffffff;box-shadow:
+                     inset 1px -1px 1px #E3E3E4, inset -1px 1px 1px #E3E3E4;border-top:solid 1px  #E3E3E4;margin:0px;padding:0px;">
+            <Error-chart id="errorLineChart"  class="echart_height" ></Error-chart>
+            <h3 class="text-center"></h3>
+        </div>
+    </div>
+</div>
+
+
+
+<!--create 模态框（Modal） -->
+<div class="modal " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-css">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel" >
+                     JVM
+                </h4>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;margin: 0px">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#home" data-toggle="tab">
+                            Diagram
+                        </a>
+                    </li>
+                    <li><a href="#args" data-toggle="tab">VM Parameters</a></li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <!-- tab1 -->
+                    <div class="tab-pane fade in active" id="home">
+                        <div class="row" style="padding: 0px;margin: 0px">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="heapLine">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="permLine">
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding: 0px;margin: 0px">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  id="jvmLine">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="tranxLine">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- tab2 -->
+                    <div class="tab-pane fade" id="args" style="padding: 0px 15px">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="name">JVM Version</label>
+                                <input type="text" class="form-control" id="jvmver" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">GC Tpye</label>
+                                <input type="text" class="form-control" id="gctype" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">JVM Arguments</label>
+                                <textarea class="form-control" rows="10" id="jvmstartopt"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+
+<div style="visibility:hidden;height: 5px;overflow :auto">
+    <Heap-chart id="heapLineChart" class="echart_heighth" style="visibility:hidden;width: 45%"></Heap-chart>
+    <Perm-chart id="permLineChart" class="echart_heighth" style="visibility:hidden;width: 45%"></Perm-chart>
+    <Jvm-chart id="jvmLineChart" class="echart_heighth" style="visibility:hidden;width: 45%"></Jvm-chart>
+    <Tranx-chart id="tranxLineChart" class="echart_heighth" style="visibility:hidden;width: 45%"></Tranx-chart>
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/node.js"></script>
+</body>
+</html>

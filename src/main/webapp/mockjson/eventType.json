@@ -1,0 +1,124 @@
+{
+  "app": {
+    "calls": {
+      "normal": "10010",
+      "warning": "10011",
+      "critical": "10012"
+    },
+    "errors": {
+      "normal": "10030",
+      "warning": "10031",
+      "critical": "10032"
+    },
+    "responsetime": {
+      "normal": "10070",
+      "warning": "10071",
+      "critical": "10072"
+    }
+  },
+  "service": {
+    "calls": {
+      "normal": "20010",
+      "warning": "20011",
+      "critical": "20012"
+    },
+    "errors": {
+      "normal": "20030",
+      "warning": "20031",
+      "critical": "20032"
+    },
+    "responsetime": {
+      "normal": "20070",
+      "warning": "20071",
+      "critical": "20072"
+    }
+  },
+  "instance": {
+    "calls": {
+      "normal": "30010",
+      "warning": "30011",
+      "critical": "30012"
+    },
+    "errors": {
+      "normal": "30030",
+      "warning": "30031",
+      "critical": "30032"
+    },
+    "responsetime": {
+      "normal": "30070",
+      "warning": "30071",
+      "critical": "30072"
+    }
+  },
+  "transaction": {
+    "calls": {
+      "normal": "40010",
+      "warning": "40011",
+      "critical": "40012"
+    },
+    "errors": {
+      "normal": "40030",
+      "warning": "40031",
+      "critical": "40032"
+    },
+    "responsetime": {
+      "normal": "40070",
+      "warning": "40071",
+      "critical": "40072"
+    }
+  },
+  "host": {
+    "cpuusage": {
+      "normal": "50120",
+      "warning": "50121",
+      "critical": "50122"
+    },
+    "memusage": {
+      "normal": "50130",
+      "warning": "50131",
+      "critical": "50132"
+    },
+    "diskusage": {
+      "normal": "50140",
+      "warning": "50141",
+      "critical": "50142"
+    },
+    "networkin": {
+      "normal": "50150",
+      "warning": "50151",
+      "critical": "50152"
+    },
+    "networkout": {
+      "normal": "50150",
+      "warning": "50151",
+      "critical": "50152"
+    },
+    "jvm": {
+      "normal": "50090",
+      "warning": "50091",
+      "critical": "50092"
+    },
+    "gcTime": {
+      "normal": "50100",
+      "warning": "50101",
+      "critical": "50102"
+    }
+  },
+  "db": {
+    "calls": {
+      "normal": "60160",
+      "warning": "60161",
+      "critical": "60162"
+    },
+    "connections": {
+      "normal": "60170",
+      "warning": "60171",
+      "critical": "60172"
+    },
+    "spendtime": {
+      "normal": "60180",
+      "warning": "60181",
+      "critical": "60182"
+    }
+  }
+}

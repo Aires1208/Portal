@@ -1,0 +1,20 @@
+{
+  "dbs": [
+    {
+      "dbid": "db1",
+      "type": "Oracle",
+      "health": "true",
+      "queries": "2.3k",
+      "timeSpent": "00:21:32",
+      "cpu": "30%"
+    },
+    {
+      "dbid": "db2",
+      "type": "MySQL",
+      "health": "true",
+      "queries": "2.1k",
+      "timeSpent": "01:21:32",
+      "cpu": "23%"
+    }
+  ]
+}

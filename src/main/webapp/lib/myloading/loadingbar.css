@@ -1,0 +1,26 @@
+#testLoading {
+    position: absolute;
+    /*width: 100%;*/
+    /*height: 100px;*/
+    text-align: center;
+    /*top:300px;*/
+    margin:auto; width:10px; height:0px;
+    background-color: #29d;
+    border-bottom-right-radius: 1px;
+    border-top-right-radius: 1px;
+    box-shadow:0px 0px 8px #fff3f8;
+    z-index: 1300; /* make sure its in front */
+
+    -webkit-transition: width 350ms;
+    -moz-transition: width 350ms;
+    -o-transition: width 350ms;
+    transition: width 350ms;
+
+    -moz-box-shadow: #29d 1px 0 6px 1px;
+    -ms-box-shadow: #29d 1px 0 6px 1px;
+    -webkit-box-shadow: #29d 1px 0 6px 1px;
+    box-shadow: #29d 1px 0 6px 1px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}

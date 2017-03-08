@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Kafka</title>
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+         .modal-dialog-css {
+            width: 80%;
+            margin: auto;
+            margin-top: 10px;
+            /!*margin-left: 10px;*!/
+        }
+
+        #objid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #objid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #objid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #objid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #objid .nav-tabs > li.active > a,
+        #objid .nav-tabs > li.active > a:hover,
+        #objid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #objid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #objid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #objid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #objid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+        /*report*/
+        #reportid  .nav-tabs {
+            border-bottom: 1px solid #dddddd;
+            font-size: 1em;
+        }
+
+        #reportid .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        #reportid .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.428571429;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #reportid .nav-tabs > li > a:hover {
+            border-color: #eeeeee #eeeeee #dddddd;
+        }
+
+        #reportid .nav-tabs > li.active > a,
+        #reportid .nav-tabs > li.active > a:hover,
+        #reportid .nav-tabs > li.active > a:focus {
+            /*color: #555555;*/
+            color: #555555;
+            cursor: default;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }
+
+        #reportid .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+
+        #reportid .nav-tabs.nav-justified > li {
+            float: none;
+        }
+
+        #reportid .nav-tabs.nav-justified > li > a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #reportid .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+        }
+
+        /* 另一种尝试通过，把边框变成透明的。 */
+        .no-border {
+            border: 1px solid transparent !important;
+        }
+
+        .no-part-border {
+            border-right: 1px solid transparent !important;
+        }
+    </style>
+</head>
+<body ng-app="kafkaInfoApp" ng-controller="kafkaInfoCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" >
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+            <span style="font-size: 2em"> <img src="../img/kafkalogo1.jpg" height="25px">{{overview.name}} </span>
+        </div>
+        <div class="col-md-4 col-xs-12">
+        </div>
+    </div>
+
+
+    <ul id="tranxTab" class="nav nav-tabs" style="font-size: 0.9em">
+        <li class="active"><a href="#overviewId" data-toggle="tab">Overview</a></li>
+        <li><a href="#brokersId" data-toggle="tab">Brokers</a></li>
+        <li><a href="#queriesid" data-toggle="tab">Topics</a></li>
+        <li><a href="#clientid" data-toggle="tab">Consumers</a></li>
+    </ul>
+
+    <div id="tranxTabContent" class="tab-content" style="background-color: #EAEAEA;padding: 10px">
+        <!-- Overview -->
+        <div class="tab-pane fade in active" id="overviewId" >
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Name
+                            <p style="font-size: 1.5em;">{{overview.name}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Status
+                            <p style="font-size: 1.5em"><span ng-class="{true: 'glyphicon glyphicon-ok-sign', false: 'glyphicon glyphicon-exclamation-sign'}[overview.status]" style="color: {{isHealthColor(true)}}"></span></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Zookeeper
+                            <p style="font-size: 1.5em;">{{overview.zookeeper}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Version
+                            <p style="font-size: 1.5em;">{{overview.version}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Topics
+                            <p style="font-size: 1.5em;">{{overview.topics}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Brokers
+                            <p style="font-size: 1.5em">{{overview.brokers}}</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            Consumers
+                            <p style="font-size: 1.5em">{{overview.consumers}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <div style="font-size: 1.3em;font-weight: bold">Cluster Visualization</div>
+                            <div id="myDiagramDiv" style="height:200px"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <allload-chart id="allload"  class="echart_height" ></allload-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brokers -->
+        <div class="tab-pane fade" id="brokersId" style="padding-top: 20px">
+            <div class="container-fluid page-content-body">
+                <div style="background-color: #ffffff; border: 1px solid #E3E3E4;padding: 12px;margin: 10px;margin-top:-8px">
+                    <div class="row" style="padding-left: 30px;padding-right: 30px">
+                        <h4>Combined Metrics</h4>
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Rate</th>
+                                <th>Mean</th>
+                                <th>1 min</th>
+                                <th>5 min</th>
+                                <th>15 min</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="record in combinedMetricRecords">
+                                    <td>{{record.name}}</td>
+                                    <td>{{record.mean}}</td>
+                                    <td>{{record.min1}}</td>
+                                    <td>{{record.min5}}</td>
+                                    <td>{{record.min15}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                 <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                            <h4>Broker List</h4>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Host</th>
+                                    <th>Port</th>
+                                    <th>JMX Port</th>
+                                    <th>Bytes In</th>
+                                    <th>Bytes Out</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="record in brokerListRecords">
+                                        <td><a href=""  ng-click="selectBroker(record.id)" data-toggle="modal" data-target="#brokerInfoId">{{record.id}}</a></td>
+                                        <td>{{record.host}}</td>
+                                        <td>{{record.port}}</td>
+                                        <td>{{record.jmxport}}</td>
+                                        <td>{{record.bytesIn}}</td>
+                                        <td>{{record.bytesOut}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Topics -->
+        <div class="tab-pane fade" id="queriesid">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_querytopn_id" class="col-sm-2 control-label  pull-left" style="padding-top: 8px"><strong>Search </strong></label>
+                        <div class="col-sm-10 pull-right">
+                            <input type="text" class="form-control" ng-model="topicFilterInput" style="border: 1px solid #ccc;border-radius: 0px;" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                <div class="row" >
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                        <div class="table-responsive">
+                            <table class="table  table-striped">
+                                <p></p>
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Partition</th>
+                                    <th>Brokers</th>
+                                    <th>Brokers Spread(%)</th>
+                                    <th>Brokers Skew(%)</th>
+                                    <th>Replicas</th>
+                                    <th>Under Replicated(%)</th>
+                                    <th>Producer Message/Sec</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="record in topicRecords | filter:topicFilterInput">
+                                    <td><a href="" ng-click="selectTopic(record.topic)" data-toggle="modal" data-target="#topicInfoId">{{record.topic}}</a></td>
+                                    <td>{{record.partition}}</td>
+                                    <td>{{record.brokers}}</td>
+                                    <td>{{record.brokersSpread}}</td>
+                                    <td>{{record.brokersSkew}}</td>
+                                    <td>{{record.replicas}}</td>
+                                    <td>{{record.underReplicated}}</td>
+                                    <td>{{record.producerMessage}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consumers -->
+        <div class="tab-pane fade" id="clientid" style="">
+            <div class="col-md-3 col-md-offset-9" style="margin-bottom: 10px">
+                <form class="form-horizontal" role="form" class="pull-right">
+                    <div class="form-group">
+                        <label for="select_querytopn_id" class="col-sm-2 control-label  pull-left" style="padding-top: 8px"><strong>Search </strong></label>
+                        <div class="col-sm-10 pull-right">
+                            <input type="text" class="form-control" ng-model="consumerFilterInput" style="border: 1px solid #ccc;border-radius: 0px;" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div style="background-color: #ffffff; border: 1px solid #E3E3E4;margin: 10px;">
+                <div class="row" >
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 50px">
+                        <div class="table-responsive">
+                            <table class="table  table-striped">
+                                <p></p>
+                                <thead>
+                                <tr>
+                                    <th>Consumers</th>
+                                    <th>Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="record in consumerRecords | filter:consumerFilterInput">
+                                    <td><a href=""   ng-click="selectConsumer(record.name)" data-toggle="modal" data-target="#consumerInfoId">{{record.name}}</a></td>
+                                    <td>{{record.type}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- broker Info 模态框（Modal） -->
+        <div class="modal " id="brokerInfoId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="">
+                            Broker Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="myTab" class="nav nav-tabs" style="font-size: x-small">
+                            <li class="active"><a href="#brokerSummaryTabId" data-toggle="tab">Summary</a></li>
+                            <li><a href="#brokerMetricTabId" data-toggle="tab">Metric</a></li>
+                            <li><a href="#brokerTopicsTabId" data-toggle="tab">Topic Detail</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="brokerSummaryTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Topics</th>
+                                        <th>Partitions</th>
+                                        <th>Messages(%)</th>
+                                        <th>Incoming(%)</th>
+                                        <th>Outgoing(%)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{brokerSummary.topics}}</td>
+                                        <td>{{brokerSummary.partitions}}</td>
+                                        <td>{{brokerSummary.messages}}</td>
+                                        <td>{{brokerSummary.incoming}}</td>
+                                        <td>{{brokerSummary.outgoing}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="row" style="margin-bottom: -70px;margin-top: 10px;padding-bottom: -50px">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px;padding-left: 50px;">
+                                        <div id="brokerChartDiv" style="padding: 0px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="brokerMetricTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Rate</th>
+                                        <th>Mean</th>
+                                        <th>1 min</th>
+                                        <th>5 min</th>
+                                        <th>15 min</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in brokerMetricRecords">
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.mean}}</td>
+                                        <td>{{record.min1}}</td>
+                                        <td>{{record.min5}}</td>
+                                        <td>{{record.min15}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="brokerTopicsTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Replication</th>
+                                        <th>Total Partitions</th>
+                                        <th>Partitions on Broker</th>
+                                        <th>Partitions</th>
+                                        <th>Skewed?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in brokerTopicsRecords">
+                                        <td>{{record.topic}}</td>
+                                        <td>{{record.replication}}</td>
+                                        <td>{{record.totalPartitions}}</td>
+                                        <td>{{record.partitionsOnBroker}}</td>
+                                        <td style="word-break:break-all; word-wrap:break-word;">{{record.partitions}}</td>
+                                        <td>{{record.Skewed}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+
+
+        <!-- topic Info 模态框（Modal） -->
+        <div class="modal " id="topicInfoId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="">
+                            Topic Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="" class="nav nav-tabs" style="font-size: x-small">
+                            <li class="active"><a href="#topicSummaryTabId" data-toggle="tab">Summary</a></li>
+                            <li><a href="#topicMetricTabId" data-toggle="tab">Metrics</a></li>
+                            <li><a href="#partitionInfoTabId" data-toggle="tab">Partition Information</a></li>
+                            <li><a href="#partitionBrokerTabId" data-toggle="tab">Partitions by Broker</a></li>
+                        </ul>
+                        <div id="" class="tab-content">
+                            <div class="tab-pane fade in active" id="topicSummaryTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in topicSummaryRecords">
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.value}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="topicMetricTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Rate</th>
+                                        <th>Mean</th>
+                                        <th>1 min</th>
+                                        <th>5 min</th>
+                                        <th>15 min</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in topicMetricRecords">
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.mean}}</td>
+                                        <td>{{record.min1}}</td>
+                                        <td>{{record.min5}}</td>
+                                        <td>{{record.min15}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="partitionInfoTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Partition</th>
+                                        <th>Latest Offset</th>
+                                        <th>Leader</th>
+                                        <th>Replicas</th>
+                                        <th>In Sync Replicas</th>
+                                        <th>Preferred Leader?</th>
+                                        <th>Under Replicated?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in topicPartitionInfoRecords">
+                                        <td>{{record.partition}}</td>
+                                        <td>{{record.latestOffset}}</td>
+                                        <td>{{record.leader}}</td>
+                                        <td>{{record.replicas}}</td>
+                                        <td>{{record.inSyncReplicas}}</td>
+                                        <td>{{record.preferredLeader}}</td>
+                                        <td>{{record.underReplicated}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="partitionBrokerTabId">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Broker</th>
+                                        <th># of Partitions</th>
+                                        <th>Partitions</th>
+                                        <th>Skewed?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in topicPartitionBrokerRecords">
+                                        <td>{{record.broker}}</td>
+                                        <td>{{record.ofPartitions}}</td>
+                                        <td>{{record.partitions}}</td>
+                                        <td>{{record.skewed}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+
+        <!-- consumer Info 模态框（Modal） -->
+        <div class="modal " id="consumerInfoId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Consumed Topic Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Partitions Covered %</th>
+                                <th>Total Lag</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="record in consumedTopicInfo">
+                                <td><a href=""  ng-click="selectConsumerTopic(record.topic)" data-toggle="modal" data-target="#consumerTopicId">{{record.topic}}</a></td>
+                                <td>{{record.partitionsCovered}}</td>
+                                <td>{{record.totalLag}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+
+
+
+        <!-- consumerTopic Info 模态框（Modal） -->
+        <div class="modal " id="consumerTopicId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-css">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="">
+                            {{topicSummary.name}}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-bottom: 20px">
+                            <p style="font-weight: bold">Total Lag</p>
+                            <p>% of Partitions assigned to a consumer instance : {{topicSummary.ofPartitions}}</p>
+                        </div>
+                            <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Partition</th>
+                                <th>LogSize</th>
+                                <th>Consumer Offset</th>
+                                <th>Lag</th>
+                                <th>Consumer Instance Owner</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="record in topicSummary.detail">
+                                <td>{{record.partition}}</td>
+                                <td>{{record.logSize}}</td>
+                                <td>{{record.consumerOffset}}</td>
+                                <td>{{record.lag}}</td>
+                                <td>{{record.instanceOwner}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+</div>
+
+<div style="visibility:hidden;height: 5px;overflow :auto">
+    <brokerload-chart id="brokerload"  class="echart_height" style="visibility:hidden;width:80%;"></brokerload-chart>
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/kafkaInfo.js"></script>
+
+</body>
+</html>

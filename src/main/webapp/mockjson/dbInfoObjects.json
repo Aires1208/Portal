@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "username": "root",
+      "host": "host1"
+    },
+    {
+      "username": "root2",
+      "host": "host2"
+    }
+  ],
+  "variables": [
+    {
+      "variableName": "auto-increment-increment",
+      "variableValue": "1"
+    },
+    {
+      "variableName": "auto-increment-offset",
+      "variableValue": "2"
+    }
+  ],
+  "storage": [
+    {
+      "databaseName": "db1",
+      "indexLength": "5",
+      "dataLength": "5"
+    },
+    {
+      "databaseName": "db2",
+      "indexLength": "15",
+      "dataLength": "15"
+    }
+  ],
+  "log":{
+    "logPath":"/var/mysql/log"
+  },
+  "database":{
+    "uptime":"12d11h10m9s",
+    "version":"5.8.11"
+  }
+
+}

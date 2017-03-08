@@ -1,0 +1,12 @@
+{
+  "sessionTopN": [
+    {
+      "sessionId": "11111",
+      "weight": "95"
+    },
+    {
+      "sessionId": "22222",
+      "weight": "5"
+    }
+  ]
+}

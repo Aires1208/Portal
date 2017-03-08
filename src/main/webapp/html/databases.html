@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Databases</title>
+    <!-- thirdparty css -->
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            /*margin-left: 10px;*/
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        .btn-clean {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #fafafa;
+            /*border: 1px solid #bfbfbf;*/
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            /*color: #8f8f8f;*/
+            /*color: #9AA3B3;*/
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean:hover{background:#07B0D3;}
+    </style>
+</head>
+<body ng-app="dbApp" ng-controller="dbCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" style="padding: 0px ;margin: 0px">
+        <div class="col-md-3 col-sm-12" style="padding: 0px ;margin: 0px">
+            <span style="font-size: 2em;padding: 0px ;margin: 0px"> Databases </span>
+        </div>
+    </div>
+    <hr>
+    <div class="row" >
+        <div class="col-sm-3" style="margin-bottom: 5px;">
+            <div class="pull-left" >
+                <button class="btn btn-primary btn-lg btn-clean" data-toggle="modal" data-target="#addMonitor">
+                    <span class="glyphicon glyphicon-plus"></span> Add DB Monitor
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-offset-5">
+            <div id="reportrange" class="pull-right">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                <span></span> <b class="caret"></b>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+            <table class="table  table-striped" id="dbsTable" cellspacing="0" cellpadding="0">
+                <p></p>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Host</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Health</th>
+                    <th>Queries</th>
+                    <th>Time Spent In Database</th>
+                    <th>CPU(%)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="record in records | filter:{tier:typeFilter}:false ">
+                    <td><a href="./dbInfo.html?neId={{record.dbNeId}}&from={{from|reverse}}&to={{to|reverse}}"><img src="../img/topic_small.gif">{{record.dbName}}</a></td>
+                    <td>{{record.dbHost}}</td>
+                    <td>{{record.type}}</td>
+                    <td><span class="badge hvr-sweep-to-left" style="background-color: {{isOnBgColor(record.status)}}">{{record.status}}</span></td>
+                    <td><span ng-class="{true: 'glyphicon glyphicon-ok-sign', false: 'glyphicon glyphicon-exclamation-sign'}[record.health]"
+                              style="color: {{isHealthColor(record.health)}}"></span></td>
+                    <td>{{record.queries}}</td>
+                    <td>{{record.timeSpent}}</td>
+                    <td>{{record.cpu}}</td>
+                    <td><a ng-click="selectMonitor(record.dbNeId)" data-toggle="modal" data-target="#delMonitor"><img src="../img/close_view.gif" class="delImgCss"></a></td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+
+
+    <!--create 模态框（Modal） -->
+    <div class="modal " id="addMonitor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Add DB Monitor
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" name="myForm">
+                        <div class="form-group">
+                            <label for="dbname" class="col-sm-3 control-label">DB Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="dbname" id="dbname" ng-model="monitorParam.dbName" placeholder="Input Name Please" required>
+                                <span style="color:red" ng-show="myForm.dbname.$dirty && myForm.dbname.$invalid">
+                                    <span ng-show="myForm.dbname.$error.required">DB name is required</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addMonitorSelectedId" class="col-sm-3 control-label">DB Type</label>
+                            <div class="col-sm-9">
+                                <select id="addMonitorSelectedId" class="form-control" ng-model="monitorParam.dbType">
+                                    <option value="mysql">MySql</option>
+                                    <option value="oracle">Oracle</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="dburl" class="col-sm-3 control-label">Host IP</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="dburl" id="dburl" ng-model="monitorParam.url" placeholder=" " required>
+                                <span style="color:red" ng-show="myForm.dburl.$dirty && myForm.dburl.$invalid">
+                                    <span ng-show="myForm.dburl.$error.required">Host IP is required</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dbport" class="col-sm-3 control-label">DB Port</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="dbport" ng-model="monitorParam.dbPort" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">DB Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username" ng-model="monitorParam.dbUsername" placeholder="root">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="col-sm-3 control-label">DB Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="pwd" ng-model="monitorParam.dbPassword" placeholder="">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="connectType" class="col-sm-3 control-label">Connect Type</label>
+                            <div class="col-sm-9">
+                                <select id="connectType" class="form-control" ng-model="monitorParam.connectType">
+                                    <option>TELNET</option>
+                                    <option>SSH</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hport" class="col-sm-3 control-label">Host Port</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="hport" ng-model="monitorParam.hostPort" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="husername" class="col-sm-3 control-label">Host Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="husername" ng-model="monitorParam.hostUsername" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hpwd" class="col-sm-3 control-label">Host Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="hpwd" ng-model="monitorParam.hostPassword" placeholder="">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-disabled="myForm.dbname.$error.required||myForm.dburl.$error.required" ng-click="addMonitor()">Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+    <!--delete 模态框（Modal） -->
+    <div class="modal " id="delMonitor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Confirm
+                    </h4>
+                </div>
+                <div class="modal-body">
+                     <div>Are you sure to delete this db monitor?</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="delMonitor()">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+</div>
+
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/databases.js"></script>
+
+</body>
+</html>

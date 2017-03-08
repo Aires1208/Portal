@@ -1,0 +1,86 @@
+{
+  "topo":
+  {
+    "nodes":[
+      {"key": "console", "name": "Console","type":"JAVA","count":2},
+      {"key": "pm", "name": "PM Node1","type":"JAVA","count":1},
+      {"key": "oracle", "name": "EMS_Oracle","type": "ORACLE","count":1},
+      {"key": "client", "name": "Client","type":"USER","count":1}
+    ],
+    "links":[
+      {"from": "client", "to": "console", "respondTime": "2ms"},
+      {"from": "console", "to": "pm", "respondTime": "1ms"},
+      {"from": "console", "to": "fm", "respondTime": "2ms"},
+      {"from": "pm", "to": "oracle", "respondTime": "2ms"}
+    ]
+  },
+  "cpuInfo":{
+    "info":"cpu info 0.9%  70error 8error/min",
+    "time":["09:03", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "memInfo":{
+    "info":"mem info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "storeInfo":{
+    "info":"store info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "netInfo":{
+    "info":"net info 0.9%  70error 8error/min",
+    "time":["09:05", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30"],
+    "data":[100, 20, 31, 234, 120, 90, 20]
+  },
+  "treeTable":[
+    {
+      "id":1,
+      "idParent":0,
+      "method":"method1",
+      "argument":"param1",
+      "startTime":"2011-11-11",
+      "gap":"1ms",
+      "exec":"1ms",
+      "execPer":"2%",
+      "self":"3ms",
+      "class":"java.util.",
+      "api":"Spring",
+      "agent":"agent1",
+      "app":"app1"
+    },
+    {
+      "id":2,
+      "idParent":1,
+      "method":"method2",
+      "argument":"param2",
+      "startTime":"2011-11-12",
+      "gap":"2ms",
+      "exec":"2ms",
+      "execPer":"2%",
+      "self":"2ms",
+      "class":"java.util2.",
+      "api":"Spring2",
+      "agent":"agent2",
+      "app":"app2"
+    },
+    {
+      "id":3,
+      "idParent":2,
+      "method":"method3",
+      "argument":"param3",
+      "startTime":"2011-11-13",
+      "gap":"3ms",
+      "exec":"32ms",
+      "execPer":"3%",
+      "self":"3ms",
+      "class":"java.util3.",
+      "api":"Spring3",
+      "agent":"agent3",
+      "app":"app3"
+    }
+
+  ]
+
+}

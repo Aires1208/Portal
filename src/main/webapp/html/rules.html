@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Rules</title>
+    <!-- thirdparty css -->
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="../lib/timepicker/timePicker.css" rel="stylesheet" type="text/css"/>-->
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 70%;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        .dialog-boldfont {
+            font-weight: bold;
+            padding-bottom: 12px;
+        }
+
+        .btn-clean {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean-sm {
+            display: inline-block;
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean:hover {
+            background: #448EF9;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #fff;
+        }
+
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+
+        .rangeInput {
+            width: 183px;
+            height: 32px;
+            border: 1px solid #cccccc;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body ng-app="rulesApp" ng-controller="rulesCtrl">
+<div id="testLoading"></div>
+<div ng-include="'common/header.html'"></div>
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" style="padding: 0px ;margin: 0px">
+        <div class="col-md-1 col-sm-12" style="padding: 0px ;margin: 0px">
+            <span style="font-size: 2em;padding: 0px ;margin: 0px"> Rules </span>
+        </div>
+
+        <!-- select obj filters -->
+        <div class="col-sm-3">
+            <div class="dropdown">
+                <a id="dLabel" role="button" title="Click to Filter" data-toggle="dropdown"
+                   class="btn btn-primary btn-clean-sm" data-target="#"
+                   href="javascript:;">
+                    {{selectedObjName}} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a ng-click="searchAll()" href="javascript:;">All</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">App</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableAppNames"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">Service</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableSvcNames"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">Instance</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableInstanceNames"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">Transaction</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableTransactions"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">Host</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableHostNames"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="javascript:;">DB</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="x in selectableDBNames"><a ng-click="changeApp(x)" tabindex="-1" href="javascript:;">{{x}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3" style="margin-bottom: 5px;">
+            <div class="pull-left">
+                <button class="btn btn-primary btn-lg btn-clean" data-toggle="modal" data-target="#createRuleId">
+                    <span class="glyphicon glyphicon-plus"></span> Create Rule
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <p></p>
+            <thead>
+            <tr>
+                <th>RuleName</th>
+                <th>RuleType</th>
+                <th>Metric Name</th>
+                <th>EnableStatus</th>
+                <th>Input Data Range</th>
+                <th>affectObjects</th>
+                <th>Warning Level</th>
+                <th>Critical Level</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in names.rules | filter:{affectObjects:selectedObjName}:false">
+                <td>
+                    <a data-toggle="modal" data-target="#modifyRuleId" ng-click="selectOneRule2Modify(x);">
+                        <img src="../img/topic_small.gif">{{ x.ruleName }}
+                    </a>
+                </td>
+                <td>{{ x.ruleType }}</td>
+                <td>{{ x.metricName }}</td>
+                <td>
+                    <span ng-class="{true: 'glyphicon glyphicon-ok-sign', false: 'glyphicon glyphicon-exclamation-sign'}[enableStatus(x.enableStatus)]"
+                        style="color: {{enableStatusColor(x.enableStatus)}}"></span>
+                </td>
+                <td>{{ inputDataRangesStr(x.inputDataRanges)}}</td>
+                <td>{{ x.affectObjects }}</td>
+                <td>{{ ruleConditionStr(x, 0) }}</td>
+                <td>{{ ruleConditionStr(x, 1) }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!--create 模态框（Modal） -->
+    <div class="modal " id="createRuleId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Create Rule
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" name="myForm">
+                        <!-- Rule Name -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Rule Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="ruleName" id="ruleName"
+                                       ng-model="ruleNameModel"
+                                       placeholder="Rule Name" required>
+                                <span style="color:red" ng-show="myForm.ruleName.$dirty && myForm.ruleName.$invalid">
+                                    <span ng-show="myForm.ruleName.$error.required">rule name is required</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- EnableStatus -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Enable Status</label>
+                            <div class="col-sm-9">
+                                <p style="padding-top: 5px">
+                                    <input type="checkbox" ng-click="" ng-model="enableStatusCheckbox" checked="checked">Enable
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <!-- Rule Type -->
+                        <div class="form-group">
+                            <label for="dbname" class="col-sm-3 control-label" style="font-weight: bold">Rule
+                                Type</label>
+                            <div class="col-sm-9">
+                                <select id="selectRuleType" class="form-control" ng-change="ruleTypeChange(selectRuleType)" ng-model="selectRuleType">
+                                    <option value="app">APP</option>
+                                    <option value="service">Service</option>
+                                    <option value="instance">Instance</option>
+                                    <option value="transaction">Transaction</option>
+                                    <option value="host">Host</option>
+                                    <option value="db">DB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Metric Name -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Metric Name</label>
+                            <div class="col-sm-9">
+                                <select id="objectTypeId" ng-change="metricNameChange(metricNameParam)" class="form-control" ng-model="metricNameParam">
+                                    <option ng-repeat="x in selectableWaitMetrics" value={{x.id}}>
+                                        <a href="javascript:;">{{x.name}}</a>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Check Time -->
+                        <div class="form-group" ng-hide="true">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Check Time</label>
+                            <div class="col-sm-3">
+                                <p style="padding-top: 5px">
+                                    <input type="radio" name="optionsRadios" id="Always" value="Always" checked>Always
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p style="padding-top: 5px"><input type="radio" name="optionsRadios"> Range
+                                    &nbsp&nbsp <input type="text" class="timeRange rangeInput"/>
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Select Item -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Selected Items</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="selectedObjId" id="selectedObjId"
+                                       disabled="disabled" ng-model="selectedObjsParam"
+                                       placeholder="Select Item" required>
+                                <span style="color:red" ng-show="myForm.selectedObjId.$dirty && myForm.selectedObjId.$invalid">
+                                    <span ng-show="myForm.selectedObjId.$error.required">Selected Items is required</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" data-toggle="modal" data-target="#selectObjId"
+                                        class="btn btn-default" style="height: 35px;"
+                                        ng-click="openSelectWaitObjsDialog()"> Select Objects
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input Data Range -->
+                        <hr>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Input Data
+                                Range</label>
+                            <div class="col-sm-2">
+                                <select id="objectTypeId" class="form-control" ng-model="inputDataRangeParam">
+                                    <option value="0"> 0</option>
+                                    <option value="10"> 10</option>
+                                    <option value="20"> 20</option>
+                                    <option value="30"> 30</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <p style="padding-top: 5px">mins</p>
+                            </div>
+                        </div>
+
+                        <!-- Warning Level -->
+                        <div class="form-group">
+                            <label for="hport" class="col-sm-3 control-label" style="font-weight: bold">Warning Level</label>
+                            <div class="col-sm-2" ng-hide=true>
+                                <select id="objectTypeId" class="form-control" disabled="disabled">
+                                    <option value="mysql"> ></option>
+                                    <option value="oracle"> =</option>
+                                    <option value="oracle"> <</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" ng-model="warningLevelValueParam" id="warningLevelValueParam"
+                                       placeholder="">
+                                <span style="color:red" ng-show="warningLevelValueParam < 0">
+                                    Warning Level value should greater than 0!
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Critical Level -->
+                        <div class="form-group">
+                            <label for="hport" class="col-sm-3 control-label" style="font-weight: bold">Critical Level</label>
+                            <div class="col-sm-2" ng-hide=true>
+                                <select id="objectTypeId" class="form-control" disabled="disabled">
+                                    <option value="mysql"> ></option>
+                                    <option value="oracle"> =</option>
+                                    <option value="oracle"> <</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" ng-model="criticalLevelValueParam" id="criticalLevelValueParam"
+                                       placeholder="">
+                                <span style="color:red" ng-show="criticalLevelValueParam < 0">
+                                    Critical Level value should greater than 0!
+                                    <br>
+                                </span>
+
+                                <span style="color:red" ng-show="criticalLevelValueParam < warningLevelValueParam">
+                                    Critical Level value should greater than Warning Level value!
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="myForm.ruleName.$error.required||myForm.selectedObjId.$error.required
+                            || criticalLevelValueParam < warningLevelValueParam || criticalLevelValueParam < 0
+                            || warningLevelValueParam < 0"
+                            ng-click="addRuleAction()">Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+
+    <!--select objs 模态框（Modal） -->
+    <div class="modal " id="selectObjId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-css">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="selectObjects">
+                        Select Objects
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6" style="overflow-x:auto">
+                            <form role="form" name="addSelectForm">
+                                <div class="form-group" >
+                                    <label for="" style="margin-bottom: 10px"><h4>Selectable Items</h4></label>
+                                    <select multiple ng-model="selectableValues" ng-multiple="false"
+                                            ng-change="selectableChanged()" name="addSelect"
+                                            class="form-control" style="margin-bottom: 10px;height: 200px">
+                                        <option title="{{x}}" data-toggle="tooltip" data-placement="top"  ng-repeat="x in selectableWaitObjs track by $index">
+                                            <a href="javascript:;" >{{x}}</a>
+                                        </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                            <form role="form" name="addSelectedForm">
+                                <div class="form-group">
+                                    <label for="name" style="margin-bottom: 10px"><h4>Selected Items</h4></label>
+
+                                    <select id="selectidddd" multiple class="form-control" ng-model="selectedValues"
+                                            name="addSelected"
+                                            style="margin-bottom: 10px;height: 200px">
+                                        <option ng-click="deleteOneObj(x)" title="{{x}}" ng-repeat="x in selectedObjList">
+                                            <a href="javascript:;">{{x}}</a>
+                                        </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="addSelectedOjbs2Form()">Select
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+
+    <!--modify 模态框（Modal） -->
+    <div class="modal " id="modifyRuleId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="modifyRule">
+                        Modify Rule
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" name="myModForm">
+                        <!-- Rule Name -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Rule Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="modRuleName" id="modRuleName" ng-model="modRuleName"
+                                       placeholder="" required >
+                                <span style="color:red" ng-show="myModForm.modRuleName.$dirty && myModForm.modRuleName.$invalid">
+                                    <span ng-show="myModForm.modRuleName.$error.required">rule name is required</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- EnableStatus -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Enable Status</label>
+                            <div class="col-sm-9">
+                                <p style="padding-top: 5px">
+                                    <input type="checkbox" ng-click="" ng-model="modEnableStatusCheckbox" checked="checked">Enable
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <!-- Rule Type -->
+                        <div class="form-group">
+                            <label for="modSelectRuleType" class="col-sm-3 control-label" style="font-weight: bold">Rule
+                                Type</label>
+                            <div class="col-sm-9">
+                                <select id="modSelectRuleType" class="form-control"
+                                        ng-change="ruleTypeChange(modSelectRuleType)" ng-model="modSelectRuleType"
+                                        disabled="disabled">
+                                    <option value="app">APP</option>
+                                    <option value="service">Service</option>
+                                    <option value="instance">Instance</option>
+                                    <option value="transaction">Transaction</option>
+                                    <option value="host">Host</option>
+                                    <option value="db">DB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Metric Name -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Metric Name</label>
+                            <div class="col-sm-9">
+                                <select id="modMetricNameParam" class="form-control" ng-model="modMetricNameParam"
+                                        disabled="disabled">
+                                    <option ng-repeat="x in selectableWaitMetrics" value={{x.id}}><a
+                                            ng-click="selectOneObjxxx(x)"
+                                            href="javascript:;">{{x.name}}</a>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Check Time -->
+                        <div class="form-group" ng-hide="true">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Check Time</label>
+                            <div class="col-sm-3">
+                                <p style="padding-top: 5px"><input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                                   value="option1" checked>Always </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p style="padding-top: 5px"><input type="radio" disabled="disabled"> Range
+                                    &nbsp&nbsp <input type="text" class="timeRange rangeInput"/></p>
+                            </div>
+                        </div>
+
+                        <!-- Select Item -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Select Item</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="item" id="item"
+                                       ng-model="modSelectedObjsParam"
+                                       placeholder="Select Item" required disabled="disabled">
+                                <span style="color:red" ng-show="myForm.item.$dirty && myForm.item.$invalid">
+                                    <span ng-show="myForm.item.$error.required">Select Item is required</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" data-toggle="modal" data-target="#selectObjId"
+                                        class="btn btn-default" style="height: 35px;" disabled="disabled"
+                                        ng-click="openSelectWaitObjsDialog()"> Select Objects
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input Data Range -->
+                        <hr>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-weight: bold">Input Data
+                                Range</label>
+                            <div class="col-sm-2">
+                                <select id="modInputDataRangeParam" class="form-control" ng-model="modInputDataRangeParam">
+                                    <option value="0"> 0</option>
+                                    <option value="10"> 10</option>
+                                    <option value="20"> 20</option>
+                                    <option value="30"> 30</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <p style="padding-top: 5px">mins</p>
+                            </div>
+                        </div>
+
+                        <!-- Warning Level -->
+                        <div class="form-group">
+                            <label for="hport" class="col-sm-3 control-label" style="font-weight: bold">Warning
+                                Level</label>
+                            <div class="col-sm-2" ng-hide=true>
+                                <select id="objectTypeId" class="form-control" disabled="disabled">
+                                    <option value="mysql"> ></option>
+                                    <option value="oracle"> =</option>
+                                    <option value="oracle"> <</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" ng-model="modWarningLevelValueParam"
+                                       id="modWarningLevelValueParam" placeholder="">
+                                <span style="color:red" ng-show="modWarningLevelValueParam<0">
+                                    Warning Level value should greater than 0!
+                                    <br>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Critical Level -->
+                        <div class="form-group">
+                            <label for="hport" class="col-sm-3 control-label" style="font-weight: bold">Critical
+                                Level</label>
+                            <div class="col-sm-2" ng-hide=true>
+                                <select id="objectTypeId" class="form-control" disabled="disabled">
+                                    <option value="mysql"> ></option>
+                                    <option value="oracle"> =</option>
+                                    <option value="oracle"> <</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" ng-model="modCriticalLevelValueParam"
+                                       id="hport" placeholder="">
+                                <span style="color:red" ng-show="modCriticalLevelValueParam<0">
+                                    Critical Level value should greater than 0!
+                                    <br>
+                                </span>
+                                <span style="color:red" ng-show="modCriticalLevelValueParam<modWarningLevelValueParam">
+                                    Critical Level value should greater than Warning Level value!
+                                </span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="(modCriticalLevelValueParam<modWarningLevelValueParam)
+                            || modCriticalLevelValueParam<0 || modWarningLevelValueParam<0"
+                            ng-click="saveRuleAction()">Modify
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+
+</div>
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/jquery/jQuery.timeRange.js"></script>
+<!--<script src="../lib/timepicker/jquery.timePicker.js"></script>-->
+<script src="../lib/angularjs/angular.min.js"></script>
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/rules.js"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</body>
+
+</html>

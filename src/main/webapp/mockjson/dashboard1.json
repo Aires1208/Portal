@@ -1,0 +1,67 @@
+{
+  "summary": [
+    {
+      "appName": "EMS",
+      "healthRuleViolations": 0,
+      "nodeHealth": {
+        "critical": 1,
+        "warning": 5,
+        "normal": 80
+      },
+      "transactionHealth": {
+        "critical": 1,
+        "warning": 0,
+        "normal": 50
+      },
+      "calls": "16k",
+      "callsPerMin": "20",
+      "responseTime": "30",
+      "errorsPercent": "2%",
+      "errors": "500",
+      "errorsPerMin": "52"
+    },
+    {
+      "appName": "OMM",
+      "healthRuleViolations": 2,
+      "nodeHealth": {
+        "critical": 1,
+        "warning": 5,
+        "normal": 20
+      },
+      "transactionHealth": {
+        "critical": 1,
+        "warning": 30,
+        "normal": 20
+      },
+      "calls": "2k",
+      "callsPerMin": "20",
+      "responseTime": "50",
+      "errorsPercent": "2%",
+      "errors": "500",
+      "errorsPerMin": "52"
+    }
+  ],
+  "topo":
+  {
+    "nodes":[
+      {"key": "client", "name": "Client","type":"USER","count":""},
+      {"key": "ems", "name": "EMS","type":"JBOSS","count":""},
+      {"key": "omm", "name": "OMM","type":"JBOSS","count":""},
+      {"key": "emsoracle", "name": "EMS_Oracle","type": "ORACLE","count":""},
+      {"key": "ommmysql", "name": "OMM_MySQL","type":"MYSQL","count":""}
+    ],
+    "links":[
+      {"from": "client", "to": "ems", "respondTime": "2ms"},
+      {"from": "client", "to": "omm", "respondTime": "2ms"},
+      {"from": "ems", "to": "emsoracle", "respondTime": "1ms"},
+      {"from": "ems", "to": "omm", "respondTime": "2ms\n2ms"},
+      {"from": "omm", "to": "ommmysql", "respondTime": "2ms\n10ms"},
+      {"from": 2, "to": 10, "respondTime": ""},
+      {"from": 2, "to": 12, "respondTime": "2ms"},
+      {"from": 4, "to": 5, "respondTime": ""},
+      {"from": 4, "to": 6, "respondTime": "2ms"},
+      {"from": 4, "to": 9, "respondTime": "2ms"}
+    ]
+  }
+
+}

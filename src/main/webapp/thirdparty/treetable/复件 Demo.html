@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+ <meta charset="UTF-8">
+  <TITLE> demo </TITLE>
+	 <script src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="jquery.treetable.js"></script>
+  <link href="styles.css" rel="stylesheet" type="text/css" />
+  <script LANGUAGE="JavaScript" >
+  
+	$(document).ready(function(){
+	
+		$.treetable.defaults={
+			id_col:0,//ID td�� {��0��ʼ}
+			parent_col:1,//��ID td��
+			handle_col:2,//���ϲ���չ�������� td��
+			open_img:"images/minus.gif",
+			close_img:"images/plus.gif"
+		}
+		
+		//$("#tb").treetable({id_col:0,parent_col:1,handle_col:2,open_img:"images/minus.gif",close_img:"images/plus.gif"});
+		
+		//ֻ��Ӧ����tbody
+		$("#tb").treetable();
+		
+		//Ӧ����ʽ
+		//$("#tb tr:even td").addClass("alt");
+		//$("#tb tr").find("td:eq(2)").addClass("spec");
+		//$("#tb tr:even").find("td:eq(2)").removeClass().addClass("specalt");
+		
+		//����������
+		$("#tb tr").find("td:eq(0)").hide();
+		$("#tb tr").find("td:eq(1)").hide();
+		$("#mytable tr:eq(0)").find("th:eq(0)").hide();
+		$("#mytable tr:eq(0)").find("th:eq(1)").hide();
+	});
+	
+  </script>
+ </HEAD>
+
+ <BODY>
+ <div style="float:left;">
+  <table id="mytable" cellspacing="0" cellpadding="0" >
+	<caption>Table 1: �����б�ʾ��</caption>
+	<tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th><th>col6</th></tr>
+	<tbody id="tb" >
+	<tr><td>1</td><td>2</td><td>��1</td><td>1111</td><td>212312</td><td>1234</td></tr>
+	<tr><td>10</td><td>9</td><td>��2</td><td>1111</td><td>2234</td><td>1234</td></tr>
+	<tr><td>2</td><td></td><td>��3</td><td>12131</td><td>2234</td><td>1234</td></tr>
+	<tr><td>3</td><td>1</td><td>��4</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>7</td><td></td><td>��5</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>8</td><td>4</td><td>��6</td><td>1123</td><td>2234</td><td>1243</td></tr>
+	<tr><td>9</td><td>5</td><td>��7</td><td>1123</td><td>2234</td><td>1243</td></tr>
+	<tr><td>4</td><td>3</td><td>��8</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>12</td><td>4</td><td>��9</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>5</td><td>6</td><td>��10</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>6</td><td>3</td><td>��11</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	<tr><td>11</td><td>7</td><td>��12</td><td>1123</td><td>2234</td><td>1234</td></tr>
+	</tbody>
+  </table>
+  </div>
+   
+ </BODY>
+</HTML>

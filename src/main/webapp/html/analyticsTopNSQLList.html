@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>APM - Analytics</title>
+    <!-- thirdparty css -->
+    <link href="../lib/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+    <link href="../lib/myloading/loadingbar.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- common css -->
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+    <link href="../css/common/ngict-component.css" rel="stylesheet" type="text/css">
+    <link href="../css/common/commonPage.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .modal-dialog-css {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            color: #008ed3;
+        }
+
+        .btn-clean {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #fafafa;
+            /*border: 1px solid #bfbfbf;*/
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.71);
+            font-size: 1em;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+        .btn-clean:hover {
+            background: #448EF9;
+        }
+
+        .echart_height {
+            height: 380px;
+        }
+        .echart_height1 {
+            height: 190px;
+        }
+        .echart_bar_height {
+            height: 360px;
+        }
+        .font_size {
+            font-size: 0.8cm;
+        }
+    </style>
+</head>
+<body ng-app="analyticsTopNSQLListApp" ng-controller="analyticsTopNSQLListCtrl">
+<div id="testLoading"></div>
+
+<div ng-include="'common/header.html'"></div>
+
+<div class="container" style="padding-left:10px;padding-right:10px;width:95%">
+    <div class="row" style="padding: 0px ;margin: 0px">
+        <div class="col-md-3 col-sm-12" style="padding: 0px ;margin: 0px">
+            <span style="font-size: 2em;padding: 0px ;margin: 0px"> Analytics </span>
+        </div>
+    </div>
+    <hr>
+    <!--Table -->
+    <div>
+        <span style="font-size: 1.5em">DB Name: {{currentdbName}}</span>
+    </div>
+    <div style="padding-top: 10px;">
+        <span style="font-size: 1.5em">{{tableTopName}}</span>
+    </div>
+    <div class="tab-pane " style="padding-top: 10px"  id="infotab3">
+        <table class="table table-condensed">
+            <thead >
+            <tr>
+                <th>SQL Name</th>
+                <th>Avg Time Percall
+                    <img id="sortByAvgTimePercall" ng-click="sortByAvgTimePercall()" class="floder" src="../img/sort_16px_init.png"/>
+                </th>
+                <th>Calls
+                    <img id="sortByCalls" ng-click="sortByCalls()" class="floder" src="../img/sort_16px_init.png"/>
+                </th>
+                <th>Max Time(ms)</th>
+                <!--<th>snapshot</th>-->
+            </tr>
+            </thead>
+            <tbody ng-if="$index<topN" ng-repeat="info in topNSQLInfos" >
+            <tr>
+                <td style="cursor: pointer;" title="View Snapshot">
+                    <a data-toggle="modal" data-target="#mySQLInfoModal" ng-click="selectOneSQL(info.sqlInfo);">{{info.simplifyName}}</a>
+                </td>
+                <td>{{info.avgResponseTime}}</td>
+                <td>{{info.calls}}</td>
+                <td>{{info.maxResponseTime}}</td>
+                <!--<td>{{info.maxResponseTime}}</td>-->
+            </tr>
+            </tbody>
+        </table>
+        <a ng-click="loadMoreOrShowTopNDate()">{{showMoreOrTopN}}</a>
+    </div>
+
+</div>
+
+<!--create 模态框（Modal） -->
+
+<!-- /.modal -->
+<div class="modal fade" id="mySQLInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-css">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Topo
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="width: auto">
+                    <p>SQL Detail :  {{currentdbsql}}</p>
+                    <table class="table table-condensed">
+                        <thead >
+                        <tr>
+                            <th>Start Time</th>
+                            <th>Elapsed</th>
+                            <th>TransactionName</th>
+                            <th>TransactionId</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-if="info.sqlInfo === currentdbsql" ng-repeat="info in topNSQLInfos">
+                        <tr ng-repeat="sql in info.sqlInvokeList">
+                            <td>{{sql.startTime}}</td>
+                            <td>{{sql.elapsed}}</td>
+                            <td>{{sql.transactionName}}</td>
+                            <td>{{sql.transactionId}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common js -->
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/angularjs/angular.min.js"></script>
+<script src="../lib/jquery/jquery.toaster.js"></script>
+<script src="../lib/gojs/go.js"></script>
+<script src="../lib/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-all.js" type="text/javascript"></script>
+<script src="../lib/echarts/echarts-bluetheme.js" type="text/javascript"></script>
+<script src="../thirdparty/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="../lib/myloading/loadingbar.js" type="text/javascript"></script>
+<!-- domain js -->
+<script src="../js/common/common.js"></script>
+<script src="../js/analyticsTopNSQLList.js"></script>
+</body>
+</html>

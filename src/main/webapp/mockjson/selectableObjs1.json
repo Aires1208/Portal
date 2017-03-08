@@ -1,0 +1,346 @@
+{
+  "apps": [
+    {
+      "name": "IaasOps",
+      "level": "application",
+      "services": [
+        {
+          "name": "IaasOps_api",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_api",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_api",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_fm",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_fm",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_fm",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_hwm",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_hwm",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_hwm",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_iam",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_iam",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_iam",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_logm",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_logm",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_logm",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_pm",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_pm",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_pm",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_snmpManager",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_snmpManager",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_snmpManager",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_toportal",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_toportal",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_toportal",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "IaasOps_vResource",
+          "appName": "IaasOps",
+          "level": "service",
+          "instances": [
+            {
+              "name": "IaasOps_vResource",
+              "appName": "IaasOps",
+              "serviceName": "IaasOps_vResource",
+              "level": "instance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FM",
+      "level": "application",
+      "services": [
+        {
+          "name": "FM_history",
+          "appName": "FM",
+          "level": "service",
+          "instances": [
+            {
+              "name": "FM_history",
+              "appName": "FM",
+              "serviceName": "FM_history",
+              "level": "instance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ResCollect",
+      "level": "application",
+      "services": [
+        {
+          "name": "ResCollect_t1",
+          "appName": "ResCollect",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ResCollect_t1",
+              "appName": "ResCollect",
+              "serviceName": "ResCollect_t1",
+              "level": "instance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ZenapICT",
+      "level": "application",
+      "services": [
+        {
+          "name": "ZenapICT_FM_active",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_FM_active",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_FM_active",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "ZenapICT_FM_history",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_FM_history",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_FM_history",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "ZenapICT_fm_active",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_fm_active",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_fm_active",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "ZenapICT_fm_history",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_fm_history",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_fm_history",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "ZenapICT_fm_model",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_fm_model",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_fm_model",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "ZenapICT_fm_processor",
+          "appName": "ZenapICT",
+          "level": "service",
+          "instances": [
+            {
+              "name": "ZenapICT_fm_processor",
+              "appName": "ZenapICT",
+              "serviceName": "ZenapICT_fm_processor",
+              "level": "instance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EMS",
+      "level": "application",
+      "services": [
+        {
+          "name": "EMS_client",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "client-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_client",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_main",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "main_agent",
+              "appName": "EMS",
+              "serviceName": "EMS_main",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_minos",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "minos-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_minos",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_moss",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "moss-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_moss",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_naf",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "naf-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_naf",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_son",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "son-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_son",
+              "level": "instance"
+            }
+          ]
+        },
+        {
+          "name": "EMS_uca",
+          "appName": "EMS",
+          "level": "service",
+          "instances": [
+            {
+              "name": "uca-agent",
+              "appName": "EMS",
+              "serviceName": "EMS_uca",
+              "level": "instance"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

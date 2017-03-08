@@ -1,0 +1,68 @@
+{
+  "disk": {
+    "diskDatas":[
+      {
+        "name": "dm-0",
+        "theMajorNumber": 253,
+        "theMinorNumber": 0,
+        "readTheNumberOfBlocks": 168576307,
+        "numberOfBlocksWritten": 4314982306
+      },
+      {
+        "name": "dm-1",
+        "theMajorNumber": 253,
+        "theMinorNumber": 1,
+        "readTheNumberOfBlocks": 317064,
+        "numberOfBlocksWritten": 2186752
+      },
+      {
+        "name": "dm-2",
+        "theMajorNumber": 253,
+        "theMinorNumber": 2,
+        "readTheNumberOfBlocks": 1421,
+        "numberOfBlocksWritten": 4169
+      },
+      {
+        "name": "dm-3",
+        "theMajorNumber": 253,
+        "theMinorNumber": 3,
+        "readTheNumberOfBlocks": 465731900,
+        "numberOfBlocksWritten": 504718710
+      },
+      {
+        "name": "dm-4",
+        "theMajorNumber": 253,
+        "theMinorNumber": 4,
+        "readTheNumberOfBlocks": 65450614,
+        "numberOfBlocksWritten": 64596798
+      }
+    ],
+    "diskoperations":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "readsTheNumberOfBlocksPerSecond":[0, 0, 0, 0, 0, 0, 0],
+      "numberOfBlocksWrittenPerSecond":[0, 0, 0, 0, 0, 0, 0]
+    },
+    "diskusage":{
+      "time": [
+        "2017-2-7 8:01",
+        "2017-2-7 8:02",
+        "2017-2-7 8:03",
+        "2017-2-7 8:04",
+        "2017-2-7 8:05",
+        "2017-2-7 8:06",
+        "2017-2-7 8:07"
+      ],
+      "numberOfTransfersPerSecond":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  }
+}
+
+

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.runoob.com/bootstrap/bootstrap-grid-system.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+	<title>Bootstrap 网格系统 | 菜鸟教程</title>
+
+  <link rel="canonical" href="http://www.runoob.com/bootstrap/bootstrap-grid-system.html">
+<meta name="keywords" content="Bootstrap 网格系统">
+<meta name="description" content="Bootstrap 网格系统  table.grid {     width:100%;     border:none;     background-color:#F6F4F0;     padding:0px;     } table.grid tr {     text-align:center; } table.grid td {     border:4px solid white;     padding:6px;	   ..">
+		
+	<link rel="shortcut icon" href="http://www.runoob.com/favicon.ico" mce_href="http://www.runoob.com/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./grid_files/style.css" type="text/css" media="all">	
+	<link rel="stylesheet" href="./grid_files/font-awesome.min.css" media="all">	
+  <script src="./grid_files/push.js"></script><script src="./grid_files/hm.js"></script><script src="./grid_files/ca-pub-5751451760833794.js"></script><script src="./grid_files/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  <![endif]-->
+  <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+<link rel="stylesheet" type="text/css" href="./grid_files/prettify.css"></head>
+<body>
+<!--  头部 -->
+
+
+<!-- 导航栏 -->
+<!-- 导航栏 -->
+<!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+	<div class="col middle-column">
+		
+	
+	<div class="article">
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>Bootstrap <span class="color_h1">网格系统</span></h1>
+<style>
+table.grid {
+    width:100%;
+    border:none;
+    background-color:#F6F4F0;
+    padding:0px;    
+}
+table.grid tr {
+    text-align:center;
+}
+table.grid td {
+    border:4px solid white;
+    padding:6px;	    
+}
+</style>
+
+<div class="tutintro">
+<p>本章节我们将讲解 Bootstrap 的网格系统（Grid System）。</p>
+<p>Bootstrap 提供了一套响应式、移动设备优先的流式网格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。
+</p>
+</div>
+
+<h2 class="tutheader">什么是网格（Grid）？</h2>
+<p>摘自维基百科：</p>
+<blockquote><img src="./grid_files/quote.png">在平面设计中，网格是一种由一系列用于组织内容的相交的直线（垂直的、水平的）组成的结构（通常是二维的）。它广泛应用于打印设计中的设计布局和内容结构。在网页设计中，它是一种用于快速创建一致的布局和有效地使用 HTML 和 CSS 的方法。</blockquote>
+<p>简单地说，网页设计中的网格用于组织内容，让网站易于浏览，并降低用户端的负载。</p>
+
+<h2 class="tutheader">什么是 Bootstrap 网格系统（Grid System）？</h2>
+<p>Bootstrap 官方文档中有关网格系统的描述：</p>
+<blockquote><img src="./grid_files/quote.png">Bootstrap 包含了一个响应式的、移动设备优先的、不固定的网格系统，可以随着设备或视口大小的增加而适当地扩展到 12 列。它包含了用于简单的布局选项的预定义类，也包含了用于生成更多语义布局的功能强大的混合类。</blockquote>
+<p>让我们来理解一下上面的语句。Bootstrap 3 是移动设备优先的，在这个意义上，Bootstrap 代码从小屏幕设备（比如移动设备、平板电脑）开始，然后扩展到大屏幕设备（比如笔记本电脑、台式电脑）上的组件和网格。</p>
+<h3>移动设备优先策略</h3>
+<ul>
+<li><b>内容</b>
+<ul class="list">
+<li>决定什么是最重要的。</li>
+</ul>
+</li>
+<li><b>布局</b>
+<ul class="list">
+<li>优先设计更小的宽度。</li>
+<li>基础的 CSS 是移动设备优先，媒体查询是针对于平板电脑、台式电脑。</li>
+</ul>
+</li>
+<li><b>渐进增强</b>
+<ul class="list">
+<li>随着屏幕大小的增加而添加元素。</li>
+</ul>
+</li>
+</ul>
+<p>响应式网格系统随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</p>
+<table class="grid" cellspacing="0">
+<tbody><tr>
+  <td>1</td>
+  <td>1</td>		
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>		
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>		
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>		
+  <td>1</td>
+</tr>
+<tr>
+  <td colspan="4">4</td>
+  <td colspan="4">4</td>		
+  <td colspan="4">4</td>
+</tr>
+<tr>
+  <td colspan="4">4</td>
+  <td colspan="8">8</td>		
+</tr>
+<tr>
+  <td colspan="6">6</td>
+  <td colspan="6">6</td>		
+</tr>
+<tr>
+  <td colspan="12">12</td>
+</tr>
+</tbody></table><br>
+<h2 class="tutheader">Bootstrap 网格系统（Grid System）的工作原理</h2>
+<p>网格系统通过一系列包含内容的行和列来创建页面布局。下面列出了 Bootstrap 网格系统是如何工作的：</p>
+<ul>
+<li>行必须放置在 <b>.container</b> class 内，以便获得适当的对齐（alignment）和内边距（padding）。</li>
+<li>使用行来创建列的水平组。</li>
+<li>内容应该放置在列内，且唯有列可以是行的直接子元素。</li>
+<li>预定义的网格类，比如 <b>.row</b> 和 <b>.col-xs-4</b>，可用于快速创建网格布局。LESS 混合类可用于更多语义布局。</li>
+<li>列通过内边距（padding）来创建列内容之间的间隙。该内边距是通过 <b>.rows</b> 上的外边距（margin）取负，表示第一列和最后一列的行偏移。</li>
+<li>网格系统是通过指定您想要横跨的十二个可用的列来创建的。例如，要创建三个相等的列，则使用三个 <b>.col-xs-4</b>。</li>
+</ul>
+
+<h2 class="tutheader">媒体查询</h2>
+<p>媒体查询是非常别致的"有条件的 CSS 规则"。它只适用于一些基于某些规定条件的 CSS。如果满足那些条件，则应用相应的样式。</p>
+<p>Bootstrap 中的媒体查询允许您基于视口大小移动、显示并隐藏内容。下面的媒体查询在 LESS 文件中使用，用来创建 Bootstrap 网格系统中的关键的分界点阈值。</p>
+<pre class="prettyprint prettyprinted"><span class="com">/* 超小设备（手机，小于 768px） */</span><span class="pln">
+</span><span class="com">/* Bootstrap 中默认情况下没有媒体查询 */</span><span class="pln">
+
+</span><span class="com">/* 小型设备（平板电脑，768px 起） */</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">sm</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/* 中型设备（台式电脑，992px 起） */</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">md</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/* 大型设备（大台式电脑，1200px 起） */</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">lg</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span></pre>
+<p>我们有时候也会在媒体查询代码中包含 <b>max-width</b>，从而将 CSS 的影响限制在更小范围的屏幕大小之内。</p>
+<pre class="prettyprint prettyprinted"><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">max</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">xs</span><span class="pun">-</span><span class="pln">max</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">sm</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> </span><span class="pun">(</span><span class="pln">max</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">sm</span><span class="pun">-</span><span class="pln">max</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">md</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> </span><span class="pun">(</span><span class="pln">max</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">md</span><span class="pun">-</span><span class="pln">max</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">lg</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span></pre>
+<p>媒体查询有两个部分，先是一个设备规范，然后是一个大小规则。在上面的案例中，设置了下列的规则：</p>
+<p>让我们来看下面这行代码：</p>
+<pre class="prettyprint prettyprinted"><span class="lit">@media</span><span class="pln"> </span><span class="pun">(</span><span class="pln">min</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">sm</span><span class="pun">-</span><span class="pln">min</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> </span><span class="pun">(</span><span class="pln">max</span><span class="pun">-</span><span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">@screen</span><span class="pun">-</span><span class="pln">sm</span><span class="pun">-</span><span class="pln">max</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span></pre>
+<p>对于所有带有 <i>min-width: @screen-sm-min</i> 的设备，如果屏幕的宽度小于 <i>@screen-sm-max</i>，则会进行一些处理。</p>
+
+<h2 class="tutheader">网格选项</h2>
+<p>下表总结了 Bootstrap 网格系统如何跨多个设备工作：</p>
+<table class="reference notranslate">
+<tbody><tr><th></th><th>超小设备手机（&lt;768px）</th><th>小型设备平板电脑（≥768px）</th><th>中型设备台式电脑（≥992px）</th><th>大型设备台式电脑（≥1200px）</th></tr>
+<tr><td>网格行为</td><td>一直是水平的</td><td>以折叠开始，断点以上是水平的</td><td>以折叠开始，断点以上是水平的</td><td>以折叠开始，断点以上是水平的</td></tr>
+<tr><td>最大容器宽度</td><td>None (auto)</td><td>750px</td><td>970px</td><td>1170px</td></tr>
+<tr><td>Class 前缀</td><td><b>.col-xs-</b></td><td><b>.col-sm-</b></td><td><b>.col-md-</b></td><td><b>.col-lg-</b></td></tr>
+<tr><td>列数量和</td><td>12</td><td>12</td><td>12</td><td>12</td></tr>
+<tr><td>最大列宽</td><td>Auto</td><td>60px</td><td>78px</td><td>95px</td></tr>
+<tr><td>间隙宽度</td><td>30px<br>（一个列的每边分别 15px）</td><td>30px<br>（一个列的每边分别 15px）</td><td>30px<br>（一个列的每边分别 15px）</td><td>30px<br>（一个列的每边分别 15px）</td></tr>
+<tr><td>可嵌套</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>偏移量</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>列排序</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+</tbody></table>
+<h3>基本的网格结构</h3>
+<p>下面是 Bootstrap 网格的基本结构：</p>
+<pre class="prettyprint prettyprinted"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-*-*"</span><span class="tag">&gt;&lt;/div&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-*-*"</span><span class="tag">&gt;&lt;/div&gt;</span><span class="pln">      
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">...</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">....</span></pre>
+<p>让我们来看几个简单的网格实例：</p>
+<ul class="list">
+<li><b><a href="http://www.runoob.com/bootstrap/bootstrap-grid-system-example1.html">实例：堆叠的水平</a></b></li>
+<li><b><a href="http://www.runoob.com/bootstrap/bootstrap-grid-system-example2.html">实例：中型和大型设备</a></b></li>
+<li><b><a href="http://www.runoob.com/bootstrap/bootstrap-grid-system-example3.html">实例：手机、平板电脑、台式电脑</a></b></li>
+</ul>
+
+<h2 class="tutheader">响应式的列重置</h2>
+<p>以下实例包含了4个网格，但是我们在小设备浏览时无法确定网格显示的位置。
+</p>为了解决这个问题，使用 可以使用 <b>.clearfix</b> class和 <a href="http://www.runoob.com/bootstrap/bootstrap-responsive-utilities.html">响应式实用工具</a>来解决，如下面实例所示：<p></p>
+<pre class="prettyprint tryit prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+   </span><span class="tag">&lt;title&gt;</span><span class="pln">Bootstrap 实例 - 响应式的列重置</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+   </span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"/bootstrap/css/bootstrap.min.css"</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/scripts/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/bootstrap/js/bootstrap.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="pln"> </span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-xs-6 col-sm-3"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-xs-6 col-sm-3"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;box-shadow: </span><span class="pln">
+         inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            nisi ut aliquip ex ea commodo consequat.
+         </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+            eiusmod tempor incididunt ut. 
+         </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"clearfix visible-xs"</span><span class="tag">&gt;&lt;/div&gt;</span><span class="pln">
+
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-xs-6 col-sm-3"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln">inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+            laboris nisi ut aliquip ex ea commodo consequat. 
+         </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-xs-6 col-sm-3"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;box-shadow: </span><span class="pln">
+         inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+            enim ad minim 
+         </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+<p><a href="http://www.w3cschool.cc/try/demo_source/bootstrap3-gridsys-columnreset.htm"><button class="btn example-btn">尝试一下 »</button></a></p>
+<p>浏览器上调整窗口大小查看变化，或在您手机上查看效果。</p>
+
+<h2 class="tutheader">偏移列</h2>
+<p>偏移是一个用于更专业的布局的有用功能。它们可用来给列腾出更多的空间。例如，<b>.col-xs=*</b> 类不支持偏移，但是它们可以简单地通过使用一个空的单元格来实现该效果。</p>
+<p>为了在大屏幕显示器上使用偏移，请使用 <b>.col-md-offset-*</b> 类。这些类会把一个列的左外边距（margin）增加 <b>*</b> 列，其中 <b>*</b> 范围是从 <b>1</b> 到 <b>11</b>。</p>
+<p>在下面的实例中，我们有 &lt;div class="col-md-6"&gt;..&lt;/div&gt;，我们将使用 <b>.col-md-offset-3</b> class 来居中这个 div。</p>
+<pre class="prettyprint tryit prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+   </span><span class="tag">&lt;title&gt;</span><span class="pln">Bootstrap 实例 - 偏移列</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+   </span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"/bootstrap/css/bootstrap.min.css"</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/scripts/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/bootstrap/js/bootstrap.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;h1&gt;</span><span class="pln">Hello, world!</span><span class="tag">&lt;/h1&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="pln"> </span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-xs-6 col-md-offset-3"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;box-shadow: </span><span class="pln">
+         inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing 
+            elit.
+         </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+<p><a href="http://www.runoob.com/try/try2.php?filename=bootstrap3-gridsys-offsetcolumns" target="_blank"><button class="btn example-btn">尝试一下 »</button></a></p>
+<p>结果如下所示：</p>
+<div class="cover" style="border: 1px solid #D6D6D6;padding: 5px;">
+<img src="./grid_files/gridsys_offsetcolumns_demo.jpg" alt="网格系统偏移列">
+</div>
+<br>
+<h2 class="tutheader">嵌套列</h2>
+<p>为了在内容中嵌套默认的网格，请添加一个新的 <b>.row</b>，并在一个已有的 <b>.col-md-*</b> 列内添加一组 <b>.col-md-*</b> 列。被嵌套的行应包含一组列，这组列个数不能超过12（其实，没有要求你必须占满12列）。</p>
+<p>在下面的实例中，布局有两个列，第二列被分为两行四个盒子。</p>
+<pre class="prettyprint tryit prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+   </span><span class="tag">&lt;title&gt;</span><span class="pln">Bootstrap 实例 - 嵌套列</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+   </span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"/bootstrap/css/bootstrap.min.css"</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/scripts/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/bootstrap/js/bootstrap.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;h1&gt;</span><span class="pln">Hello, world!</span><span class="tag">&lt;/h1&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-3"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;box-shadow: </span><span class="pln">
+         inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;h4&gt;</span><span class="pln">第一列</span><span class="tag">&lt;/h4&gt;</span><span class="pln">
+         </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-9"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;box-shadow: </span><span class="pln">
+         inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;h4&gt;</span><span class="pln">第二列 - 分为四个盒子</span><span class="tag">&lt;/h4&gt;</span><span class="pln">
+         </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-6"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#B18904;</span><span class="pln">
+               box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+               </span><span class="tag">&lt;p&gt;</span><span class="pln">Consectetur art party Tonx culpa semiotics. Pinterest 
+                  assumenda minim organic quis.
+               </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+            </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-6"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#B18904;</span><span class="pln">
+               box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+               </span><span class="tag">&lt;p&gt;</span><span class="pln"> sed do eiusmod tempor incididunt ut labore et dolore magna 
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+               </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+         </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+         </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-6"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#B18904;</span><span class="pln">
+               box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+               </span><span class="tag">&lt;p&gt;</span><span class="pln">quis nostrud exercitation ullamco laboris nisi ut 
+                  aliquip ex ea commodo consequat.
+               </span><span class="tag">&lt;/p&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/div&gt;</span><span class="pln">   
+            </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-6"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#B18904;</span><span class="pln">
+               box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+               </span><span class="tag">&lt;p&gt;</span><span class="pln">Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+                  sed do eiusmod tempor incididunt ut labore et dolore magna 
+                  aliqua. Ut enim ad minim.</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+         </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+<p><a href="http://www.runoob.com/try/try2.php?filename=bootstrap3-gridsys-nestingcolumns" target="_blank"><button class="btn example-btn">尝试一下 »</button></a></p>
+<p>结果如下所示：</p>
+<div class="cover" style="border: 1px solid #D6D6D6;padding: 5px;">
+<img src="./grid_files/gridsys_nestingcolumns_demo.jpg" alt="网格系统嵌套列">
+</div>
+<br>
+<h2 class="tutheader">列排序</h2>
+<p>Bootstrap 网格系统另一个完美的特性，就是您可以很容易地以一种顺序编写列，然后以另一种顺序显示列。</p>
+<p>您可以很轻易地改变带有 <b>.col-md-push-*</b> 和 <b>.col-md-pull-*</b> 类的内置网格列的顺序，其中 <b>*</b> 范围是从 <b>1</b> 到 <b>11</b>。</p>
+<p>在下面的实例中，我们有两列布局，左列很窄，作为侧边栏。我们将使用 <b>.col-md-push-*</b> 和 <b>.col-md-pull-*</b> 类来互换这两列的顺序。</p>
+<pre class="prettyprint tryit prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+   </span><span class="tag">&lt;title&gt;</span><span class="pln">Bootstrap 实例 - 列排序</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+   </span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"/bootstrap/css/bootstrap.min.css"</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/scripts/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+   </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"/bootstrap/js/bootstrap.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"container"</span><span class="tag">&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;h1&gt;</span><span class="pln">Hello, world!</span><span class="tag">&lt;/h1&gt;</span><span class="pln">
+
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;p&gt;</span><span class="pln">排序前</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-4"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         我在左边
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-8"</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, inset -1px 1px 1px #444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         我在右边
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;&lt;br&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;p&gt;</span><span class="pln">排序后</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-4 col-md-push-8"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, </span><span class="pln">
+         inset </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         我在左边
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-8 col-md-pull-4"</span><span class="pln"> 
+         </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#dedef8;</span><span class="pln">
+         box</span><span class="pun">-</span><span class="pln">shadow</span><span class="pun">:</span><span class="pln"> inset </span><span class="lit">1px</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444, </span><span class="pln">
+         inset </span><span class="pun">-</span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> </span><span class="com">#444;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">
+         我在右边
+      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+<p><a href="http://www.w3cschool.cc/try/demo_source/bootstrap3-gridsys-columnordering.htm" target="_blank"><button class="btn example-btn">尝试一下 »</button></a></p>
+<p>结果如下所示：</p>
+<div class="cover" style="border: 1px solid #D6D6D6;padding: 5px;">
+<img src="./grid_files/gridsys_columnordering_demo.jpg" alt="网格系统排序列">
+</div>			
+			
+			</div>
+		</div>
+		
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+</div>
+
+</div>
+<!-- 底部 -->
+
+<div style="display:none;">
+  <script src="./grid_files/stat.php" language="JavaScript"></script><script src="./grid_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=5578006" target="_blank" title="站长统计">站长统计</a>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?8e2a116daf0104a78d601f40a45c75b4";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</div>
+<script src="./grid_files/main.js"></script>
+
+
+</body></html>

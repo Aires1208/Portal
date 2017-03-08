@@ -1,0 +1,169 @@
+<!--header-->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target="#example-navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="font-size: 20px;font-weight: bold"><img src="../img/ztelogo.png">  SmartSight <span style="font-size: 3px;vertical-align:bottom;font-weight: normal;padding-top: 20px"> - APM  </span></a>
+    </div>
+    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li onclick="changeHeaderBg(this)" id="mihome"><a href="home.html">Home</a></li>
+            <li onclick="changeHeaderBg(this)" id="miapp"><a href="dashboard.html">Applications</a></li>
+
+            <!--<li onclick="changeHeaderBg(this)" id="midb"><a href="databases.html">Databases</a></li>-->
+
+            <li id="midb2" class="dropdown"  onclick="changeHeaderBg(this)">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Middlewares <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu"> <a href="#">Databases</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="databases.html">MySQL</a>
+                            </li>
+                            <li id="miaerospike"><a href="aerospike.html">AeroSpike</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu"> <a href="#">MessageQueue</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="kafka.html">Kafka</a>
+                            </li>
+                            <li id="mirabbitmq"><a href="rabbitmq.html">RabbitMQ</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li onclick="changeHeaderBg(this)" id="miservers"><a href="servers.html">Server&Docker</a></li>
+            <li onclick="changeHeaderBg(this)" id="mianalytics"><a href="analytics.html">Analytics</a></li>
+            <!--<li onclick="changeHeaderBg(this)" id="mipolicies"><a href="policies.html">Policies</a></li>-->
+
+            <li id="mipolicies" class="dropdown"  onclick="changeHeaderBg(this)">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Policies <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="policies.html">Policies</a></li>
+                    <!--<li class="divider"></li>-->
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="actions.html">Actions</a></li>
+                    <!--<li><a href="emailgigests.html">Email Digests</a></li>-->
+                </ul>
+            </li>
+            <li onclick="changeHeaderBg(this)" id="minfvtracer"><a href="nfvtracer.html">NFVTrace</a></li>
+            <li onclick="changeHeaderBg(this)" id="miwebconsole"><a href="webConsole.html">WebConsole</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<script>
+    var selectedMenuItem;
+
+    function changeHeaderBg(obj) {
+        console.log("selectedMenuItem = " + obj.innerHTML)
+        if (obj.innerHTML.toUpperCase().indexOf('HOME') != -1) {
+            document.cookie = "menuitem=home";
+        } else if (obj.innerHTML.toUpperCase().indexOf('APPLICATIONS') != -1) {
+            document.cookie = "menuitem=app";
+        } else if (obj.innerHTML.toUpperCase().indexOf('DATABASE') != -1) {
+            document.cookie = "menuitem=db";
+        } else if (obj.innerHTML.toUpperCase().indexOf('SERVERS') != -1) {
+            document.cookie = "menuitem=servers";
+        }else if (obj.innerHTML.toUpperCase().indexOf('ANALYTICS') != -1) {
+            document.cookie = "menuitem=analytics";
+        }else if (obj.innerHTML.toUpperCase().indexOf('NFVTRACER') != -1) {
+            document.cookie = "menuitem=nfvtracer";
+        }
+
+        var headerItem = document.getElementsByClassName("active");
+        if (headerItem[0] != undefined) {
+            headerItem[0].classList.remove("active");
+        }
+
+        obj.classList.add("active");
+    }
+
+
+    $(document).ready(function () {
+        showDemo();
+
+
+        var url = location.href;
+//        console.log("---" + url.toUpperCase());
+        if (url.toUpperCase().indexOf('HOME.HTML') != -1) {
+            $("#mihome").addClass("active");
+        } else if (url.toUpperCase().indexOf('DASHBOARD.HTML') != -1 || url.toUpperCase().indexOf('APP.HTML') != -1
+                || url.toUpperCase().indexOf('SERVICE.HTML') != -1 || url.toUpperCase().indexOf('NODE.HTML') != -1
+                || url.toUpperCase().indexOf('TRACE.HTML') != -1 || url.indexOf('healthRuleViolationsList.html') != -1
+                || url.toUpperCase().indexOf('TRANSACTION.HTML') != -1) {
+            $("#miapp").addClass("active");
+        } else if (url.toUpperCase().indexOf('DATABASES.HTML') != -1 || url.toUpperCase().indexOf('DBINFO.HTML') != -1
+                || url.indexOf('kafka.html') != -1
+                || url.indexOf('kafkaInfo.html') != -1
+                || url.indexOf('aerospike.html') != -1
+                || url.indexOf('aerospikeInfo.html') != -1
+                || url.indexOf('rabbitmq.html') != -1
+                || url.indexOf('rabbitmqInfo.html') != -1) {
+            $("#midb").addClass("active");
+            $("#midb2").addClass("active");
+        } else if (url.toUpperCase().indexOf('SERVERS.HTML') != -1 || url.toUpperCase().indexOf('SERVERINFO.HTML') != -1) {
+            $("#miservers").addClass("active");
+        } else if (url.toUpperCase().indexOf('POLICIES.HTML') != -1 || url.toUpperCase().indexOf('RULES.HTML') != -1 ) {
+            $("#mipolicies").addClass("active")
+        } else if (url.toUpperCase().indexOf('ANALYTICS.HTML') != -1 || url.toUpperCase().indexOf('ANALYTICSINFO.HTML') != -1
+                || url.indexOf('analyticsTransactionInfo.html') != -1
+                || url.indexOf('analyticsServiceInfo.html') != -1
+                || url.indexOf('analyticsTopNSQLList.html') != -1
+                || url.indexOf('analyticsServicesTopNList.html') != -1) {
+            $("#mianalytics").addClass("active");
+        } else if(url.toUpperCase().indexOf('NFVTRACER.HTML') != -1 ) {
+            $("#minfvtracer").addClass("active");
+        }else if(url.toUpperCase().indexOf('WEBCONSOLE.HTML') != -1 ) {
+            $("#miwebconsole").addClass("active");
+        }
+    });
+
+
+    function showDemo(){
+        var demoStr =  getCookie("demo");
+        var isDemo = true;
+
+        if (demoStr == "true") {
+            isDemo = true;
+        } else {
+            isDemo = false;
+        }
+
+        if(isDemo){
+            console.log("===== demo version =====");
+            $("#mihome").attr("ng-if",true);
+
+            $("#mirabbitmq").attr("ng-if",true);
+            $("#miaerospike").attr("ng-if",true);
+            $("#miwebconsole").attr("ng-if",true);
+
+            $("#minfvtracer").attr("ng-if",true);
+        }else{
+            console.log("===== deploy version =====");
+            $("#mihome").attr("ng-if",false);
+
+            $("#mirabbitmq").attr("ng-if",false);
+            $("#miaerospike").attr("ng-if",false);
+            $("#miwebconsole").attr("ng-if",false);
+
+            $("#minfvtracer").attr("ng-if",false);
+        }
+
+    }
+</script>
+
+
+
+

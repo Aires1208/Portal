@@ -1,0 +1,735 @@
+{
+  "tenantId": "apm",
+  "appId": "apm",
+  "rules": [
+    {
+      "ruleName": "applications-calls",
+      "ruleType": "app",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "appname=app1",
+      "metricName": "calls",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 80
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 120
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "10010",
+          "warning": "10011",
+          "critical": "10012"
+        }
+      }]
+    },
+    {
+      "ruleName": "applications-errors",
+      "ruleType": "app",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "appname=app1",
+      "metricName": "errors",
+      "conditions": [
+        {
+          "conditionType": "warning",
+          "operator": ">",
+          "evaluationValue": 0
+        }, {
+          "conditionType": "critical",
+          "operator": ">",
+          "evaluationValue": 5
+        }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "10010",
+          "warning": "10011",
+          "critical": "10012"
+        }
+      }]
+    },
+    {
+      "ruleName": "applications-responsetime",
+      "ruleType": "app",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "appname=app1",
+      "metricName": "responsetime",
+      "conditions": [
+        {
+          "conditionType": "warning",
+          "operator": ">",
+          "evaluationValue": 5
+        }, {
+          "conditionType": "critical",
+          "operator": ">",
+          "evaluationValue": 10
+        }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "10010",
+          "warning": "10011",
+          "critical": "10012"
+        }
+      }]
+    },
+    {
+      "ruleName": "service-calls",
+      "ruleType": "service",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "service=service1,transaction=transaction1, appname=app1",
+      "metricName": "calls",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 70
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 100
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "20010",
+          "warning": "20011",
+          "critical": "20012"
+        }
+      }]
+    },
+    {
+      "ruleName": "service-errors",
+      "ruleType": "service",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "service=service1,transaction=transaction1, appname=app1",
+      "metricName": "errors",
+      "conditions": [
+        {
+          "conditionType": "warning",
+          "operator": ">",
+          "evaluationValue": 0
+        }, {
+          "conditionType": "critical",
+          "operator": ">",
+          "evaluationValue": 5
+        }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "20010",
+          "warning": "20011",
+          "critical": "20012"
+        }
+      }]
+    },
+    {
+      "ruleName": "service-responsetime",
+      "ruleType": "service",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "service=service1,transaction=transaction1, appname=app1",
+      "metricName": "responsetime",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 5
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "20010",
+          "warning": "20011",
+          "critical": "20012"
+        }
+      }]
+    },
+    {
+      "ruleName": "instance-calls",
+      "ruleType": "instance",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1, instance=instance1",
+      "metricName": "calls",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 10
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 100
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "30010",
+          "warning": "30011",
+          "critical": "30012"
+        }
+      }]
+    },
+    {
+      "ruleName": "instance-errors",
+      "ruleType": "instance",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1, instance=instance1",
+      "metricName": "errors",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 5
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "30010",
+          "warning": "30011",
+          "critical": "30012"
+        }
+      }]
+    },
+    {
+      "ruleName": "instance-responsetime",
+      "ruleType": "instance",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1, instance=instance1",
+      "metricName": "responsetime",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 5
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "30010",
+          "warning": "30011",
+          "critical": "30012"
+        }
+      }]
+    },
+    {
+      "ruleName": "transaction-calls",
+      "ruleType": "transaction",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "calls",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 10
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 100
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "40010",
+          "warning": "40011",
+          "critical": "40012"
+        }
+      }]
+    },
+    {
+      "ruleName": "transaction-errors",
+      "ruleType": "transaction",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "errors",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 5
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "40010",
+          "warning": "40011",
+          "critical": "40012"
+        }
+      }]
+    },
+    {
+      "ruleName": "transaction-responsetime",
+      "ruleType": "transaction",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "responsetime",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 5
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "40010",
+          "warning": "40011",
+          "critical": "40012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-cpuusage",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "cpuusage",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-memusage",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "memusage",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-diskusage",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "diskusage",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-jvm",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "jvm",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-gcTime",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "gcTime",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-networkin",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "networkin",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "host-networkout",
+      "ruleType": "host",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "networkout",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 0.7
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 0.9
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "50010",
+          "warning": "50011",
+          "critical": "50012"
+        }
+      }]
+    },
+    {
+      "ruleName": "db-calls",
+      "ruleType": "db",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "calls",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 1
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "60170",
+          "warning": "60171",
+          "critical": "60172"
+        }
+      }]
+    },
+    {
+      "ruleName": "db-connections",
+      "ruleType": "db",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "connections",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 1
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "60170",
+          "warning": "60171",
+          "critical": "60172"
+        }
+      }]
+    },
+    {
+      "ruleName": "db-spendtime",
+      "ruleType": "db",
+      "checkTime": "8:00-12:00",
+      "enableStatus": "true",
+      "inputDataRanges": 10,
+      "affectObjects": "transaction=transaction1, appname=app1",
+      "metricName": "spendtime",
+      "conditions": [{
+        "conditionType": "warning",
+        "operator": ">",
+        "evaluationValue": 1
+      }, {
+        "conditionType": "critical",
+        "operator": ">",
+        "evaluationValue": 10
+      }],
+      "actions": [{
+        "actionPlugin": "kafka",
+        "actionId": "sender-1",
+        "properties": {
+          "kafkaUrl": {
+            "srcUrl":"10.92.252.61:9092",
+            "srcTopic": "policy_event",
+            "dstUrl": "10.92.252.61:9092",
+            "dstTopic": "result_event"
+          },
+          "normal": "60170",
+          "warning": "60171",
+          "critical": "60172"
+        }
+      }]
+    }
+  ]
+}

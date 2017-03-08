@@ -1,0 +1,17 @@
+{
+  "topo":
+  {
+    "nodes":[
+      {"key": "console", "name": "Console","type":"JAVA","count":2,"metrics": "2calls/2errors/139ms"},
+      {"key": "pm", "name": "PM Node1","type":"JAVA","count":1,"metrics": "2calls/2errors/139ms"},
+      {"key": "oracle", "name": "EMS_Oracle","type": "ORACLE","count":1,"metrics": "2calls/2errors/139ms"},
+      {"key": "client", "name": "Client","type":"USER","count":1,"metrics": "2calls/2errors/139ms"}
+    ],
+    "links":[
+      {"from": "client", "to": "console", "respondTime": "2calls/2errors/0ms"},
+      {"from": "console", "to": "pm", "respondTime": "2calls/2errors/0ms"},
+      {"from": "console", "to": "fm", "respondTime": "2calls/2errors/0ms"},
+      {"from": "pm", "to": "oracle", "respondTime": "2calls/2errors/0ms"}
+    ]
+  }
+}
